@@ -16,12 +16,12 @@ powered by [Strapi](https://strapi.io/)
 ## Setup
 ### Client
 ### Server
-> Make sure to have [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) and [node](https://nodejs.org/en/download/) installed
+> This requires [docker desktop](https://www.docker.com/products/docker-desktop) 
 ``` bash
-cd server
-yarn 
-yarn develop
+docker-compose up
 ```
+
+> If you are having related to dependencies, delete the `node_modules` folder and run up
 
 <br/>
 
