@@ -1,9 +1,9 @@
 import React from 'react';
-import ConsumerHome from './containers/Cardholder/Home';
+import CardholderHome from './containers/Cardholder/CardholderHome';
 
 function App() {
   return (
-    <ConsumerHome />
+    <CardholderHome />
   );
 }
 
