@@ -87,6 +87,47 @@ code {
 }
 
 
+/*
+=======================================================
+                        INPUT BOX
+=======================================================
+*/
+
+.inputBox {
+  width: 380px;
+  height: 800px;
+  margin: 30px;
+  background-color: white;
+  box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
+  border-radius: 4px;
+}
+
+.inputBoxHeader {
+  padding: 20px;
+  background-color: #f0f2f4;
+  font-size: 24px;
+  font-weight: 600;
+  color: #303030;
+}
+
+.inputBoxFields {
+  padding: 25px;
+  font-size: 17px;
+}
+
+.inputBoxFieldsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inputBoxFieldsRow:nth-child(1) {
+  padding-bottom: 20px;
+}
+
+.inputSearchButton {
+  width: 200px;
+}
 
 /*
 =======================================================
@@ -121,7 +162,7 @@ code {
 .footerSocial {
   width: 25px;
   height: 25px;
-  padding: 10px;
+  margin: 10px;
 }
 
 
