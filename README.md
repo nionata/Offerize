@@ -1,5 +1,5 @@
-# PaymentsAndPandemic
-Team Fun's project for the [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/)
+# Offerize
+a [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/) project
 
 <br/>
 
@@ -10,6 +10,10 @@ powered by [React](https://reactjs.org/)
 
 ### Server
 powered by [Strapi](https://strapi.io/)
+
+#### API
+Current documentation is available [here](https://documenter.getpostman.com/view/3570478/Szzn4vmW?version=latest)
+> A full SwagerUI documentation is coming soon
 
 <br/>
 
