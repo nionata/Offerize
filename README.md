@@ -12,7 +12,7 @@ powered by [React](https://reactjs.org/)
 powered by [Strapi](https://strapi.io/)
 
 #### API
-Current documentation is available [here](https://documenter.getpostman.com/view/3570478/Szzn4vmW?version=latest)
+Current documentation is available [here](https://documenter.getpostman.com/view/3570478/Szzn6wMY?version=latest)
 > A full SwagerUI documentation is coming soon
 
 <br/>
