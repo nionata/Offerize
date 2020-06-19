@@ -1,5 +1,5 @@
-# PaymentsAndPandemic
-Team Fun's project for the [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/)
+# Offerize
+a [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/) project
 
 <br/>
 
@@ -11,17 +11,21 @@ powered by [React](https://reactjs.org/)
 ### Server
 powered by [Strapi](https://strapi.io/)
 
+#### API
+Current documentation is available [here](https://documenter.getpostman.com/view/3570478/Szzn4vmW?version=latest)
+> A full SwagerUI documentation is coming soon
+
 <br/>
 
 ## Setup
 ### Client
 ### Server
-> Make sure to have [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) and [node](https://nodejs.org/en/download/) installed
+> This requires [docker desktop](https://www.docker.com/products/docker-desktop) 
 ``` bash
-cd server
-yarn 
-yarn develop
+docker-compose up
 ```
+
+> If you are having related to dependencies, delete the `node_modules` folder and run up
 
 <br/>
 

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offers",
+  "info": {
+    "name": "Offers"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "discountRate": {
+      "type": "integer"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "initialOffers": {
+      "type": "integer"
+    },
+    "currentOffers": {
+      "type": "integer"
+    },
+    "expirationDate": {
+      "type": "datetime"
+    },
+    "merchant": {
+      "model": "merchant",
+      "via": "offers"
+    }
+  }
+}
