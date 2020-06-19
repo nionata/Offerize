@@ -38,7 +38,7 @@ code {
 */
 
 .header {
-  height: 85px;
+  height: 80px;
   background-color: #1a1f71;
   display: flex;
   align-items: center;
@@ -61,6 +61,7 @@ code {
 .visaLogo {
   width: 120px;
   height: auto;
+  padding-left: 12px;
 }
 
 .header a {
@@ -74,18 +75,10 @@ code {
 }
 
 @media screen and (max-width: 1100px) {
-  .header {
-    height: 75px;
-  }
   .headerBody {
     flex-shrink: 1;
   }
-  .visaLogo {
-    width: 110px;
-    padding-left: 12px;
-  }
 }
-
 
 /*
 =======================================================
@@ -95,8 +88,11 @@ code {
 
 .inputBox {
   width: 380px;
-  height: 800px;
+  /* height: 800px; */
   margin: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
   background-color: white;
   box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
   border-radius: 4px;
@@ -121,12 +117,19 @@ code {
   align-items: center;
 }
 
-.inputBoxFieldsRow:nth-child(1) {
+.inputBoxFieldsRow:nth-child(-n+2) {
   padding-bottom: 20px;
 }
 
-.inputSearchButton {
-  width: 200px;
+
+/*
+=======================================================
+                        MAP
+=======================================================
+*/
+
+.gm-style-mtc {
+  display: none !important;
 }
 
 /*
@@ -137,7 +140,7 @@ code {
 
 .footer {
   background-color: #f7f7f7;
-  min-height: 90px;
+  min-height: 60px;
   display: flex;
   align-items: center;
 }
@@ -154,21 +157,20 @@ code {
 }
 
 .visaFooter {
-  width: 200px;
+  width: 170px;
   height: auto;
   padding: 15px 15px 15px 0;
 }
 
 .footerSocial {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   margin: 10px;
 }
 
 
 @media screen and (max-width: 1100px) {
   .footer {
-    min-height: 80px;
     padding: 0 15px;
   }
   .footerBody {
