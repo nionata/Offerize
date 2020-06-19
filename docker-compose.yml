@@ -2,7 +2,7 @@ version: '3'
 
 services:
   server:
-    container_name: pp-server-dev
+    container_name: offerize-server-dev
     image: strapi/strapi
     environment: 
       - DATABASE_HOST=db
@@ -13,7 +13,7 @@ services:
     depends_on:
       - db
   db:
-    container_name: pp-db-dev
+    container_name: offerize-db-dev
     image: postgres
     restart: always
     ports:
