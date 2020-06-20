@@ -1,0 +1,31 @@
+name: Release Latest Version
+
+on:
+  release:
+    types: [ published ]
+    branches: [ master ]
+  push:
+
+jobs:
+  build-and-release-client:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Install client dependencies
+      run: cd client && npm install
+    - name: Build client
+      run: cd client && npm run build
+    - name: Upload build to S3
+      uses: shallwefootball/s3-upload-action@master
+      with:
+        aws_key_id: ${{ secrets.AWS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        aws_bucket: ${{ secrets.AWS_BUCKET }}
+        source_dir: 'client/build'
+  # tag-and-release-server:
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #     - name: Tag latest according to release
+  #     - name: Push tagged image
+  #     - name: Revise task definition
