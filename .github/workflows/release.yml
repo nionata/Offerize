@@ -17,12 +17,13 @@ jobs:
     - name: Build client
       run: cd client && npm run build
     - name: Upload build to S3
-      uses: shallwefootball/s3-upload-action@master
+      uses: nionata/s3-upload-action@master
       with:
         aws_key_id: ${{ secrets.AWS_KEY_ID }}
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         aws_bucket: ${{ secrets.AWS_BUCKET }}
         source_dir: 'client/build'
+        destination_dir: ''
   # tag-and-release-server:
   #     runs-on: ubuntu-latest
   #     steps:
