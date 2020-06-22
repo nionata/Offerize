@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "merchants",
+  "info": {
+    "name": "Merchant"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "merchantID": {
+      "type": "string"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "merchant"
+    },
+    "offers": {
+      "via": "merchant",
+      "collection": "offers"
+    }
+  }
+}
