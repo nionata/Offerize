@@ -15,6 +15,8 @@ jobs:
       run: cd client && npm install
     - name: Build client
       run: cd client && npm run build
+      env:
+        CI: false
     - name: Upload build to S3
       uses: nionata/upload-s3-action@v1.0.2
       with:
@@ -27,6 +29,6 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - name: Tag latest according to release
-        run: docker tag nionata/offerize:latest nionata/offerize:$GITHUB_REF
+        run: docker tag nionata/offerize:latest nionata/offerize:${GITHUB_REF##*/}
       - name: Push tagged image
-        run: docker push nionata/offerize:$GITHUB_REF
+        run: docker push nionata/offerize:${GITHUB_REF##*/}
