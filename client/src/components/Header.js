@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import visaLogo from '../VisaIcons/visaLogo.svg';
 
 function Header(props) {
@@ -8,9 +10,9 @@ function Header(props) {
             <div className='headerBody'>
                 <img className='visaLogo' src={visaLogo} alt='Visa logo' draggable='false'
                     onClick={() => { }} />
-                <a href='#'>
+                <Link to='/signin'>
                     Sign in
-                </a>
+                </Link>
             </div>
             <div className='headerFiller' />
         </div>
