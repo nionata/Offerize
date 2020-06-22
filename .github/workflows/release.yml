@@ -28,6 +28,6 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - name: Tag latest according to release
-        run: docker tag nionata/offerize:latest nionata/offerize:${ GITHUB_REF }
+        run: docker tag nionata/offerize:latest nionata/offerize:$GITHUB_REF
       - name: Push tagged image
-        run: docker push nionata/offerize:${ GITHUB_REF }
+        run: docker push nionata/offerize:$GITHUB_REF
