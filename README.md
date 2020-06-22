@@ -1,4 +1,6 @@
 # Offerize
+![Release Latest Version](https://github.com/nionata/Offerize/workflows/Release%20Latest%20Version/badge.svg)
+
 a [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/) project
 
 <br/>
