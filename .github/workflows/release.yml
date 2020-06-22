@@ -28,6 +28,8 @@ jobs:
   tag-and-push-server-image:
       runs-on: ubuntu-latest
       steps:
+      - name: Pull the latest server image
+        run: docker pull nionata/offerize:latest
       - name: Tag latest according to release
         run: docker tag nionata/offerize:latest nionata/offerize:${GITHUB_REF##*/}
       - name: Push tagged image
