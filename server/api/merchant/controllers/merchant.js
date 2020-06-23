@@ -21,12 +21,10 @@
 const { sanitizeEntity } = require('strapi-utils');
 const axios = require('axios');
 
-module.exports = {
-    // First need to retrieve corresponding provider data
-   
+module.exports = {   
     
     async find(ctx) {
-
+        console.log(ctx.request.url);
         // retrieves the data
         let entities;
         if (ctx.query._q) {
@@ -71,12 +69,7 @@ module.exports = {
                 timings = response.data.result.opening_hours.weekday_text
                 reviews = response.data.result.reviews
             })
-
-            merchant.timings = timings;
-            merchant.reviews = reviews
-            validMerchants[i] = merchant;
-
-        }
+                }
             }
         
            // Retrieve data from supplier api 
@@ -87,13 +80,19 @@ module.exports = {
                 long = response.data.results[0].geometry.location.lng;
             
               })
-              
+              var listMerchants;
               // use lat and long to access the providers DB so that we can add some basic data to the DB data and return it 
-             await axios.post(`https://www.visa.com/supplierlocator-app/rest/search/supplier/desktop?lat=${lat}&lon=${long}&distLat=${lat}&distLon=${long}&text=&is=&mcc=5812`)
+              await axios.post(`https://www.visa.com/supplierlocator-app/rest/search/supplier/desktop?lat=${lat}&lon=${long}&distLat=${lat}&distLon=${long}&text=&is=&mcc=5812`)
               .then((response) => {
-                  var listMerchants = response.data.data[0].list;
+                  listMerchants = response.data.data[0].list;
+                })
                   var i;
                   for (i = 0; i < listMerchants.length; i++) {
+                      var placeId;
+                      var timings;
+                      var reviews;
+
+                    // deleting unnecessary fields
                       merchant = listMerchants[i];
                       merchant.id = merchant.clientId;
                       delete merchant.clientId;
@@ -101,19 +100,34 @@ module.exports = {
                       delete merchant.mccCode;
                       delete merchant.enhancedDataLevel;
                       delete merchant.businessEnterpriseIndicator;
+                      delete merchant.websiteUrl;
                       delete merchant.distance;
                       delete merchant.streetViewUrl;
                       delete merchant.lat;
                       delete merchant.lon;
+                      
+                  await axios.post("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+ merchant.address1 + " " +  merchant.name + "&inputtype=textquery&fields=place_id&key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U")
+                      .then((response) => {
+                      if(response.data.candidates[0] != null){
+                        placeId = response.data.candidates[0].place_id;
+                      }
+                    })
+                  
+                    if(placeId) {
+                    // getting the timings and reviews location
+                  await axios.get("https://maps.googleapis.com/maps/api/place/details/json?place_id=" + placeId + "&fields=reviews,opening_hours&key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U")
+                      .then((response) => {
+                        // need to do error checking for if timings and review exist 
+                      timings = response.data.result.opening_hours.weekday_text
+                      reviews = response.data.result.reviews
+                  })
+
+                  merchant.timings = timings;
+                  merchant.reviews = reviews;
                 }
-                // all the data up to this point is formatted correctly
-                // need to add reviews and timings;
-
-              })
-
-          
-        
-    
+                  listMerchants[i] = merchant;
+                }
+            
             return validMerchants.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
       },
     };
