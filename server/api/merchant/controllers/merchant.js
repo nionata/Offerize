@@ -34,10 +34,14 @@ module.exports = {
         } else {
           entities = await strapi.services.merchant.find(ctx.query);
         }
+        // filters the valid data for the picked zipcode
+        var validMerchants =  entities.filter(function(merchant) {
+            return merchant.zipcode == 78705;
+        });
+        
         var i;
-        for (i = 0; i < entities.length; i++) {
-            
-            var merchant = entities[i];
+        for (i = 0; i < validMerchants.length; i++) {
+            var merchant = validMerchants[i];
             var zipCode = merchant.zipcode;
             var lat;
             var long;
@@ -55,12 +59,13 @@ module.exports = {
                 var placeId;
                 var timings;
                 var reviews;
-
+            // first need to retrieve placeId in order to make search for timings and reviews
             await axios.post("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+ address + " " +  name + "&inputtype=textquery&fields=place_id&key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U")
                 .then((response) => {
                 placeId = response.data.candidates[0].place_id;
               })
-
+            
+              // getting the timings and reviews location
             await axios.get("https://maps.googleapis.com/maps/api/place/details/json?place_id=" + placeId + "&fields=reviews,opening_hours&key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U")
                 .then((response) => {
                 timings = response.data.result.opening_hours.weekday_text
@@ -69,34 +74,47 @@ module.exports = {
 
             merchant.timings = timings;
             merchant.reviews = reviews
-            entities[i] = merchant;
-            console.log(merchant);
+            validMerchants[i] = merchant;
 
-
+        }
             }
+        
+           // Retrieve data from supplier api 
+            // need to extract lat and long from zipcode
+            await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U&components=postal_code:${zipCode}`)
+                .then((response) => {
+                lat = response.data.results[0].geometry.location.lat;
+                long = response.data.results[0].geometry.location.lng;
             
-            // Bind google data of hours (if not there) and reviews for each merchant in DB for provided zip code
-            
-
-            // // need to extract lat and long from zipcode
-            // await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U&components=postal_code:${zipCode}`)
-            //     .then((response) => {
-            //     lat = response.data.results[0].geometry.location.lat;
-            //     long = response.data.results[0].geometry.location.lng;
-            
-            //   })
+              })
               
-            //   // use lat and long to access the providers DB so that we can add some basic data to the DB data and return it 
+              // use lat and long to access the providers DB so that we can add some basic data to the DB data and return it 
+             await axios.post(`https://www.visa.com/supplierlocator-app/rest/search/supplier/desktop?lat=${lat}&lon=${long}&distLat=${lat}&distLon=${long}&text=&is=&mcc=5812`)
+              .then((response) => {
+                  var listMerchants = response.data.data[0].list;
+                  var i;
+                  for (i = 0; i < listMerchants.length; i++) {
+                      merchant = listMerchants[i];
+                      merchant.id = merchant.clientId;
+                      delete merchant.clientId;
+                      delete merchant.address2;
+                      delete merchant.mccCode;
+                      delete merchant.enhancedDataLevel;
+                      delete merchant.businessEnterpriseIndicator;
+                      delete merchant.distance;
+                      delete merchant.streetViewUrl;
+                      delete merchant.lat;
+                      delete merchant.lon;
+                }
+                // all the data up to this point is formatted correctly
+                // need to add reviews and timings;
 
-            //  await axios.post(`https://www.visa.com/supplierlocator-app/rest/search/supplier/desktop?lat=${lat}&lon=${long}&distLat=${lat}&distLon=${long}&text=&is=&mcc=5812`)
-            //   .then((response) => {
-            //       console.log(response.data);
-            //   })
+              })
 
-          }
+          
         
     
-            return entities.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
+            return validMerchants.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
       },
     };
     
