@@ -24,8 +24,11 @@
       "via": "merchant"
     },
     "offers": {
-      "via": "merchant",
-      "collection": "offers"
+      "collection": "offers",
+      "via": "merchant"
+    },
+    "zipcode": {
+      "type": "integer"
     }
   }
 }
