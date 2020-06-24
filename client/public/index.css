@@ -74,11 +74,41 @@ code {
   color: #f7b600;
 }
 
+.headerText {
+  /* only display on mobile layout */
+  display: none;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #303030;
+}
+
 @media screen and (max-width: 1100px) {
   .headerBody {
     flex-shrink: 1;
   }
 }
+
+
+/*
+=======================================================
+                        MAP
+=======================================================
+*/
+
+.map {
+  width: '100%';
+   /* view height minus (header and footer) */
+  height: calc(100vh - 80px - 60px);
+}
+
+/* removes the map / satellite buttons */
+.gm-style-mtc {
+  display: none !important;
+}
+
+
 
 /*
 =======================================================
@@ -88,7 +118,8 @@ code {
 
 .inputBox {
   width: 380px;
-  /* height: 800px; */
+  /* view height of map minus 60px bc of the margins */
+  max-height: calc(100vh - 80px - 60px - 60px);
   margin: 30px;
   position: absolute;
   top: 0;
@@ -96,10 +127,11 @@ code {
   background-color: white;
   box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
   border-radius: 4px;
+  overflow: scroll;
 }
 
 .inputBoxHeader {
-  padding: 20px;
+  padding: 20px 25px;
   background-color: #f0f2f4;
   font-size: 24px;
   font-weight: 600;
@@ -121,16 +153,97 @@ code {
   padding-bottom: 20px;
 }
 
-
-/*
-=======================================================
-                        MAP
-=======================================================
-*/
-
-.gm-style-mtc {
-  display: none !important;
+.inputBoxComponent {
+  width: 200px !important;
 }
+
+/* when given invalid input */
+.inputBox .invalidZip.ant-input{
+  /* rgb(255, 77, 79) */
+  border-color: #ff4d4f !important;
+}
+.inputBox .invalidZip.ant-input:focus {
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.buttonShake {
+  animation: shake .6s ease both;
+}
+
+@keyframes shake {
+  0%, to {
+      transform:translateX(0)
+  }
+
+  20% {
+      transform:translateX(-15px)
+  }
+
+  40% {
+      transform:translateX(15px)
+  }
+
+  60% {
+      transform:translateX(-10px)
+  }
+
+  80% {
+      transform:translateX(10px)
+  }
+}
+
+
+.footerSpace {
+  height: 20px;
+  background-color: #f7fafc;
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .inputBox {
+    position: relative;
+    width: 400px;
+    min-height: 450px;
+    max-height: 600px;
+    margin: 20px auto 0 auto;
+    /* box-shadow: none; */
+  }
+
+  .inputBoxFieldsRow {
+    font-size: 15px;
+  }
+
+  .inputBoxComponent {
+    width: 160px !important;
+  }
+
+  .inputBoxHeader {
+    display: none;
+  }
+
+  .headerText {
+    display: block;
+  }
+
+  .map {
+    height: 350px;
+    margin: 0 25px;
+  }
+
+  .footerSpace {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .inputBox {
+    width: 100%;
+  }
+  .map {
+    margin: 0;
+  }
+}
+
 
 
 /*
@@ -170,6 +283,8 @@ code {
 .signinForgot {
   float: right;
   font-weight: 600;
+  color: #1890ff;
+  -webkit-text-fill-color: #1890ff;
 }
 
 .signinForgot:hover {
@@ -206,6 +321,8 @@ code {
 
 
 .signinBottomText {
+  color: #1890ff;
+  -webkit-text-fill-color: #1890ff;
 }
 
 .signinBottomText:hover {
@@ -231,7 +348,7 @@ code {
 */
 
 .footer {
-  background-color: #f7f7f7;
+  background-color: #f7fafc;
   min-height: 60px;
   display: flex;
   align-items: center;
@@ -246,6 +363,7 @@ code {
   justify-content: space-between;
   align-items: center;
   width: 1100px;
+  padding: 0 15px;
 }
 
 .visaFooter {
@@ -263,14 +381,9 @@ code {
 
 @media screen and (max-width: 1100px) {
   .footer {
-    padding: 0 15px;
   }
   .footerBody {
     flex-shrink: 1;
     flex-wrap: wrap;
-  }
-  .visaFooter {
-    width: 180px;
-    /* padding */
   }
 }
