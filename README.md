@@ -1,5 +1,9 @@
-# PaymentsAndPandemic
-Team Fun's project for the [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/)
+# Offerize
+![Release Latest Version](https://github.com/nionata/Offerize/workflows/Release%20Latest%20Version/badge.svg) 
+![](https://img.shields.io/docker/cloud/build/nionata/offerize)
+![](https://img.shields.io/docker/pulls/nionata/offerize.svg)
+
+a [Visa Global Intern Hackathon](https://www.hackerearth.com/challenges/hackathon/visa-hackathon-2020/) project
 
 <br/>
 
@@ -10,6 +14,10 @@ powered by [React](https://reactjs.org/)
 
 ### Server
 powered by [Strapi](https://strapi.io/)
+
+#### API
+Current documentation is available [here](https://documenter.getpostman.com/view/3570478/Szzn6wMY?version=latest)
+> A full SwaggerUI documentation is coming soon
 
 <br/>
 
@@ -22,6 +30,38 @@ docker-compose up
 ```
 
 > If you are having related to dependencies, delete the `node_modules` folder and run up
+
+<br/>
+
+## Deployment
+
+The [release](/.github/workflows/release.yml) workflow will be kicked off every time a GitHub release is published to the master branch
+
+### Client
+
+On release, the client will be built to static files and uploaded to an S3 bucket. Those files will then be served on requests to [offerize.xyz](http://offerize.xyz)
+
+### Server
+
+The [server docker image](https://hub.docker.com/repository/docker/nionata/offerize) is built on all new commits to `develop` and tagged as `latest`. On release, the image is tagged with the explicit version and pushed back to [dockerhub](https://hub.docker.com/). The following steps detail deploying the freshly tagged image:
+
+1. SSH into the EC2 instance with a perm file
+
+2. Remove the existing container, `docker rm --force offerize-server-prod`
+
+3. Run a new container with the following options, `docker run`
+
+   1. `--name offerize-server-prod`
+
+   2. `-p 80:1337` 
+
+      > maps the host port 80 (http default port) with the container port 1337 (strapi server port)
+
+   3. `-e DATABASE_HOST=hostFromRDS` 
+
+   4. `-e DATABASE_PASSWORD=passwordFromRDS` 
+
+   5. `nionata/offerize:releaseVersion`  
 
 <br/>
 
