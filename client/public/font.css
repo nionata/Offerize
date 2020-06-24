@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url('./Fonts/OpenSans/OpenSans300.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('./Fonts/OpenSans/OpenSans400.woff2') format('woff2'); 
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('./Fonts/OpenSans/OpenSans600.woff2') format('woff2'); 
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('./Fonts/OpenSans/OpenSans700.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('./Fonts/OpenSans/OpenSans800.woff2') format('woff2'); 
+    font-weight: 800;
+    font-style: normal;
+}
