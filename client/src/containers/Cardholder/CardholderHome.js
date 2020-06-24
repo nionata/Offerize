@@ -39,7 +39,10 @@ function CardholderHome(props) {
     return (
         <>
             <Header />
-            <div style={{ position: 'relative' }}>
+            <div className='headerText'>
+                Find offers from your favorite local businesses.
+            </div>
+            <div style={{ position: 'relative', backgroundColor: '#f7fafc' }}>
                 <Map merchants={merchants} />
                 <div className='inputBox'>
                     <InputBox store={store} setStore={setStore} zip={zip} setZip={setZip}
@@ -47,6 +50,7 @@ function CardholderHome(props) {
                     {showMerchants && <MerchantList merchants={merchants} />}
                 </div>
             </div>
+            <div className='footerSpace' />
             <Footer />
         </>
     )

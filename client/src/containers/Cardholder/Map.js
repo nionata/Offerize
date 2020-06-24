@@ -3,12 +3,6 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 
 import mapStyles from './mapStyles.json';
 
-const containerStyle = {
-    width: '100%',
-    // view height minus (header and footer)
-    height: 'calc(100vh - 80px - 60px)'
-};
-
 const Map = (props) => {
 
     // The things we need to track in state
@@ -78,7 +72,7 @@ const Map = (props) => {
         >
             <GoogleMap
                 onLoad={loadHandler}
-                mapContainerStyle={containerStyle}
+                mapContainerClassName='map'
                 center={center}
                 zoom={zoom}
                 options={{
