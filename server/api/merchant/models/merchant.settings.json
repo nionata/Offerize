@@ -18,11 +18,6 @@
     "merchantID": {
       "type": "string"
     },
-    "user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "merchant"
-    },
     "offers": {
       "collection": "offers",
       "via": "merchant"

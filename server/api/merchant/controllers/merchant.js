@@ -34,9 +34,9 @@ module.exports = {
         }
         // filters the valid data for the picked zipcode
         var validMerchants =  entities.filter(function(merchant) {
-            return merchant.zipcode == 78705;
+            return merchant.zipcode == 78705; // need to change to passed in zipcode
         });
-        
+        // add lat long using address
         var i;
         for (i = 0; i < validMerchants.length; i++) {
             var merchant = validMerchants[i];
@@ -44,14 +44,8 @@ module.exports = {
             var lat;
             var long;
             
-
             // need to figure out situation with timings, group strapi?
             if(!merchant.timings){
-                // need to retrieve timings from google
-                // first search for the place ID based on inputted information
-                // use place ID to search for opening hours
-                //input that to the DB and save it correspondily
-
                 var address = merchant.address;
                 var name = merchant.Name;
                 var placeId;
@@ -69,6 +63,14 @@ module.exports = {
                 timings = response.data.result.opening_hours.weekday_text
                 reviews = response.data.result.reviews
             })
+            if(timings){
+                merchant.timings = timings;
+              }
+                merchant.reviews = reviews;
+              
+                validMerchants[i] = merchant;
+                console.log(merchant);
+              
                 }
             }
         
@@ -97,14 +99,13 @@ module.exports = {
                       merchant.id = merchant.clientId;
                       delete merchant.clientId;
                       delete merchant.address2;
-                      delete merchant.mccCode;
                       delete merchant.enhancedDataLevel;
                       delete merchant.businessEnterpriseIndicator;
                       delete merchant.websiteUrl;
                       delete merchant.distance;
                       delete merchant.streetViewUrl;
-                      delete merchant.lat;
-                      delete merchant.lon;
+                    //   delete merchant.lat;
+                    //   delete merchant.lon;
                       
                   await axios.post("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+ merchant.address1 + " " +  merchant.name + "&inputtype=textquery&fields=place_id&key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U")
                       .then((response) => {
@@ -118,17 +119,21 @@ module.exports = {
                   await axios.get("https://maps.googleapis.com/maps/api/place/details/json?place_id=" + placeId + "&fields=reviews,opening_hours&key=AIzaSyCPHQ-nIVO74LuBOl4231hsoCB6oSeh64U")
                       .then((response) => {
                         // need to do error checking for if timings and review exist 
+                     if(response.data.result.opening_hours){
                       timings = response.data.result.opening_hours.weekday_text
+                     }
+                     
                       reviews = response.data.result.reviews
                   })
-
+                if(timings){
                   merchant.timings = timings;
+                }
                   merchant.reviews = reviews;
                 }
                   listMerchants[i] = merchant;
                 }
             
-            return validMerchants.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
+            return listMerchants.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
       },
     };
     
