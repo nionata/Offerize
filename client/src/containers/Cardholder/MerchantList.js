@@ -12,7 +12,7 @@ const MerchantList = (props) => {
                     <List.Item>
                         <List.Item.Meta
                             avatar={<Avatar src={pizza} />}
-                            title={<a href="https://ant.design">{item.id}</a>}
+                            title={<a href="https://sbarro.com">{item.id}</a>}
                             description={item.desc}
                         />
                     </List.Item>

@@ -88,7 +88,8 @@ code {
 
 .inputBox {
   width: 380px;
-  /* height: 800px; */
+  /* view height of map minus 60px bc of the margins */
+  max-height: calc(100vh - 80px - 60px - 60px);
   margin: 30px;
   position: absolute;
   top: 0;
@@ -96,6 +97,7 @@ code {
   background-color: white;
   box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
   border-radius: 4px;
+  overflow: scroll;
 }
 
 .inputBoxHeader {
@@ -205,6 +207,8 @@ code {
 .signinForgot {
   float: right;
   font-weight: 600;
+  color: #1890ff;
+  -webkit-text-fill-color: #1890ff;
 }
 
 .signinForgot:hover {
@@ -241,6 +245,8 @@ code {
 
 
 .signinBottomText {
+  color: #1890ff;
+  -webkit-text-fill-color: #1890ff;
 }
 
 .signinBottomText:hover {

@@ -25,6 +25,12 @@ function CardholderHome(props) {
             setMerchants([
                 { id: "Sbarro", pos: { lat: 39.09366509575983, lng: -94.58751660204751 }, desc: 'A classic New York slice.' },
                 { id: "Pizza by Alfredo", pos: { lat: 39.10894664788252, lng: -94.57926449532226 }, desc: 'A hot circle of garbage.' },
+                { id: "Alfredo's Pizza Cafe", pos: { lat: 39.07602397235644, lng: -94.5184089401211 }, desc: 'Superior in quality and taste.' },
+                { id: "Sbarro", pos: { lat: 39.09366509575983, lng: -94.58751660204751 }, desc: 'A classic New York slice.' },
+                { id: "Pizza by Alfredo", pos: { lat: 39.10894664788252, lng: -94.57926449532226 }, desc: 'A hot circle of garbage.' },
+                { id: "Alfredo's Pizza Cafe", pos: { lat: 39.07602397235644, lng: -94.5184089401211 }, desc: 'Superior in quality and taste.' },
+                { id: "Sbarro", pos: { lat: 39.09366509575983, lng: -94.58751660204751 }, desc: 'A classic New York slice.' },
+                { id: "Pizza by Alfredo", pos: { lat: 39.10894664788252, lng: -94.57926449532226 }, desc: 'A hot circle of garbage.' },
                 { id: "Alfredo's Pizza Cafe", pos: { lat: 39.07602397235644, lng: -94.5184089401211 }, desc: 'Superior in quality and taste.' }
             ]);
         }, 2000);

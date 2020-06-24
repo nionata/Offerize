@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
+import mapStyles from './mapStyles.json';
+
 const containerStyle = {
     width: '100%',
     // view height minus (header and footer)
@@ -79,6 +81,9 @@ const Map = (props) => {
                 mapContainerStyle={containerStyle}
                 center={center}
                 zoom={zoom}
+                options={{
+                    styles: mapStyles
+                }}
             // Save the current center position in state
             // onCenterChanged={() => setCenter(mapRef.getCenter().toJSON())}
             // Save the user's map click position
