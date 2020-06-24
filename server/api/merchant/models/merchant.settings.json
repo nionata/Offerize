@@ -9,13 +9,10 @@
     "timestamps": true
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string"
     },
     "address": {
-      "type": "string"
-    },
-    "merchantID": {
       "type": "string"
     },
     "offers": {
@@ -25,10 +22,10 @@
     "zipcode": {
       "type": "integer"
     },
-    "City": {
+    "city": {
       "type": "string"
     },
-    "States": {
+    "state": {
       "type": "enumeration",
       "enum": [
         "Alabama",
@@ -82,6 +79,24 @@
         "Wisconsin",
         "Wyoming"
       ]
+    },
+    "merchant_id": {
+      "type": "biginteger"
+    },
+    "mccCode": {
+      "type": "biginteger"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "mccDescription": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "string"
+    },
+    "lon": {
+      "type": "string"
     }
   }
 }
