@@ -21,6 +21,8 @@
 const { sanitizeEntity } = require('strapi-utils');
 const axios = require('axios');
 
+const GOOGLE_KEY = process.env.GOOGLE_KEY
+
 module.exports = {   
     
     async find(ctx) {
@@ -133,7 +135,7 @@ module.exports = {
                   listMerchants[i] = merchant;
                 }
             
-            return listMerchants.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
+            return validMerchants.map(entity => sanitizeEntity(entity, { model: strapi.models.merchant }));
       },
     };
     
