@@ -54,7 +54,6 @@
       "configurable": false
     },
     "merchant": {
-      "via": "user",
       "model": "merchant"
     }
   }

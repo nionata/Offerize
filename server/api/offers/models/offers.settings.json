@@ -28,8 +28,8 @@
       "type": "datetime"
     },
     "merchant": {
-      "model": "merchant",
-      "via": "offers"
+      "via": "offers",
+      "model": "merchant"
     }
   }
 }
