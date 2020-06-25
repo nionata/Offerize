@@ -41,9 +41,13 @@ const InputBox = (props) => {
                     Find
                     <Select className='inputBoxComponent' value={props.store} size={width > 800 ? 'large' : 'middle'}
                         onChange={val => props.setStore(val)}>
-                        <Option value="restaurants">Restaurants</Option>
-                        <Option value="bars">Bars</Option>
-                        <Option value="dentists">Dentists</Option>
+                        <Option value='RESTAURANTS/BARS'>Restaurants + Bars</Option>
+                        <Option value='AUTO RENTAL'>Auto Rental</Option>
+                        <Option value='BARBER/BEAUTY SHOPS'>Barbers + Beauty</Option>
+                        <Option value='HOTELS & MOTELS'>Hotels</Option>
+                        <Option value='LAUNDRY/CLEANING/GARMENT & SHOE REPAIR'>Laundry + Garment</Option>
+                        <Option value='GROCERY STORES/SUPERMARKETS/BAKERIES'>Groceries + Bakeries</Option>
+                        <Option value='HARDWARE/PAINT/GLASS'>Hardware</Option>
                     </Select>
                 </div>
                 <div className='inputBoxFieldsRow'>

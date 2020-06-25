@@ -84,9 +84,9 @@ const Map = (props) => {
             // onClick={e => setClickedLatLng(e.latLng.toJSON())}
             >
                 <>
-                    {props.merchants.map(place => (
+                    {props.merchants.map((place, idx) => (
                         <Marker
-                            key={place.name}
+                            key={idx}
                             position={{ lat: place.lat, lng: place.lon }}
                             onLoad={marker => markerLoadHandler(marker, place)}
                             onClick={event => markerClickHandler(event, place)}

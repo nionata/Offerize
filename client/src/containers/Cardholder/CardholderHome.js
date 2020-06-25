@@ -6,19 +6,21 @@ import Footer from '../../components/Footer.js';
 import Map from './Map.js';
 import InputBox from './InputBox.js';
 import MerchantList from './MerchantList';
+import industryCodes from './industryCodes.json';
 
 function CardholderHome(props) {
 
-    const [store, setStore] = useState('restaurants');
+    const [store, setStore] = useState('RESTAURANTS/BARS');
     const [zip, setZip] = useState('');
     const [showMerchants, setShowMerchants] = useState(false);
     const [loadingMerchants, setLoadingMerchants] = useState(false);
     const [merchants, setMerchants] = useState([]);
 
     function fetchMerchants() {
-        console.log('search!!');
         setLoadingMerchants(true);
-        axios.get(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=5812`)
+        let codes = industryCodes[store];
+        console.log(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=${codes}`);
+        axios.get(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=${codes}`)
             .then(res => {
                 console.log(res);
                 setShowMerchants(true);
