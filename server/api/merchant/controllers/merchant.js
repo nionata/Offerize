@@ -19,7 +19,7 @@
    That is simulated with the "show" query
 */
 
-const { sanitizeEntity } = require('strapi-utils')
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
 const { getLatLong, getSuppliers, getPlaceId, getPlaceDetails, cleanMerchant } = require('./utils')
 
 const formatError = error => [
@@ -109,5 +109,29 @@ module.exports = {
 				}
 			}))
 		}
+	},
+
+	async create(ctx) {
+		
+		let merchant 
+
+		if (ctx.is('multipart')) {
+
+		  	const { data, files } = parseMultipartData(ctx);
+			merchant = await strapi.services.merchant.create(data, { files })
+		} else {
+
+			const { zipcode } = ctx.request.body
+			if (zipcode) {
+				const { lat, lon } = await getLatLong(zipcode)
+
+				ctx.request.body.lat = `${lat}`
+				ctx.request.body.lon = `${lon}`
+			}
+
+			merchant = await strapi.services.merchant.create(ctx.request.body)
+		}
+
+		return sanitizeEntity(merchant, { model: strapi.models.merchant })
 	},
 }
