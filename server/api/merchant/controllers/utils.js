@@ -27,7 +27,7 @@ module.exports = {
         const resp = await axios.post(`https://www.visa.com/supplierlocator-app/rest/search/supplier/desktop?lat=${lat}&lon=${long}&distLat=${lat}&distLon=${long}&text=&is=&mcc=${mcc}`)
         const { data } = resp.data
 
-        return data[0] ? data[0].list : null
+        return data && data.length > 0 ? data[0].list : null
     },
 
     async getPlaceId(address, name) {
@@ -35,7 +35,7 @@ module.exports = {
         const resp = await axios.post(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${address} ${name}&inputtype=textquery&fields=place_id&key=${GOOGLE_KEY}`)
         const { candidates } = resp.data
 
-        return candidates[0] ? candidates[0].place_id : null
+        return candidates && candidates.length > 0 ? candidates[0].place_id : null
     },
     
     async getPlaceDetails(id) {
