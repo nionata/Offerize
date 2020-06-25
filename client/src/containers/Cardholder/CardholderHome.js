@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import Header from '../../components/Header.js';
 import Footer from '../../components/Footer.js';
@@ -17,23 +18,16 @@ function CardholderHome(props) {
     function fetchMerchants() {
         console.log('search!!');
         setLoadingMerchants(true);
-        // some api call
-        // .then() =>
-        setTimeout(() => {
-            setShowMerchants(true);
-            setLoadingMerchants(false);
-            setMerchants([
-                { id: "Sbarro", pos: { lat: 39.09366509575983, lng: -94.58751660204751 }, desc: 'A classic New York slice.' },
-                { id: "Pizza by Alfredo", pos: { lat: 39.10894664788252, lng: -94.57926449532226 }, desc: 'A hot circle of garbage.' },
-                { id: "Alfredo's Pizza Cafe", pos: { lat: 39.07602397235644, lng: -94.5184089401211 }, desc: 'Superior in quality and taste.' },
-                { id: "Sbarro", pos: { lat: 39.09366509575983, lng: -94.58751660204751 }, desc: 'A classic New York slice.' },
-                { id: "Pizza by Alfredo", pos: { lat: 39.10894664788252, lng: -94.57926449532226 }, desc: 'A hot circle of garbage.' },
-                { id: "Alfredo's Pizza Cafe", pos: { lat: 39.07602397235644, lng: -94.5184089401211 }, desc: 'Superior in quality and taste.' },
-                { id: "Sbarro", pos: { lat: 39.09366509575983, lng: -94.58751660204751 }, desc: 'A classic New York slice.' },
-                { id: "Pizza by Alfredo", pos: { lat: 39.10894664788252, lng: -94.57926449532226 }, desc: 'A hot circle of garbage.' },
-                { id: "Alfredo's Pizza Cafe", pos: { lat: 39.07602397235644, lng: -94.5184089401211 }, desc: 'Superior in quality and taste.' }
-            ]);
-        }, 2000);
+        axios.get(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=5812`)
+            .then(res => {
+                console.log(res);
+                setShowMerchants(true);
+                setLoadingMerchants(false);
+                setMerchants(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     return (

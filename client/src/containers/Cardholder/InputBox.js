@@ -14,7 +14,6 @@ const InputBox = (props) => {
     const { height, width } = useWindowDimensions();
 
     function onSubmit() {
-        console.log(width);
         // stops button click spam
         if (buttonShake || props.loadingMerchants)
             return;

@@ -33,8 +33,8 @@ const Map = (props) => {
         }
         const bounds = new window.google.maps.LatLngBounds();
         props.merchants.map(place => {
-            bounds.extend(place.pos);
-            return place.id;
+            bounds.extend({ lat: place.lat, lng: place.lon });
+            return place.name;
         });
         map.fitBounds(bounds);
     };
@@ -42,7 +42,7 @@ const Map = (props) => {
     // We have to create a mapping of our places to actual Marker objects
     const markerLoadHandler = (marker, place) => {
         return setMarkerMap(prevState => {
-            return { ...prevState, [place.id]: marker };
+            return { ...prevState, [place.name]: marker };
         });
     };
 
@@ -86,20 +86,21 @@ const Map = (props) => {
                 <>
                     {props.merchants.map(place => (
                         <Marker
-                            key={place.id}
-                            position={place.pos}
+                            key={place.name}
+                            position={{ lat: place.lat, lng: place.lon }}
                             onLoad={marker => markerLoadHandler(marker, place)}
                             onClick={event => markerClickHandler(event, place)}
                         />
                     ))}
                     {infoOpen && selectedPlace && (
                         <InfoWindow
-                            anchor={markerMap[selectedPlace.id]}
+                            anchor={markerMap[selectedPlace.name]}
                             onCloseClick={() => setInfoOpen(false)}
                         >
                             <div>
-                                <h3>{selectedPlace.id}</h3>
-                                <div>Some content about the location</div>
+                                <h3>{selectedPlace.name}</h3>
+                                <div>{selectedPlace.city}, {selectedPlace.state}</div>
+                                <div>Open until 8:00pm</div>
                             </div>
                         </InfoWindow>
                     )}
