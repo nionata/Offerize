@@ -40,14 +40,17 @@ module.exports = {
     
     async getPlaceDetails(id) {
 
-        const resp = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=reviews,opening_hours&key=${GOOGLE_KEY}`)
+        const resp = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=reviews,opening_hours,icon,rating,price_level&key=${GOOGLE_KEY}`)
         const { result } = resp.data
 
         const opening_hours = getDetail('opening_hours', result)
 
         return { 
             timings: opening_hours ? opening_hours.weekday_text : null, 
-            reviews: getDetail('reviews', result)
+            reviews: getDetail('reviews', result),
+            icon: getDetail('icon', result),
+            rating: getDetail('rating', result),
+            price_level: getDetail('price_level', result)
         }
     },
 
