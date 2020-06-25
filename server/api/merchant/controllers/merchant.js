@@ -19,7 +19,7 @@
    That is simulated with the "show" query
 */
 
-const { sanitizeEntity } = require('strapi-utils')
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
 const { getLatLong, getSuppliers, getPlaceId, getPlaceDetails, cleanMerchant } = require('./utils')
 
 const formatError = error => [
@@ -59,10 +59,12 @@ module.exports = {
 			if (show !== 'visa') {
 				const codes = mccCode.split(',')
 
+				// run a db query for each mccCode sent
 				const queries = await Promise.all(codes.map(async (code) => {
 					return strapi.services.merchant.find({ mccCode: code, zipcode })
 				}))
 
+				// reduce all the queries into the list of merchants
 				queries.forEach(potentialMerchants => merchants = merchants.concat(potentialMerchants))
 			}
 
@@ -73,7 +75,7 @@ module.exports = {
 				const { lat, lon } = await getLatLong(zipcode)
 
 				let suppliers = await getSuppliers(lat, lon, mccCode)
-				suppliers.forEach(supplier => {
+				if (suppliers) suppliers.forEach(supplier => {
 					const { clientId, address1, zipCode } = supplier
 
 					supplier.merchant_id = clientId
@@ -107,5 +109,29 @@ module.exports = {
 				}
 			}))
 		}
+	},
+
+	async create(ctx) {
+		
+		let merchant 
+
+		if (ctx.is('multipart')) {
+
+		  	const { data, files } = parseMultipartData(ctx);
+			merchant = await strapi.services.merchant.create(data, { files })
+		} else {
+
+			const { zipcode } = ctx.request.body
+			if (zipcode) {
+				const { lat, lon } = await getLatLong(zipcode)
+
+				ctx.request.body.lat = `${lat}`
+				ctx.request.body.lon = `${lon}`
+			}
+
+			merchant = await strapi.services.merchant.create(ctx.request.body)
+		}
+
+		return sanitizeEntity(merchant, { model: strapi.models.merchant })
 	},
 }
