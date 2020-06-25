@@ -1,7 +1,4 @@
 import React from 'react';
-<<<<<<< Updated upstream
-import ConsumerHome from './containers/Cardholder/Home';
-=======
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import CardholderHome from './containers/Cardholder/CardholderHome';
@@ -11,7 +8,6 @@ import Signup from './containers/Signup';
 import NotFound from './containers/NotFound';
 
 import 'antd/dist/antd.css';
->>>>>>> Stashed changes
 
 export const AuthContext = React.createContext();
 const initialState = {
@@ -43,10 +39,6 @@ const reducer = (state, action) => {
 };
 
 function App() {
-<<<<<<< Updated upstream
-  return (
-    <ConsumerHome />
-=======
 
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
@@ -69,7 +61,6 @@ function App() {
         </div>
       </Router>
     </AuthContext.Provider>
->>>>>>> Stashed changes
   );
 }
 
