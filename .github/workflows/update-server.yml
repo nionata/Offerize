@@ -5,6 +5,7 @@ on:
     branches: [ develop, master, feature/deployment-2.0 ]
     paths:
       - 'server/**'
+      - '.github/workflows/*'
       - '!client/**'
       - '!README.md'
 
