@@ -4,8 +4,6 @@ on:
   release:
     types: [ published ]
     branches: [ master ]
-  push:
-    branches: [ feature/deployment-2.0 ]
 
 jobs:
   build-and-release-client:
@@ -30,17 +28,17 @@ jobs:
         BUCKET: ${{ secrets.AWS_BUCKET }}
         SOURCE_DIR: 'client/build'
         DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
-  # tag-and-push-server-image:
-  #     runs-on: ubuntu-latest
-  #     steps:
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v2
-  #     - name: Build latest and tag as release version
-  #       uses: docker/build-push-action@v1
-  #       with:
-  #         username: ${{ secrets.DOCKER_USERNAME }}
-  #         password: ${{ secrets.DOCKER_PASSWORD }}
-  #         repository: nionata/offerize
-  #         cache_froms: nionata/offerize:latest
-  #         always_pull: true
-  #         tag_with_ref: true
+  tag-and-push-server-image:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Build latest and tag as release version
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nionata/offerize
+          cache_froms: nionata/offerize:latest
+          always_pull: true
+          tag_with_ref: true
