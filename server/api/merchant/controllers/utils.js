@@ -12,7 +12,6 @@ const getDetail = (type, result) => {
 module.exports = {
 
     async getLatLong(zipcode) {
-
         const resp = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${GOOGLE_KEY}&components=postal_code:${zipcode}`)
         const { results } = resp.data
         
@@ -23,7 +22,7 @@ module.exports = {
     },
 
     async getSuppliers(lat, long, mcc) {
-
+      
         const resp = await axios.post(`https://www.visa.com/supplierlocator-app/rest/search/supplier/desktop?lat=${lat}&lon=${long}&distLat=${lat}&distLon=${long}&text=&is=&mcc=${mcc}`)
         const { data } = resp.data
 
@@ -40,7 +39,7 @@ module.exports = {
     
     async getPlaceDetails(id) {
 
-        const resp = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=reviews,opening_hours,icon,rating,price_level&key=${GOOGLE_KEY}`)
+        const resp = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&fields=reviews,website,opening_hours,icon,rating,price_level&key=${GOOGLE_KEY}`)
         const { result } = resp.data
 
         const opening_hours = getDetail('opening_hours', result)
@@ -48,6 +47,7 @@ module.exports = {
         return { 
             timings: opening_hours ? opening_hours.weekday_text : null, 
             reviews: getDetail('reviews', result),
+            website: getDetail('website', result),
             icon: getDetail('icon', result),
             rating: getDetail('rating', result),
             price_level: getDetail('price_level', result)

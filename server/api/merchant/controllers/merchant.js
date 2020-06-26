@@ -29,7 +29,6 @@ const formatError = error => [
 module.exports = {
 
 	async find(ctx) {
-
 		let merchants = []
 
 		if (ctx.query._q) {
@@ -72,16 +71,16 @@ module.exports = {
 			// add all merchants from the suppliers api
 			if (show === 'all' || show === 'visa') {
 
-				const { lat, lon } = await getLatLong(zipcode)
+                const { lat, lon } = await getLatLong(zipcode)
 
-				let suppliers = await getSuppliers(lat, lon, mccCode)
+                let suppliers = await getSuppliers(lat, lon, mccCode)
 				if (suppliers) suppliers.forEach(supplier => {
+                    
 					const { clientId, address1, zipCode } = supplier
 
 					supplier.merchant_id = clientId
 					supplier.address = address1
 					supplier.zipcode = zipCode
-
 					merchants.push(supplier)
 				})
 			}
@@ -95,12 +94,13 @@ module.exports = {
 
 				try { 
 					const placeId = await getPlaceId(address, name)
-					const { timings, reviews, icon, rating, price_level } = await getPlaceDetails(placeId)
+					const { timings, reviews, website, icon, rating, price_level } = await getPlaceDetails(placeId)
 					
 					return {
 						...merchant,
 						timings,
-						reviews,
+                        reviews,
+                        website,
 						icon,
 						rating, 
 						price_level
@@ -132,7 +132,7 @@ module.exports = {
 				ctx.request.body.lon = `${lon}`
 			}
 
-			merchant = await strapi.services.merchant.create(ctx.request.body)
+            merchant = await strapi.services.merchant.create(ctx.request.body)
 		}
 
 		return sanitizeEntity(merchant, { model: strapi.models.merchant })
