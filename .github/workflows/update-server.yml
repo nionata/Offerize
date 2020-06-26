@@ -50,7 +50,6 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           privateKey: ${{ secrets.EC2_PERM_KEY }}
           command: |
-            docker kill offerize-server-prod
-            docker rm offerize-server-prod
+            docker rm -f offerize-server-prod
             docker pull nionata/offerize:latest
-            docker run --name offerize-server-prod -p 80:1337 -e DATABASE_HOST=$DATABASE_HOST -e DATABASE_PASSWORD=$DATABASE_PASSWORD -e GOOGLE_KEY=$GOOGLE_KEY nionata/offerize:latest
+            docker run --name offerize-server-prod -p 80:1337 -e DATABASE_HOST="$DATABASE_HOST" -e DATABASE_PASSWORD="$DATABASE_PASSWORD" -e GOOGLE_KEY="$GOOGLE_KEY" nionata/offerize:latest
