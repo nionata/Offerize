@@ -2,7 +2,7 @@ name: Build and Update Server
 
 on:
   push:
-    branches: [ develop, master ]
+    branches: [ develop, master, feature/deployment-2.0 ]
     paths:
       - 'server/**'
       - '!client/**'
