@@ -70,7 +70,6 @@ module.exports = {
 			// only when show all and visa,
 			// add all merchants from the suppliers api
 			if (show === 'all' || show === 'visa') {
-
                 const { lat, lon } = await getLatLong(zipcode)
 
                 let suppliers = await getSuppliers(lat, lon, mccCode)
@@ -94,13 +93,14 @@ module.exports = {
 
 				try { 
 					const placeId = await getPlaceId(address, name)
-					const { timings, reviews, website, icon, rating, price_level } = await getPlaceDetails(placeId)
+					const { timings, reviews, website, formatted_phone_number, icon, rating, price_level } = await getPlaceDetails(placeId)
 					
 					return {
 						...merchant,
 						timings,
                         reviews,
                         website,
+                        formatted_phone_number,
 						icon,
 						rating, 
 						price_level
