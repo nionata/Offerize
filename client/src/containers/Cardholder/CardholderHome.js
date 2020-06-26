@@ -7,25 +7,49 @@ import Map from './Map.js';
 import InputBox from './InputBox.js';
 import MerchantList from './MerchantList';
 import industryCodes from './industryCodes.json';
+import tempData from './tempData.json';
 
 function CardholderHome(props) {
 
     const [store, setStore] = useState('RESTAURANTS/BARS');
     const [zip, setZip] = useState('');
-    const [showMerchants, setShowMerchants] = useState(false);
+    const [showMerchants, setShowMerchants] = useState(false); //false
     const [loadingMerchants, setLoadingMerchants] = useState(false);
     const [merchants, setMerchants] = useState([]);
 
     function fetchMerchants() {
+        // setMerchants(tempData);
         setLoadingMerchants(true);
         let codes = industryCodes[store];
-        console.log(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=${codes}`);
         axios.get(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=${codes}`)
             .then(res => {
                 console.log(res);
                 setShowMerchants(true);
                 setLoadingMerchants(false);
-                setMerchants(res.data);
+                let listOfMerchants = []
+                res.data.forEach(elem => {
+                    let name = elem.name.toLowerCase()
+                        .split(' ')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ');
+                    name = name.replace(/&amp;/g, '&');
+                    let city = elem.city.toLowerCase()
+                        .split(' ')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ');
+                    let address = elem.address.toLowerCase()
+                        .split(' ')
+                        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                        .join(' ');
+                    listOfMerchants.push({
+                        ...elem,
+                        name: name,
+                        city: city,
+                        address: address
+                    })
+                })
+                setMerchants(listOfMerchants);
+                console.log(listOfMerchants);
             })
             .catch(error => {
                 console.log(error);
