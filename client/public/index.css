@@ -108,6 +108,16 @@ code {
   display: none !important;
 }
 
+.mapMarkerMoreInfo {
+  text-decoration-color: #909090;
+}
+
+.mapMarkerMoreInfo:hover {
+  cursor: pointer;
+  color: #202020;
+  text-decoration-color: #404040;
+}
+
 
 
 /*
@@ -194,7 +204,7 @@ code {
 
 
 .footerSpace {
-  height: 20px;
+  height: 30px;
   background-color: #f7fafc;
   display: none;
 }
@@ -251,10 +261,103 @@ code {
 =======================================================
 */
 
+.merchantList .ant-list-item-meta {
+  cursor: pointer;
+}
+
 .ant-list-item-meta-title {
   margin: 0 !important;
 }
 
+
+/*
+=======================================================
+                      MERCHANT MODAL
+=======================================================
+*/
+
+.merchantModalBody {
+  display: flex;
+  flex-direction: row;
+}
+
+.merchantModalBodyLeft {
+  /* width: 50%; */
+  width: 276px;
+}
+
+.merchantModalBodyRight {
+  width: 276px;
+}
+
+.merchantModalHours {
+  width: 200px;
+  float: right; 
+}
+
+.merchantModalWebsite {
+  font-weight: 500;
+  color: #555759;
+  border-bottom: 1px solid rgba(0,0,0,0.40);
+}
+
+.merchantModalWebsite:hover {
+  color: #181a1c;
+  border-bottom: 1px solid rgba(0,0,0,0.70);
+}
+
+.merchantModal ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.merchantModalIconText {
+  padding-left: 13px;
+  margin-left: 13px;
+  text-indent: -13px;
+}
+
+.merchantModalIconText:nth-child(-n+3) {
+  padding-bottom: 14px;
+}
+
+.merchantModalReviewsLink:hover {
+  color: #202020;
+  cursor: pointer;
+}
+
+.ant-tabs-nav {
+    display: none !important;
+}
+
+.reviewsBack {
+  font-size: 16px;
+  color: #595959;
+}
+
+.reviewsBack:hover {
+  color: #202020;
+}
+
+.merchantModalReviews .ant-list-item-meta-description {
+  line-height: 1.8;
+}
+
+.ant-tabs-tabpane {
+  /* height: 300px !important;
+  overflow-y: scroll; */
+}
+
+@media screen and (max-width: 650px) {
+  .merchantModalBody {
+      flex-direction: column;
+      align-items: center;
+  }
+  .merchantModalHours {
+    float: left;
+  }
+}
 
 
 /*

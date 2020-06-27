@@ -8,7 +8,7 @@
         "lat": 39.00283,
         "lon": -76.930731,
         "merchant_id": 80430076,
-        "address": "9078 BALTIMORE AVE",
+        "address": "9078 Baltimore Ave",
         "zipcode": "20740-1356",
         "timings": [
             "Monday: 10:00 AM – 10:00 PM",
@@ -31,16 +31,6 @@
                 "time": 1580266657
             },
             {
-                "author_name": "Stacy Tucker",
-                "author_url": "https://www.google.com/maps/contrib/117749007858030324952/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh4.ggpht.com/-MFFIp-0_VVc/AAAAAAAAAAI/AAAAAAAAAAA/XR-R6MM-bXk/s128-c0x00000000-cc-rp-mo/photo.jpg",
-                "rating": 4,
-                "relative_time_description": "3 months ago",
-                "text": "We are considering using their catering for a party so we came for a \"tasting\" of our own. The food is amazing!! Authentic flavors served up hot and fresh in generous portions with a vast selection of sides.We opted for oxtails with plaintain and red beans and rice. Also had jerk pork with yam and banana. \nThe service is fast and the food comes out pretty quickly. The venue leaves a little to be desired. Love the Jamaican patois and expressions on the wall, but it is kind of dark and tightly configured.",
-                "time": 1583026885
-            },
-            {
                 "author_name": "Keisha Belton",
                 "author_url": "https://www.google.com/maps/contrib/101937872986533492988/reviews",
                 "language": "en",
@@ -51,26 +41,37 @@
                 "time": 1591816718
             },
             {
+                "author_name": "Stacy Tucker",
+                "author_url": "https://www.google.com/maps/contrib/117749007858030324952/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh4.ggpht.com/-MFFIp-0_VVc/AAAAAAAAAAI/AAAAAAAAAAA/XR-R6MM-bXk/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 4,
+                "relative_time_description": "3 months ago",
+                "text": "We are considering using their catering for a party so we came for a \"tasting\" of our own. The food is amazing!! Authentic flavors served up hot and fresh in generous portions with a vast selection of sides.We opted for oxtails with plaintain and red beans and rice. Also had jerk pork with yam and banana. \nThe service is fast and the food comes out pretty quickly. The venue leaves a little to be desired. Love the Jamaican patois and expressions on the wall, but it is kind of dark and tightly configured.",
+                "time": 1583026885
+            },
+            {
                 "author_name": "Eric Clark",
                 "author_url": "https://www.google.com/maps/contrib/114956418327227170914/reviews",
                 "language": "en",
                 "profile_photo_url": "https://lh6.ggpht.com/-vVFyEv1wPik/AAAAAAAAAAI/AAAAAAAAAAA/Mr4JtRKIoQA/s128-c0x00000000-cc-rp-mo/photo.jpg",
                 "rating": 1,
-                "relative_time_description": "2 weeks ago",
+                "relative_time_description": "3 weeks ago",
                 "text": "This place is badly run. Tried to call several time to place an order no one answered. Went to the location, and was floored, the place was crowded no social distancing what so ever. No guidance from the workers nor management on social distancing of customers. I asked why no one answered the phone and was told that their policy is floor customers have priority. That’s well and good but it’s a pandemic out there! So I tried to place an order to be told that they needed to assist someone else first even though I was in line. Finally as I was standing there I noticed they were allowing individuals in the ordering area and restaurant with NO MASKS! I left... I feel god awful for the employees that have to deal with this. Grub hub workers were jumping in front of customers, again people with NO MASKS...Stay away, my lesson learned!",
                 "time": 1591321201
             },
             {
-                "author_name": "Doris Windham",
-                "author_url": "https://www.google.com/maps/contrib/107621797615607868197/reviews",
+                "author_name": "beth ajai",
+                "author_url": "https://www.google.com/maps/contrib/109354751006268902373/reviews",
                 "language": "en",
-                "profile_photo_url": "https://lh4.ggpht.com/-iAdsulUdhdI/AAAAAAAAAAI/AAAAAAAAAAA/TlEYHF5rhqw/s128-c0x00000000-cc-rp-mo/photo.jpg",
-                "rating": 1,
+                "profile_photo_url": "https://lh3.ggpht.com/-lnU6zhiiwT0/AAAAAAAAAAI/AAAAAAAAAAA/fxnOTszb0pQ/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 4,
                 "relative_time_description": "in the last week",
-                "text": "This place is dirty, long wait unprofessional staff. I’m highly disappointed I couldn’t even eat I left out after reviewing the environment and seeing how long people were waiting. Not what I thought I guess it’s back to muffin man for me.",
-                "time": 1592680245
+                "text": "Food here is really good but getting thru to place a pick up order was a nightmare! The lines stayed busy it took me an hour for the phone to be picked up. When I got there they were really busy so it speaks to their good food but maybe they need multiple people on the phones. Its good to see a small business not suffering during this pandemic.",
+                "time": 1592947249
             }
         ],
+        "website": "http://www.myjerkpit.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4.1,
         "price_level": 2
@@ -84,7 +85,7 @@
         "lat": 39.000656,
         "lon": -76.931254,
         "merchant_id": 28576047,
-        "address": "9031 BALTIMORE AVE",
+        "address": "9031 Baltimore Ave",
         "zipcode": "20740-1311",
         "timings": [
             "Monday: 11:00 AM – 10:00 PM",
@@ -147,6 +148,7 @@
                 "time": 1558974549
             }
         ],
+        "website": "http://sakuraseafoodbuffet.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.9,
         "price_level": 1
@@ -160,7 +162,7 @@
         "lat": 39.003516,
         "lon": -76.930581,
         "merchant_id": 14826383,
-        "address": "9098 BALTIMORE AVE",
+        "address": "9098 Baltimore Ave",
         "zipcode": "20740-1312",
         "timings": [
             "Monday: 11:00 AM – 7:00 PM",
@@ -223,6 +225,7 @@
                 "time": 1548540225
             }
         ],
+        "website": null,
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.9,
         "price_level": 1
@@ -236,7 +239,7 @@
         "lat": 38.999924,
         "lon": -76.931296,
         "merchant_id": 11815738,
-        "address": "9021 BALTIMORE AVE",
+        "address": "9021 Baltimore Ave",
         "zipcode": "20740-1311",
         "timings": null,
         "reviews": [
@@ -291,6 +294,7 @@
                 "time": 1580592717
             }
         ],
+        "website": "https://www.bowlero.com/location/bowlero-college-park",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
         "rating": 4.1,
         "price_level": null
@@ -304,7 +308,7 @@
         "lat": 38.999879,
         "lon": -76.931306,
         "merchant_id": 26738679,
-        "address": "9015 BALTIMORE AVE",
+        "address": "9015 Baltimore Ave",
         "zipcode": "20740-1311",
         "timings": [
             "Monday: 11:00 AM – 10:00 PM",
@@ -337,6 +341,16 @@
                 "time": 1583086213
             },
             {
+                "author_name": "Clarence Staten",
+                "author_url": "https://www.google.com/maps/contrib/109070515003734769122/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh4.ggpht.com/-Z3MDh-OtGf4/AAAAAAAAAAI/AAAAAAAAAAA/ldstgy5GTdE/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 3,
+                "relative_time_description": "4 months ago",
+                "text": "Everytime I go there, everyone is so friendly. I would have given 5 stars but when I was in Pa and order for my son and daughter a delivery 2 miles in Berwyn Heights they said they don't deliver in that area.\nSo I had to order Dominoes",
+                "time": 1581412382
+            },
+            {
                 "author_name": "Hector Vega",
                 "author_url": "https://www.google.com/maps/contrib/105768925181952997714/reviews",
                 "language": "en",
@@ -347,26 +361,17 @@
                 "time": 1581553727
             },
             {
-                "author_name": "Stan Mosca",
-                "author_url": "https://www.google.com/maps/contrib/103602848794581008125/reviews",
+                "author_name": "JoAnn Missick",
+                "author_url": "https://www.google.com/maps/contrib/116651909700797376145/reviews",
                 "language": "en",
-                "profile_photo_url": "https://lh5.ggpht.com/-ENMueALsBKo/AAAAAAAAAAI/AAAAAAAAAAA/M5G4b9e7LpM/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
-                "rating": 5,
-                "relative_time_description": "6 months ago",
-                "text": "This site is my first choice place.  Of all restaurants I know I like it most. I never miss an opportunity to go to visit this restaurant. everytime  I want to go to a good lunch, this is the place that comes straight to my mind. exeptionalgorgeous and all kinds of  food and a large list of dishes.great team, and great ambience. In addition to that, the bill is reasonable. I tell about this restaurant with no doubt.",
-                "time": 1577025976
-            },
-            {
-                "author_name": "Clarence Staten",
-                "author_url": "https://www.google.com/maps/contrib/109070515003734769122/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh4.ggpht.com/-Z3MDh-OtGf4/AAAAAAAAAAI/AAAAAAAAAAA/ldstgy5GTdE/s128-c0x00000000-cc-rp-mo/photo.jpg",
-                "rating": 3,
+                "profile_photo_url": "https://lh6.ggpht.com/-G7d-Zv2YePY/AAAAAAAAAAI/AAAAAAAAAAA/RVEx0ieq03M/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 2,
                 "relative_time_description": "4 months ago",
-                "text": "Everytime I go there, everyone is so friendly. I would have given 5 stars but when I was in Pa and order for my son and daughter a delivery 2 miles in Berwyn Heights they said they don't deliver in that area.\nSo I had to order Dominoes",
-                "time": 1581412382
+                "text": "Driver forgot my drink, was extremely rude, and refused to give me his name. I placed an online order to be delivered on Friday 2/14/20 @ 2pm. When the driver arrived he stated he had forgotten the pepsi but he still wanted the money for the order and that he would deduct the cost of the soda. I explained I still wanted the pepsi and since I gave him the full amount I wanted his name. He started walking away and said what do you want with my name? I asked again and he continued to refuse to give me his name. After he left just so there was no funny business I called up to the store to explain the situation to the manager. His tone sounded as if this was not the first time he has heard this complaint; he explained he would rush a soda out to me right away. About 20 min later the same man knocked at the door but instead of waiting for me to get to the door he left the sodas on the step and got in his car. The customer service at this location is terrible and drivers irresponsible without a care.",
+                "time": 1581711433
             }
         ],
+        "website": "https://locations.pizzahut.com/md/college-park/9015-baltimore-ave",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.2,
         "price_level": 1
@@ -380,7 +385,7 @@
         "lat": 38.998905,
         "lon": -76.931368,
         "merchant_id": 28084516,
-        "address": "8900 BALTIMORE AVE",
+        "address": "8900 Baltimore Ave",
         "zipcode": "20740-2017",
         "timings": [
             "Monday: Closed",
@@ -423,16 +428,6 @@
                 "time": 1567775693
             },
             {
-                "author_name": "Kevin Spann",
-                "author_url": "https://www.google.com/maps/contrib/113203795769427720743/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh3.ggpht.com/-9e_WoK4oEK4/AAAAAAAAAAI/AAAAAAAAAAA/N75URR_-Ug8/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg",
-                "rating": 5,
-                "relative_time_description": "5 months ago",
-                "text": "What can I say.... Who doesnt like Rita's!???  I loved their Italian ice.  Wish it was open year round.",
-                "time": 1579043922
-            },
-            {
                 "author_name": "Joseph M",
                 "author_url": "https://www.google.com/maps/contrib/104125848942961476451/reviews",
                 "language": "en",
@@ -441,8 +436,19 @@
                 "relative_time_description": "9 months ago",
                 "text": "It's the best Custard your going to find around here.  The water ice is good too, but the custard is my go-to.  Add on tje sprinkles for a nice little crunch to the mouth coating custard creamy goodness and you're set.",
                 "time": 1569371530
+            },
+            {
+                "author_name": "Manasij Venkatesh",
+                "author_url": "https://www.google.com/maps/contrib/116371724301556198137/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh5.ggpht.com/-TCfaBxto1c4/AAAAAAAAAAI/AAAAAAAAAAA/FIFSCUxhTGk/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg",
+                "rating": 5,
+                "relative_time_description": "a year ago",
+                "text": "The following must be read with Anthony Bourdain’s voice in your head. (RIP)\n\nDear Rita’s\n\nYou often looked like somebody’s memory of a town, and the memory’s fading. You’re not open half the year, so I judged you to be running out of business, your counters to be dust-filled, and your ice cream to be drab. But on this especially humid day, one of the first of this summer, we decided to visit you almost as a joke. We told ourselves, “Even Rita’s can’t taste bad when we’re this tired.” “I’d eat a brick right now.” (undergrads, I tell ya)\n\nAs I stood outside the counters staring at your menu, I wondered why you would call your ice cream, a custard, and how full of yourself you must be to think Italian ice is better than any regular ice. Yet, I wanted to try both of them. The gelati seemed perfect, a choice of custard served over ice. Summer was finally here, and I’d been waiting to eat into some watermelon but here I was trying the watermelon ice and a twist custard of chocolate and vanilla.\n\nI was so tired, I didn’t complain about how unflattering your cup looked. I dug right into the custard and took a bite and I realized immediately – you were no ordinary ice cream. To make sure it wasn’t just me being dehydrated, I took another bite. So thick, so creamy. It was almost like I wanted it to just stay in my mouth. Your chocolate was just the right amount of chocolat-y and as I finished it, I was already starting to taste the ice underneath it.\n\nIt was as though the custard was just to slowly build me up to something even better, so I don’t get completely blown away. Italian ice is no ordinary ice. How could something so different from a custard, taste so good with it? You left me with puzzling questions but instead of trying to think them through, I just decided to continue eating. But you weren’t done, were you?\n\nDuring every dessert, there’s a point where you start feeling bad it’s almost over. I thought I was there but there was something creamy underneath the ice. Turns out, they had more custard underneath the ice!(!) I was probably close to tears. And I say probably only because I don’t want to admit it. I knew then, you were not just some ice cream place. You weren’t trying to make money, by feeding people. It wasn’t the custard, it wasn’t the ice. You were trying to make people happy. And for that, I’ll always come back.\n\nX\nManny",
+                "time": 1534295103
             }
         ],
+        "website": "https://www.ritasfranchises.com/CollegePark",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
         "rating": 4.5,
         "price_level": 1
@@ -456,10 +462,11 @@
         "lat": 39.006201,
         "lon": -76.929924,
         "merchant_id": 15241730,
-        "address": "9206 BALTIMORE AVE",
+        "address": "9206 Baltimore Ave",
         "zipcode": "20740-1316",
         "timings": null,
         "reviews": null,
+        "website": null,
         "icon": null,
         "rating": null,
         "price_level": null
@@ -473,7 +480,7 @@
         "lat": 38.996852,
         "lon": -76.931674,
         "merchant_id": 7105825,
-        "address": "8700 BALTIMORE AVE",
+        "address": "8700 Baltimore Ave",
         "zipcode": "20740-2113",
         "timings": [
             "Monday: 11:00 AM – 8:00 PM",
@@ -516,16 +523,6 @@
                 "time": 1583101572
             },
             {
-                "author_name": "Alex Jiao",
-                "author_url": "https://www.google.com/maps/contrib/101186883287015180913/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh4.ggpht.com/-3TRwNJoyshM/AAAAAAAAAAI/AAAAAAAAAAA/lo6ifZW7ZVg/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
-                "rating": 5,
-                "relative_time_description": "7 months ago",
-                "text": "Very good hotpot, especially for being in college park. They have a wide range of meats veggies, tofu and other options, and the sauce bar is solid. Ayce pricing is fair at $24. The inside of the restaurant is nicely decorated too.",
-                "time": 1573486283
-            },
-            {
                 "author_name": "jenny Zhang",
                 "author_url": "https://www.google.com/maps/contrib/113189562649619534131/reviews",
                 "language": "en",
@@ -534,8 +531,19 @@
                 "relative_time_description": "4 months ago",
                 "text": "I love this place!! Been going here since they open and the flavor is still the same! Servers are very nice and they make sure you have everything you need! It can get busy during the weekend because it is in a college area but the wait shouldn’t be too long since they have plenty tables.",
                 "time": 1582097881
+            },
+            {
+                "author_name": "Frances Antoinette",
+                "author_url": "https://www.google.com/maps/contrib/110469656570399336195/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh5.ggpht.com/-EqXN-2LB3CM/AAAAAAAAAAI/AAAAAAAAAAA/1_TXezxERQM/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg",
+                "rating": 5,
+                "relative_time_description": "6 months ago",
+                "text": "Brought my mother and nephew here for their first hotpot and they loved it! I love how they have dipping sauce recipes over the buffet. Ingredients are good and portion sizes very decent. The waiters came through often too.",
+                "time": 1577584605
             }
         ],
+        "website": "http://www.lataohotpot.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4.1,
         "price_level": null
@@ -549,10 +557,11 @@
         "lat": 38.996737,
         "lon": -76.928771,
         "merchant_id": 26331768,
-        "address": "8514 POTOMAC CREEK RD",
+        "address": "8514 Potomac Creek Rd",
         "zipcode": "20740",
         "timings": null,
         "reviews": null,
+        "website": null,
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
         "rating": null,
         "price_level": null
@@ -566,7 +575,7 @@
         "lat": 38.994947,
         "lon": -76.932132,
         "merchant_id": 21648728,
-        "address": "8503 BALTIMORE AVE",
+        "address": "8503 Baltimore Ave",
         "zipcode": "20740-2413",
         "timings": [
             "Monday: Closed",
@@ -629,6 +638,7 @@
                 "time": 1584039937
             }
         ],
+        "website": "http://www.kangnambbqmd.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4,
         "price_level": 2
@@ -642,7 +652,7 @@
         "lat": 38.994773,
         "lon": -76.932179,
         "merchant_id": 13880136,
-        "address": "8510 BALTIMORE AVE",
+        "address": "8510 Baltimore Ave",
         "zipcode": "20740-2439",
         "timings": [
             "Monday: 6:00 AM – 12:00 AM",
@@ -705,6 +715,7 @@
                 "time": 1588635881
             }
         ],
+        "website": "https://burgerking.com/store-locator/store/restaurant_195",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.8,
         "price_level": 1
@@ -718,7 +729,7 @@
         "lat": 38.994192,
         "lon": -76.932469,
         "merchant_id": 30549599,
-        "address": "8428 BALTIMORE AVE",
+        "address": "8428 Baltimore Ave",
         "zipcode": "20740-2438",
         "timings": [
             "Monday: 9:00 AM – 12:00 AM",
@@ -761,16 +772,6 @@
                 "time": 1576604678
             },
             {
-                "author_name": "Timothy Nugent",
-                "author_url": "https://www.google.com/maps/contrib/116406153936635268638/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh3.ggpht.com/-MVCGVeh-QUs/AAAAAAAAAAI/AAAAAAAAAAA/abTakaiBvFg/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg",
-                "rating": 4,
-                "relative_time_description": "a year ago",
-                "text": "A good Taco Bell... Service a little slow... Clean",
-                "time": 1555617050
-            },
-            {
                 "author_name": "LaTanya Lucas",
                 "author_url": "https://www.google.com/maps/contrib/117496464361144224860/reviews",
                 "language": "en",
@@ -779,8 +780,19 @@
                 "relative_time_description": "5 months ago",
                 "text": "Broken credit card machine, we'd placed an order, paid and waited for about 15min before being asked if we were ready to order. We said we ordered, told the Young lady what we ordered & there was no record of it causing us to reorder and after checking my account I learned the initial transaction didn't go through, that's when the woman said oh yeah it's broken. Why the hell didn't you say that as you stood there watching us order?!?!?",
                 "time": 1579828124
+            },
+            {
+                "author_name": "Mohamed Beshir",
+                "author_url": "https://www.google.com/maps/contrib/100778318539174630189/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.ggpht.com/-8X-7R-I-qe4/AAAAAAAAAAI/AAAAAAAAAAA/DL5l_azCaak/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 5,
+                "relative_time_description": "a month ago",
+                "text": "Good  clean friendly staff....and they fast",
+                "time": 1590386572
             }
         ],
+        "website": "https://locations.tacobell.com/md/college-park/8428-baltimore-ave-.html?utm_source=yext&utm_campaign=googlelistings&utm_medium=referral&utm_term=028976&utm_content=website",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4,
         "price_level": 1
@@ -794,7 +806,7 @@
         "lat": 38.994142,
         "lon": -76.932419,
         "merchant_id": 52000508,
-        "address": "8424 BALTIMORE AVE",
+        "address": "8424 Baltimore Ave",
         "zipcode": "20740-2438",
         "timings": [
             "Monday: 7:00 AM – 5:00 PM",
@@ -857,6 +869,7 @@
                 "time": 1551796517
             }
         ],
+        "website": "https://locations.dennys.com/MD/COLLEGE-PARK/248857?utm_source=yext&utm_medium=local-listing&utm_campaign=yext-listing",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4,
         "price_level": 1
@@ -870,7 +883,7 @@
         "lat": 38.992825,
         "lon": -76.93307,
         "merchant_id": 92538543,
-        "address": "8321 BALTIMORE AVE STE B",
+        "address": "8321 Baltimore Ave Ste B",
         "zipcode": "20740-2435",
         "timings": [
             "Monday: 12:00 – 8:00 PM",
@@ -913,16 +926,6 @@
                 "time": 1553313313
             },
             {
-                "author_name": "Pemba Lhuillier",
-                "author_url": "https://www.google.com/maps/contrib/116814430988309938746/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh3.ggpht.com/-VsyVknNn9Ck/AAAAAAAAAAI/AAAAAAAAAAA/NzFBP5GDtao/s128-c0x00000000-cc-rp-mo/photo.jpg",
-                "rating": 4,
-                "relative_time_description": "3 months ago",
-                "text": "I admire this spot! They serve excellent food, they have a rich menu, The chef in that restaurant is very trained, I enjoy a lot eating all their dishes. The dishes are always fresh, the attitude toward",
-                "time": 1583261463
-            },
-            {
                 "author_name": "Greg Karbett",
                 "author_url": "https://www.google.com/maps/contrib/116480182916380478290/reviews",
                 "language": "en",
@@ -931,8 +934,19 @@
                 "relative_time_description": "5 months ago",
                 "text": "Food was fantastic. Large portions. Upscale atmosphere. Parking garage. Dinner for four adults, two beers and tip was $150.",
                 "time": 1579395222
+            },
+            {
+                "author_name": "Pemba Lhuillier",
+                "author_url": "https://www.google.com/maps/contrib/116814430988309938746/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.ggpht.com/-VsyVknNn9Ck/AAAAAAAAAAI/AAAAAAAAAAA/NzFBP5GDtao/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 4,
+                "relative_time_description": "3 months ago",
+                "text": "I admire this spot! They serve excellent food, they have a rich menu, The chef in that restaurant is very trained, I enjoy a lot eating all their dishes. The dishes are always fresh, the attitude toward",
+                "time": 1583261463
             }
         ],
+        "website": "http://www.collegeparkgrill.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4.2,
         "price_level": null
@@ -946,10 +960,11 @@
         "lat": 38.992422,
         "lon": -76.933234,
         "merchant_id": 29144583,
-        "address": "8300 BALTIMORE AVE # 102",
+        "address": "8300 Baltimore Ave # 102",
         "zipcode": "20740-2433",
         "timings": null,
         "reviews": null,
+        "website": null,
         "icon": null,
         "rating": null,
         "price_level": null
@@ -963,7 +978,7 @@
         "lat": 38.992422,
         "lon": -76.933234,
         "merchant_id": 30461405,
-        "address": "8300 BALTIMORE AVE",
+        "address": "8300 Baltimore Ave",
         "zipcode": "20740-2433",
         "timings": [
             "Monday: 10:30 AM – 8:00 PM",
@@ -1026,6 +1041,7 @@
                 "time": 1548375447
             }
         ],
+        "website": "http://sweetgreen.com/?utm_source=google_listing&utm_medium=yext&utm_campaign=visit_main_website_CTA",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4.6,
         "price_level": 1
@@ -1039,7 +1055,7 @@
         "lat": 38.992202,
         "lon": -76.933329,
         "merchant_id": 23931308,
-        "address": "8301 BALTIMORE AVE",
+        "address": "8301 Baltimore Ave",
         "zipcode": "20740-2435",
         "timings": [
             "Monday: Open 24 hours",
@@ -1062,16 +1078,6 @@
                 "time": 1582961594
             },
             {
-                "author_name": "SHEILA LATNEY",
-                "author_url": "https://www.google.com/maps/contrib/117319367183966558350/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh3.ggpht.com/-yIYR6hUMe70/AAAAAAAAAAI/AAAAAAAAAAA/bJ7_N3aC53w/s128-c0x00000000-cc-rp-mo/photo.jpg",
-                "rating": 5,
-                "relative_time_description": "3 months ago",
-                "text": "Their food is very good to the mouth.  And their chicken is very crispy and crunchy. Keep up the good work☺thumps up.",
-                "time": 1584316306
-            },
-            {
                 "author_name": "Charles-Stephen Lbht",
                 "author_url": "https://www.google.com/maps/contrib/103469885850841345787/reviews",
                 "language": "en",
@@ -1082,6 +1088,26 @@
                 "time": 1574256899
             },
             {
+                "author_name": "SHEILA LATNEY",
+                "author_url": "https://www.google.com/maps/contrib/117319367183966558350/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh3.ggpht.com/-yIYR6hUMe70/AAAAAAAAAAI/AAAAAAAAAAA/bJ7_N3aC53w/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 5,
+                "relative_time_description": "3 months ago",
+                "text": "Their food is very good to the mouth.  And their chicken is very crispy and crunchy. Keep up the good work☺thumps up.",
+                "time": 1584316306
+            },
+            {
+                "author_name": "Toron Jackson",
+                "author_url": "https://www.google.com/maps/contrib/108409835800345309123/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh6.ggpht.com/-ohQu6rfC3r0/AAAAAAAAAAI/AAAAAAAAAAA/mD-tyOSEL6c/s128-c0x00000000-cc-rp-mo/photo.jpg",
+                "rating": 2,
+                "relative_time_description": "in the last week",
+                "text": "There fries are horrible they taste brunt and dry and too crunchy.",
+                "time": 1592987656
+            },
+            {
                 "author_name": "Luca Maro",
                 "author_url": "https://www.google.com/maps/contrib/109015632412575369099/reviews",
                 "language": "en",
@@ -1090,18 +1116,9 @@
                 "relative_time_description": "10 months ago",
                 "text": "I had good service here. It took a little while for me to get my food while going through the drive through even though my order was pretty simple but there was a pretty long line inside. The fries were great though. Some of the best I've had from this chain. The location is kind of a pain to get to though with the median.",
                 "time": 1566738243
-            },
-            {
-                "author_name": "Zoetic Properties, LLC",
-                "author_url": "https://www.google.com/maps/contrib/113717293242743530516/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh4.ggpht.com/-vUiiJjxoFFg/AAAAAAAAAAI/AAAAAAAAAAA/HtrQCcg9u4Q/s128-c0x00000000-cc-rp-mo/photo.jpg",
-                "rating": 2,
-                "relative_time_description": "3 months ago",
-                "text": "Went there to get breakfast (2 for $4 breakfast sandwiches) and the cashier charged me $4. Driving into work I realized she only gave me one sandwich. I was too far to turn around but my friend had to go sandwichless thanks to inept employees.",
-                "time": 1583375099
             }
         ],
+        "website": "https://www.mcdonalds.com/us/en-us/location/MD/COLLEGE-PARK/8301-BALTIMORE-BLVD/21123.html?cid=RF:YXT:GMB::Clicks",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.5,
         "price_level": 1
@@ -1115,7 +1132,7 @@
         "lat": 38.991481,
         "lon": -76.93366,
         "merchant_id": 26613387,
-        "address": "8147 BALTIMORE AVE STE D",
+        "address": "8147 Baltimore Ave Ste D",
         "zipcode": "20740-2492",
         "timings": [
             "Monday: 11:00 AM – 9:00 PM",
@@ -1178,6 +1195,7 @@
                 "time": 1541003633
             }
         ],
+        "website": null,
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4.8,
         "price_level": null
@@ -1191,7 +1209,7 @@
         "lat": 38.991481,
         "lon": -76.93366,
         "merchant_id": 26736020,
-        "address": "8147 BALTIMORE AVE STE G",
+        "address": "8147 Baltimore Ave Ste G",
         "zipcode": "20740-2492",
         "timings": [
             "Monday: 10:00 AM – 12:00 AM",
@@ -1254,6 +1272,7 @@
                 "time": 1541899881
             }
         ],
+        "website": "http://www.pizzabolis.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.4,
         "price_level": 1
@@ -1267,7 +1286,7 @@
         "lat": 38.991481,
         "lon": -76.93366,
         "merchant_id": 26611949,
-        "address": "8147 BALTIMORE AVE STE A",
+        "address": "8147 Baltimore Ave Ste A",
         "zipcode": "20740-2492",
         "timings": [
             "Monday: 10:30 AM – 9:30 PM",
@@ -1330,6 +1349,7 @@
                 "time": 1547868271
             }
         ],
+        "website": "http://phodlite.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.9,
         "price_level": 1
@@ -1343,10 +1363,11 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 24511624,
-        "address": "1220 STAMP STUDENT CTR",
+        "address": "1220 Stamp Student Ctr",
         "zipcode": "20742-0001",
         "timings": null,
         "reviews": null,
+        "website": null,
         "icon": null,
         "rating": null,
         "price_level": null
@@ -1360,7 +1381,7 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 58000340,
-        "address": "1101 MAIN ADMINISTRATION BLDG",
+        "address": "1101 Main Administration Bldg",
         "zipcode": "20742-5025",
         "timings": [
             "Monday: 9:30 AM – 8:00 PM",
@@ -1423,6 +1444,7 @@
                 "time": 1556533964
             }
         ],
+        "website": "http://www.pandaexpress.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.8,
         "price_level": 1
@@ -1436,10 +1458,11 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 31924072,
-        "address": "1103 LEE BLDG",
+        "address": "1103 Lee Bldg",
         "zipcode": "20742-5151",
         "timings": null,
         "reviews": null,
+        "website": null,
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
         "rating": null,
         "price_level": null
@@ -1453,7 +1476,7 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 31924061,
-        "address": "1150S S CAMPUS DINING HALL",
+        "address": "1150s S Campus Dining Hall",
         "zipcode": "20742-8400",
         "timings": [
             "Monday: 7:00 AM – 12:00 AM",
@@ -1516,6 +1539,7 @@
                 "time": 1496161158
             }
         ],
+        "website": "http://dining.umd.edu/menus/south-campus-dining-hall-menu/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.8,
         "price_level": 2
@@ -1529,7 +1553,7 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 31990794,
-        "address": "1109 S CAMPUS DINING HALL",
+        "address": "1109 S Campus Dining Hall",
         "zipcode": "20742-8400",
         "timings": [
             "Monday: 7:00 AM – 12:00 AM",
@@ -1592,6 +1616,7 @@
                 "time": 1496161158
             }
         ],
+        "website": "http://dining.umd.edu/menus/south-campus-dining-hall-menu/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.8,
         "price_level": 2
@@ -1605,7 +1630,7 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 23931308,
-        "address": "STUDENTS UNION BLDG UNIV",
+        "address": "Students Union Bldg Univ",
         "zipcode": "20742-0001",
         "timings": [
             "Monday: 7:00 AM – 12:00 AM",
@@ -1658,16 +1683,17 @@
                 "time": 1576340581
             },
             {
-                "author_name": "Wilhel S.",
-                "author_url": "https://www.google.com/maps/contrib/103684029606288792926/reviews",
+                "author_name": "bill carroll",
+                "author_url": "https://www.google.com/maps/contrib/104346401522110827947/reviews",
                 "language": "en",
-                "profile_photo_url": "https://lh5.ggpht.com/-SPBb2T3NJzQ/AAAAAAAAAAI/AAAAAAAAAAA/9bqWv3e3-es/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg",
+                "profile_photo_url": "https://lh5.ggpht.com/-bgbW8YOTVqs/AAAAAAAAAAI/AAAAAAAAAAA/k3BS65kLkvI/s128-c0x00000000-cc-rp-mo-ba6/photo.jpg",
                 "rating": 4,
-                "relative_time_description": "9 months ago",
-                "text": "Good place for everything from studying, eating, watching movies, playing games, to simply hanging out.",
-                "time": 1568425570
+                "relative_time_description": "2 years ago",
+                "text": "It has a good selection of fast food. Interesting decorations. Good ice cream at the dairy store. Lots of students having a good time. Good place to get sports clothes.",
+                "time": 1518927526
             }
         ],
+        "website": "http://thestamp.umd.edu/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
         "rating": 4.5,
         "price_level": null
@@ -1681,7 +1707,7 @@
         "lat": 38.991556,
         "lon": -76.938068,
         "merchant_id": 85422449,
-        "address": "1150 S CAMPUS DINING HALL",
+        "address": "1150 S Campus Dining Hall",
         "zipcode": "20742-8411",
         "timings": [
             "Monday: 7:00 AM – 12:00 AM",
@@ -1744,6 +1770,7 @@
                 "time": 1496161158
             }
         ],
+        "website": "http://dining.umd.edu/menus/south-campus-dining-hall-menu/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.8,
         "price_level": 2
@@ -1757,7 +1784,7 @@
         "lat": 38.991426,
         "lon": -76.933684,
         "merchant_id": 34708208,
-        "address": "8145 BALTIMORE AVE STE K",
+        "address": "8145 Baltimore Ave Ste K",
         "zipcode": "20740-2471",
         "timings": [
             "Monday: 10:30 AM – 10:00 PM",
@@ -1820,6 +1847,7 @@
                 "time": 1582568911
             }
         ],
+        "website": "http://www.pupuserialafamiliar.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4,
         "price_level": 1
@@ -1833,7 +1861,7 @@
         "lat": 38.991426,
         "lon": -76.933684,
         "merchant_id": 19550278,
-        "address": "8145 BALTIMORE AVE STE M",
+        "address": "8145 Baltimore Ave Ste M",
         "zipcode": "20740-2471",
         "timings": [
             "Monday: Closed",
@@ -1846,14 +1874,14 @@
         ],
         "reviews": [
             {
-                "author_name": "Aaye Sher",
-                "author_url": "https://www.google.com/maps/contrib/114121494123902800799/reviews",
+                "author_name": "Joziah Case",
+                "author_url": "https://www.google.com/maps/contrib/116646790152457688337/reviews",
                 "language": "en",
-                "profile_photo_url": "https://lh6.ggpht.com/-jlLSxVbjhxE/AAAAAAAAAAI/AAAAAAAAAAA/noT3-_i_O2k/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+                "profile_photo_url": "https://lh6.ggpht.com/-c6ok_497xDI/AAAAAAAAAAI/AAAAAAAAAAA/eX68kSN7AdE/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
                 "rating": 5,
-                "relative_time_description": "a year ago",
-                "text": "Great sushi, but for the love of God try some new things. Like this mango dragon roll",
-                "time": 1547141528
+                "relative_time_description": "3 months ago",
+                "text": "Finest food, very friendly employees, consistently excellent vibes. They charge reasonable prices and the food quality is good. Keep it up.",
+                "time": 1583680720
             },
             {
                 "author_name": "Misael Romero",
@@ -1866,24 +1894,14 @@
                 "time": 1581460149
             },
             {
-                "author_name": "Joziah Case",
-                "author_url": "https://www.google.com/maps/contrib/116646790152457688337/reviews",
+                "author_name": "Aaye Sher",
+                "author_url": "https://www.google.com/maps/contrib/114121494123902800799/reviews",
                 "language": "en",
-                "profile_photo_url": "https://lh6.ggpht.com/-c6ok_497xDI/AAAAAAAAAAI/AAAAAAAAAAA/eX68kSN7AdE/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+                "profile_photo_url": "https://lh6.ggpht.com/-jlLSxVbjhxE/AAAAAAAAAAI/AAAAAAAAAAA/noT3-_i_O2k/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
                 "rating": 5,
-                "relative_time_description": "3 months ago",
-                "text": "Finest food, very friendly employees, consistently excellent vibes. They charge reasonable prices and the food quality is good. Keep it up.",
-                "time": 1583680720
-            },
-            {
-                "author_name": "Isaac Andrews",
-                "author_url": "https://www.google.com/maps/contrib/114312579293767778437/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh4.ggpht.com/-OLBoXWgRd5I/AAAAAAAAAAI/AAAAAAAAAAA/XZute8ZAOrQ/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
-                "rating": 5,
-                "relative_time_description": "a month ago",
-                "text": "Had a very good experience here with my kids. The food comes fast and the customer service is just great. Prices are fair.",
-                "time": 1589913589
+                "relative_time_description": "a year ago",
+                "text": "Great sushi, but for the love of God try some new things. Like this mango dragon roll",
+                "time": 1547141528
             },
             {
                 "author_name": "Hongyu Yang",
@@ -1894,8 +1912,19 @@
                 "relative_time_description": "a year ago",
                 "text": "First time to be in there. Food and serve is good. Near campus and easy to access. Total on the picture with tax and fee was 58.",
                 "time": 1539810233
+            },
+            {
+                "author_name": "Isaac Andrews",
+                "author_url": "https://www.google.com/maps/contrib/114312579293767778437/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh4.ggpht.com/-OLBoXWgRd5I/AAAAAAAAAAI/AAAAAAAAAAA/XZute8ZAOrQ/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+                "rating": 5,
+                "relative_time_description": "a month ago",
+                "text": "Had a very good experience here with my kids. The food comes fast and the customer service is just great. Prices are fair.",
+                "time": 1589913589
             }
         ],
+        "website": "http://www.hanamijapanese.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4.2,
         "price_level": 2
@@ -1909,7 +1938,7 @@
         "lat": 38.991426,
         "lon": -76.933684,
         "merchant_id": 76522373,
-        "address": "8145 BALTIMORE AVE STE J",
+        "address": "8145 Baltimore Ave Ste J",
         "zipcode": "20740-2471",
         "timings": null,
         "reviews": [
@@ -1964,6 +1993,7 @@
                 "time": 1577564487
             }
         ],
+        "website": "http://dpdough.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 3.9,
         "price_level": 1
@@ -1977,7 +2007,7 @@
         "lat": 38.991426,
         "lon": -76.933684,
         "merchant_id": 80133209,
-        "address": "8145 BALTIMORE AVE STE G",
+        "address": "8145 Baltimore Ave Ste G",
         "zipcode": "20740-2467",
         "timings": [
             "Monday: 11:00 AM – 10:00 PM",
@@ -2020,16 +2050,6 @@
                 "time": 1578755247
             },
             {
-                "author_name": "Johnny Parry",
-                "author_url": "https://www.google.com/maps/contrib/105715876359432554643/reviews",
-                "language": "en",
-                "profile_photo_url": "https://lh5.ggpht.com/-jh7p0_OWhNM/AAAAAAAAAAI/AAAAAAAAAAA/NmihIHdhyQY/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
-                "rating": 5,
-                "relative_time_description": "6 months ago",
-                "text": "Last week was our first time we went to this good restaurant. But It is surely not the last time. We had great time with the efficient service, with the exceptional  dishes and wine and with the honest price. We will no doubt visit there soon.",
-                "time": 1576766049
-            },
-            {
                 "author_name": "RAMANISH SINGH",
                 "author_url": "https://www.google.com/maps/contrib/109754615901858709009/reviews",
                 "language": "en",
@@ -2038,8 +2058,19 @@
                 "relative_time_description": "7 months ago",
                 "text": "This isn't a good option if you are looking for Indian vegetarian dishes. The vegetarian dishes they had were average and they had no special dish or sweet in the buffet. The sitting area is clean and spacious though.",
                 "time": 1573862774
+            },
+            {
+                "author_name": "Tatum M",
+                "author_url": "https://www.google.com/maps/contrib/105715304354494713765/reviews",
+                "language": "en",
+                "profile_photo_url": "https://lh6.ggpht.com/-G_khnVazN0U/AAAAAAAAAAI/AAAAAAAAAAA/rqukC4Z1u50/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg",
+                "rating": 5,
+                "relative_time_description": "5 months ago",
+                "text": "Exceptional food, kind staff members, always  awesome ambience. They charge reasonable prices and the food quality is very good. Keep it up.",
+                "time": 1580158086
             }
         ],
+        "website": "http://www.foodfactorycollegepark.com/",
         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
         "rating": 4,
         "price_level": 1

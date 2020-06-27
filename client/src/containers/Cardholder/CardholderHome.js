@@ -13,7 +13,7 @@ function CardholderHome(props) {
 
     const [store, setStore] = useState('RESTAURANTS/BARS');
     const [zip, setZip] = useState('');
-    const [showMerchants, setShowMerchants] = useState(false); //false
+    const [showMerchants, setShowMerchants] = useState(false);
     const [loadingMerchants, setLoadingMerchants] = useState(false);
     const [merchants, setMerchants] = useState([]);
 

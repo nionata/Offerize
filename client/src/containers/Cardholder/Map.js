@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 import mapStyles from './mapStyles.json';
+import MapMarkerPopup from './MapMarkerPopup';
 
 const Map = (props) => {
 
@@ -93,16 +94,7 @@ const Map = (props) => {
                         />
                     ))}
                     {infoOpen && selectedPlace && (
-                        <InfoWindow
-                            anchor={markerMap[selectedPlace.name]}
-                            onCloseClick={() => setInfoOpen(false)}
-                        >
-                            <div>
-                                <h3>{selectedPlace.name}</h3>
-                                <div>{selectedPlace.city}, {selectedPlace.state}</div>
-                                <div>Open until 8:00pm</div>
-                            </div>
-                        </InfoWindow>
+                        <MapMarkerPopup selectedPlace={selectedPlace} anchor={markerMap[selectedPlace.name]} setInfoOpen={setInfoOpen} />
                     )}
 
                 </>
