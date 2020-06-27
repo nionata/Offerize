@@ -20,7 +20,9 @@
 */
 
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
-const { getLatLong, getSuppliers, getPlaceId, getPlaceDetails, cleanMerchant } = require('./utils')
+const { cleanMerchant } = require('../utils/base')
+const { getSuppliers } = require('../utils/supplier')
+const { getLatLong, getPlaceId, getPlaceDetails } = require('../utils/google')
 
 const formatError = error => [
     { messages: [{ id: error.id, message: error.message, field: error.field }] },
