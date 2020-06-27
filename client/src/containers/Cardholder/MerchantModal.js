@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal, Tabs, List, Avatar, Rate } from 'antd';
 import {
     GlobalOutlined, EnvironmentOutlined,
@@ -11,10 +11,6 @@ const MerchantModal = (props) => {
 
     const [tabKey, setTabKey] = useState('1');
     const [infoTabHeight, setInfoTabHeight] = useState(null);
-
-    useEffect(() => {
-        console.log(infoTabHeight);
-    }, [infoTabHeight])
 
     return (
         <Modal

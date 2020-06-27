@@ -21,7 +21,10 @@ const MerchantFromList = (props) => {
                     onClick={() => {
                         setShowModal(true);
                     }}
-                    title={<a href={props.item.website}>{props.item.name}</a>}
+                    title={<a className='merchantListWebsite' target="_blank" rel="noopener noreferrer"
+                        href={props.item.website} onClick={e => e.stopPropagation()}>
+                        {props.item.name}
+                    </a>}
                     description={<>
                         <Rate disabled allowHalf defaultValue={Math.round(props.item.rating * 2) / 2} style={{ fontSize: '14px' }} />
                         <div style={{ height: '4px' }} />

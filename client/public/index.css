@@ -141,16 +141,16 @@ code {
 }
 
 .inputBoxHeader {
-  padding: 20px 25px;
+  padding: 18px 26px;
   background-color: #f0f2f4;
-  font-size: 24px;
+  font-size: 23px;
   font-weight: 600;
   color: #303030;
 }
 
 .inputBoxFields {
   padding: 25px;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .inputBoxFieldsRow {
@@ -164,7 +164,8 @@ code {
 }
 
 .inputBoxComponent {
-  width: 200px !important;
+  width: 220px !important;
+  /* transition: transform 0s !important; */
 }
 
 /* when given invalid input */
@@ -224,7 +225,7 @@ code {
   }
 
   .inputBoxComponent {
-    width: 160px !important;
+    /* width: 160px !important; */
   }
 
   .inputBoxHeader {
@@ -249,6 +250,10 @@ code {
   .inputBox {
     width: 100%;
   }
+  .inputBoxComponent {
+    /* 100% - padding 0 space for "find" and "near" text */
+    width: calc(100vw - 50px - 100px) !important;
+  }
   .map {
     margin: 0;
   }
@@ -267,6 +272,11 @@ code {
 
 .ant-list-item-meta-title {
   margin: 0 !important;
+}
+
+.merchantListWebsite:hover {
+  color: #202020 !important;
+  border-bottom: 1px solid #585858;
 }
 
 

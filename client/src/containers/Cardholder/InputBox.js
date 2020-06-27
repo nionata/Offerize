@@ -3,6 +3,7 @@ import { Input, Select, Button, Popover, Radio } from 'antd';
 import { SlidersFilled } from '@ant-design/icons';
 
 import useWindowDimensions from './../../hooks/useWindowDimensions';
+import Autocomplete from './Autocomplete';
 
 const { Option } = Select;
 
@@ -18,17 +19,22 @@ const InputBox = (props) => {
     const [buttonShake, setButtonShake] = useState(false);
     const [sortBy, setSortBy] = useState(null);
     const { height, width } = useWindowDimensions();
+    const [edited, setEdited] = useState(false);
 
     function onSubmit() {
+        console.log(edited);
         // stops button click spam
         if (buttonShake || props.loadingMerchants)
             return;
         // if the zip is all digits and 5 digits long
-        if (/^\d+$/.test(props.zip) && props.zip.length === 5) {
+        // if (/^\d+$/.test(props.zip) && props.zip.length === 5) {
+        //     setInvalidZip(false);
+        //     props.fetchMerchants();
+        // }
+        if (props.location !== null && !edited) {
             setInvalidZip(false);
             props.fetchMerchants();
-        }
-        else {
+        } else {
             setInvalidZip(true);
             setButtonShake(true);
             setTimeout(() => {
@@ -45,7 +51,7 @@ const InputBox = (props) => {
             <div className='inputBoxFields'>
                 <div className='inputBoxFieldsRow'>
                     Find
-                    <Select className='inputBoxComponent' value={props.store} size={width > 800 ? 'large' : 'middle'}
+                    <Select className='inputBoxComponent' value={props.store} size={width > 800 ? 'middle' : 'middle'}
                         onChange={val => props.setStore(val)}>
                         <Option value='RESTAURANTS/BARS'>Restaurants + Bars</Option>
                         <Option value='AUTO RENTAL'>Auto Rental</Option>
@@ -58,8 +64,7 @@ const InputBox = (props) => {
                 </div>
                 <div className='inputBoxFieldsRow'>
                     Near
-                    <Input className={['inputBoxComponent', invalidZip ? 'invalidZip' : ''].join(' ')} value={props.zip} onChange={event => props.setZip(event.target.value)}
-                        placeholder='Zip code' size={width > 800 ? 'large' : 'middle'} />
+                    <Autocomplete invalidZip={invalidZip} setLocation={props.setLocation} setEdited={setEdited} />
                 </div>
                 <div className='inputBoxFieldsRow'>
                     <Popover placement="right" trigger="click"
@@ -80,12 +85,12 @@ const InputBox = (props) => {
                                 </Radio.Group>
                             </>
                         }>
-                        <Button size={width > 800 ? 'large' : 'middle'}>
+                        <Button size={width > 800 ? 'middle' : 'middle'}>
                             <SlidersFilled style={{ color: '#1890ff' }} />
                         </Button>
                     </Popover>
                     <Button className={['inputBoxSubmit', 'inputBoxComponent', buttonShake ? 'buttonShake' : ''].join(' ')}
-                        type='primary' size={width > 800 ? 'large' : 'middle'}
+                        type='primary' size={width > 800 ? 'middle' : 'middle'}
                         onClick={onSubmit} loading={props.loadingMerchants} >
                         Search
                     </Button>
