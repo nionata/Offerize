@@ -23,6 +23,13 @@ Current documentation is available [here](https://documenter.getpostman.com/view
 
 ## Setup
 ### Client
+> This requires [Node](https://nodejs.org/en/download/) 
+>
+> Before your first start run `npm install`
+
+``` bash
+npm run start
+```
 ### Server
 > This requires [docker desktop](https://www.docker.com/products/docker-desktop) 
 ``` bash
@@ -35,33 +42,16 @@ docker-compose up
 
 ## Deployment
 
-The [release](/.github/workflows/release.yml) workflow will be kicked off every time a GitHub release is published to the master branch
+- The [build and update server]([https://github.com/nionata/Offerize/actions?query=workflow%3A%22Build+and+Update+Server%22](https://github.com/nionata/Offerize/actions?query=workflow%3A"Build+and+Update+Server")) workflow will be kicked off every time code is pushed to the `/server` directory on the `develop` and `master` branches
+- The [release latest version]([https://github.com/nionata/Offerize/actions?query=workflow%3A%22Release+Latest+Version%22](https://github.com/nionata/Offerize/actions?query=workflow%3A"Release+Latest+Version")) workflow will be kicked off every time a GitHub release is published to the `master` branch
 
-### Client
+### Client - [offerize.xyz](https://offerize.xyz)
 
-On release, the client will be built to static files and uploaded to an S3 bucket. Those files will then be served on requests to [offerize.xyz](http://offerize.xyz)
+On release, the client will be built to static files and the build folder will be synced with the `offerize.xyz` S3 bucket. Additionally, all the old build files that were cached on [CloudFront](https://aws.amazon.com/cloudfront/) edge nodes will be invalidated.
 
-### Server
+### Server - [api.offerize.xyz](http://api.offerize.xyz)
 
-The [server docker image](https://hub.docker.com/repository/docker/nionata/offerize) is built on all new commits to `develop` and tagged as `latest`. On release, the image is tagged with the explicit version and pushed back to [dockerhub](https://hub.docker.com/). The following steps detail deploying the freshly tagged image:
-
-1. SSH into the EC2 instance with a perm file
-
-2. Remove the existing container, `docker rm --force offerize-server-prod`
-
-3. Run a new container with the following options, `docker run`
-
-   1. `--name offerize-server-prod`
-
-   2. `-p 80:1337` 
-
-      > maps the host port 80 (http default port) with the container port 1337 (strapi server port)
-
-   3. `-e DATABASE_HOST=hostFromRDS` 
-
-   4. `-e DATABASE_PASSWORD=passwordFromRDS` 
-
-   5. `nionata/offerize:releaseVersion`  
+The [server docker image](https://hub.docker.com/repository/docker/nionata/offerize) is built and tagged as `latest` on all new commits to `develop` and `master`. Additionally, the old server will be removed on the EC2 instance and replaced with the `latest` build. On release, the image is tagged with the version and pushed back to [Dockerhub](https://hub.docker.com/).
 
 <br/>
 
