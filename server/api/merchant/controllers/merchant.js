@@ -96,16 +96,11 @@ module.exports = {
 
 				try { 
 					const placeId = await getPlaceId(address, name)
-					const { timings, reviews, website, icon, rating, price_level } = await getPlaceDetails(placeId)
+					const details = await getPlaceDetails(placeId)
 					
 					return {
 						...merchant,
-						timings,
-                        reviews,
-                        website,
-						icon,
-						rating, 
-						price_level
+						...details
 					}
 				} catch (err) {
 					console.log('PlaceDetailsError', err)

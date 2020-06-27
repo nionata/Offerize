@@ -25,7 +25,7 @@ module.exports.getPlaceId = async (address, name) => {
     
 module.exports.getPlaceDetails = async (id) => {
 
-    const resp = await axios.get(`${GOOGLE_API_HOST}/place/details/json?place_id=${id}&fields=reviews,website,opening_hours,icon,rating,price_level&key=${GOOGLE_KEY}`)
+    const resp = await axios.get(`${GOOGLE_API_HOST}/place/details/json?place_id=${id}&fields=reviews,website,formatted_phone_number,opening_hours,icon,rating,price_level&key=${GOOGLE_KEY}`)
     const { result } = resp.data
 
     const opening_hours = getDetail('opening_hours', result)
@@ -34,6 +34,7 @@ module.exports.getPlaceDetails = async (id) => {
         timings: opening_hours ? opening_hours.weekday_text : null, 
         reviews: getDetail('reviews', result),
         website: getDetail('website', result),
+        formatted_phone_number: getDetail('formatted_phone_number', result),
         icon: getDetail('icon', result),
         rating: getDetail('rating', result),
         price_level: getDetail('price_level', result)
