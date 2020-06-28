@@ -22,7 +22,6 @@ const InputBox = (props) => {
     const [edited, setEdited] = useState(false);
 
     function onSubmit() {
-        console.log(edited);
         // stops button click spam
         if (buttonShake || props.loadingMerchants)
             return;

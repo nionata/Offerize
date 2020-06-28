@@ -1,10 +1,14 @@
+function mod(n, m) {
+    return ((n % m) + m) % m;
+}
+
 export default function parseDate(timings) {
     if (!timings)
         return 'Hours unavailable';
     else if (timings[0] === 'Monday: Open 24 hours')
         return 'Open 24 hours';
     // Thursday: 10:00 AM – 10:00 PM
-    let currHours = timings[(new Date().getDay() - 1) % 7].split(' ');
+    let currHours = timings[mod((new Date().getDay() - 1), 7)].split(' ');
     if (currHours[1] === 'Closed')
         return 'Closed Today';
     let opening = null;

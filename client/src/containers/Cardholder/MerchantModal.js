@@ -7,6 +7,10 @@ import {
 
 const { TabPane } = Tabs;
 
+function mod(n, m) {
+    return ((n % m) + m) % m;
+}
+
 const MerchantModal = (props) => {
 
     const [tabKey, setTabKey] = useState('1');
@@ -66,7 +70,7 @@ const MerchantModal = (props) => {
                                         return (
                                             <>
                                                 <li key={idx}>
-                                                    {(new Date().getDay() - 1) % 7 === idx ?
+                                                    {mod((new Date().getDay() - 1), 7) === idx ?
                                                         <>
                                                             <b style={{ float: 'left' }}>{elem.split('day: ')[0].slice(0, 3)}</b>
                                                             <b style={{ float: 'right' }}>{elem.split('day: ')[1]}</b>
