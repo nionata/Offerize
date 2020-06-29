@@ -127,19 +127,25 @@ module.exports = {
 
 		if (ctx.is('multipart')) {
 
-		  	const { data, files } = parseMultipartData(ctx);
-			merchant = await strapi.services.merchant.create(data, { files })
+			return badRequest('No multipart')
 		} else {
 
+			// using the address and zipcode,
+			// get the lat and lon of the merchant
 			const { address, zipcode } = ctx.request.body
-			if (zipcode) {
+			if (address && zipcode) {
 				const { lat, lon } = await getLatLong(address, zipcode)
 
 				ctx.request.body.lat = `${lat}`
 				ctx.request.body.lon = `${lon}`
 			}
 
-            merchant = await strapi.services.merchant.create(ctx.request.body)
+			// create the merchant entry
+			merchant = await strapi.services.merchant.create(ctx.request.body)
+			
+			// add the merchant to the current user
+			const { id } = ctx.state.user 
+			await strapi.query('user', 'users-permissions').update({ id }, { merchant: merchant.id })
 		}
 
 		return sanitizeEntity(merchant, { model: strapi.models.merchant })
