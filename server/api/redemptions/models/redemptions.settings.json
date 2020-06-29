@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "redemptions",
+  "info": {
+    "name": "Redemptions"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "currentRedemptions": {
+      "type": "integer"
+    },
+    "redemptionTimeStamps": {
+      "type": "json"
+    },
+    "offer": {
+      "via": "redemption",
+      "model": "offers"
+    }
+  }
+}
