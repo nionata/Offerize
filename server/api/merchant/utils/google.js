@@ -4,9 +4,9 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY
 
 const { getCoord, getDetail } = require('./base')
 
-module.exports.getLatLong = async (zipcode) => {
+module.exports.getLatLong = async (address, zipcode) => {
 
-    const resp = await axios.get(`${GOOGLE_API_HOST}/geocode/json?key=${GOOGLE_KEY}&components=postal_code:${zipcode}`)
+    const resp = await axios.get(`${GOOGLE_API_HOST}/geocode/json?address=${address}&components=postal_code:${zipcode}&key=${GOOGLE_KEY}`)
     const { results } = resp.data
     
     return {
