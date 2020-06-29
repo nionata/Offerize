@@ -28,6 +28,6 @@ function discountCalculator(minCust, maxCust, profitMargin, profitIncrease, newD
     var extraCustomers = numOfCustomersNeeded - (1.0 * (minCust + maxCust) / 2);
     return [numOfCustomersNeeded, customersToBreakEven];    
 }
-console.log(discountCalculator(50,50,30,300,20,10));
+console.log('Discount Calculator Loaded');
 
 
