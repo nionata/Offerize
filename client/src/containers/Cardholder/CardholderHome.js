@@ -9,19 +9,21 @@ import MerchantList from './MerchantList';
 import industryCodes from './industryCodes.json';
 import tempData from './tempData.json';
 
+
 function CardholderHome(props) {
 
     const [store, setStore] = useState('RESTAURANTS/BARS');
-    const [zip, setZip] = useState('');
-    const [showMerchants, setShowMerchants] = useState(false); //false
+    const [location, setLocation] = useState(null);
+    const [showMerchants, setShowMerchants] = useState(false);
     const [loadingMerchants, setLoadingMerchants] = useState(false);
     const [merchants, setMerchants] = useState([]);
+    const [address, setAddress] = useState('');
 
     function fetchMerchants() {
         // setMerchants(tempData);
         setLoadingMerchants(true);
         let codes = industryCodes[store];
-        axios.get(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=${codes}`)
+        axios.get(`http://api.offerize.xyz/merchants?zipcode=20740&show=visa&industry=${codes}`)
             .then(res => {
                 console.log(res);
                 setShowMerchants(true);
@@ -65,7 +67,7 @@ function CardholderHome(props) {
             <div style={{ position: 'relative', backgroundColor: '#f7fafc' }}>
                 <Map merchants={merchants} />
                 <div className='inputBox'>
-                    <InputBox store={store} setStore={setStore} zip={zip} setZip={setZip}
+                    <InputBox store={store} setStore={setStore} setLocation={setLocation} location={location}
                         fetchMerchants={fetchMerchants} loadingMerchants={loadingMerchants} />
                     {showMerchants && <MerchantList merchants={merchants} />}
                 </div>

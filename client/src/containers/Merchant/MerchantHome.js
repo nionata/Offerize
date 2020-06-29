@@ -7,6 +7,9 @@ function MerchantHome(props) {
     return (
         <>
             <Header />
+            <h3 style={{ textAlign: 'center' }}>
+                Merchant stuff
+            </h3>
             <div style={{ height: '1000px' }} />
             <Footer />
         </>
