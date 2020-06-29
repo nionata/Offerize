@@ -64,6 +64,11 @@ code {
   padding-left: 12px;
 }
 
+.clickableLogo:hover {
+  cursor: pointer;
+}
+
+
 .header a {
   padding: 12px 20px;
   color: #fff;
@@ -82,6 +87,10 @@ code {
   font-size: 20px;
   font-weight: 600;
   color: #303030;
+}
+
+.userPopover a{
+
 }
 
 @media screen and (max-width: 1100px) {
@@ -108,6 +117,16 @@ code {
   display: none !important;
 }
 
+.mapMarkerMoreInfo {
+  text-decoration-color: #909090;
+}
+
+.mapMarkerMoreInfo:hover {
+  cursor: pointer;
+  color: #202020;
+  text-decoration-color: #404040;
+}
+
 
 
 /*
@@ -131,16 +150,16 @@ code {
 }
 
 .inputBoxHeader {
-  padding: 20px 25px;
+  padding: 18px 26px;
   background-color: #f0f2f4;
-  font-size: 24px;
+  font-size: 23px;
   font-weight: 600;
   color: #303030;
 }
 
 .inputBoxFields {
   padding: 25px;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .inputBoxFieldsRow {
@@ -154,7 +173,8 @@ code {
 }
 
 .inputBoxComponent {
-  width: 200px !important;
+  width: 220px !important;
+  /* transition: transform 0s !important; */
 }
 
 /* when given invalid input */
@@ -194,7 +214,7 @@ code {
 
 
 .footerSpace {
-  height: 20px;
+  height: 30px;
   background-color: #f7fafc;
   display: none;
 }
@@ -214,7 +234,7 @@ code {
   }
 
   .inputBoxComponent {
-    width: 160px !important;
+    /* width: 160px !important; */
   }
 
   .inputBoxHeader {
@@ -239,6 +259,10 @@ code {
   .inputBox {
     width: 100%;
   }
+  .inputBoxComponent {
+    /* 100% - padding 0 space for "find" and "near" text */
+    width: calc(100vw - 50px - 100px) !important;
+  }
   .map {
     margin: 0;
   }
@@ -251,10 +275,108 @@ code {
 =======================================================
 */
 
+.merchantList .ant-list-item-meta {
+  cursor: pointer;
+}
+
 .ant-list-item-meta-title {
   margin: 0 !important;
 }
 
+.merchantListWebsite:hover {
+  color: #202020 !important;
+  border-bottom: 1px solid #585858;
+}
+
+
+/*
+=======================================================
+                      MERCHANT MODAL
+=======================================================
+*/
+
+.merchantModalBody {
+  display: flex;
+  flex-direction: row;
+}
+
+.merchantModalBodyLeft {
+  /* width: 50%; */
+  width: 276px;
+}
+
+.merchantModalBodyRight {
+  width: 276px;
+}
+
+.merchantModalHours {
+  width: 200px;
+  float: right; 
+}
+
+.merchantModalWebsite {
+  font-weight: 500;
+  color: #555759;
+  border-bottom: 1px solid rgba(0,0,0,0.40);
+}
+
+.merchantModalWebsite:hover {
+  color: #181a1c;
+  border-bottom: 1px solid rgba(0,0,0,0.70);
+}
+
+.merchantModal ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.merchantModalIconText {
+  padding-left: 13px;
+  margin-left: 13px;
+  text-indent: -13px;
+}
+
+.merchantModalIconText:nth-child(-n+3) {
+  padding-bottom: 14px;
+}
+
+.merchantModalReviewsLink:hover {
+  color: #202020;
+  cursor: pointer;
+}
+
+.ant-tabs-nav {
+    display: none !important;
+}
+
+.reviewsBack {
+  font-size: 16px;
+  color: #595959;
+}
+
+.reviewsBack:hover {
+  color: #202020;
+}
+
+.merchantModalReviews .ant-list-item-meta-description {
+  line-height: 1.8;
+}
+
+.ant-tabs-tabpane {
+  /* height: 300px !important;
+  overflow-y: scroll; */
+}
+
+@media screen and (max-width: 650px) {
+  .merchantModalBody {
+      flex-direction: column;
+      align-items: center;
+  }
+  .merchantModalHours {
+    float: left;
+  }
+}
 
 
 /*
@@ -285,6 +407,16 @@ code {
   box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
   font-size: 14px;
   font-weight: 500;
+}
+
+.signinShake {
+  animation: shake .6s ease both;
+}
+
+.signinAlert {
+  position: absolute;
+  top: -20px;
+  transition: opacity 0.1s;
 }
 
 .signinField {

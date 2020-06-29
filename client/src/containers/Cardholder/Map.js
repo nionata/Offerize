@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/api';
 
 import mapStyles from './mapStyles.json';
+import MapMarkerPopup from './MapMarkerPopup';
 
 const Map = (props) => {
-
     // The things we need to track in state
     const [mapRef, setMapRef] = useState(null);
     const [selectedPlace, setSelectedPlace] = useState(null);
@@ -13,6 +13,7 @@ const Map = (props) => {
     const [zoom, setZoom] = useState(5);
     const [clickedLatLng, setClickedLatLng] = useState(null);
     const [infoOpen, setInfoOpen] = useState(false);
+    const [autocomplete, setAutocomplete] = useState('');
 
     useEffect(() => {
         fitBounds(mapRef);
@@ -66,9 +67,23 @@ const Map = (props) => {
         //setCenter(place.pos)
     };
 
+    const onLoad = (autocomplete) => {
+        console.log('autocomplete: ', autocomplete)
+        setAutocomplete(autocomplete);
+    }
+
+    const onPlaceChanged = () => {
+        if (autocomplete !== null) {
+            console.log(autocomplete.getPlace());
+        } else {
+            console.log('Autocomplete is not loaded yet!');
+        }
+    }
+
     return (
         <LoadScript
             googleMapsApiKey='AIzaSyD-f71Ghi91GVwaNecmAtv_eIsaFOf3p5M'
+            libraries={["places"]}
         >
             <GoogleMap
                 onLoad={loadHandler}
@@ -78,34 +93,43 @@ const Map = (props) => {
                 options={{
                     styles: mapStyles
                 }}
-            // Save the current center position in state
-            // onCenterChanged={() => setCenter(mapRef.getCenter().toJSON())}
-            // Save the user's map click position
-            // onClick={e => setClickedLatLng(e.latLng.toJSON())}
             >
-                <>
-                    {props.merchants.map((place, idx) => (
-                        <Marker
-                            key={idx}
-                            position={{ lat: place.lat, lng: place.lon }}
-                            onLoad={marker => markerLoadHandler(marker, place)}
-                            onClick={event => markerClickHandler(event, place)}
-                        />
-                    ))}
-                    {infoOpen && selectedPlace && (
-                        <InfoWindow
-                            anchor={markerMap[selectedPlace.name]}
-                            onCloseClick={() => setInfoOpen(false)}
-                        >
-                            <div>
-                                <h3>{selectedPlace.name}</h3>
-                                <div>{selectedPlace.city}, {selectedPlace.state}</div>
-                                <div>Open until 8:00pm</div>
-                            </div>
-                        </InfoWindow>
-                    )}
+                {/* <Autocomplete
+                    onLoad={onLoad}
+                    onPlaceChanged={onPlaceChanged}
+                >
+                    <input
+                        type="text"
+                        placeholder="Customized your placeholder"
+                        style={{
+                            boxSizing: `border-box`,
+                            border: `1px solid transparent`,
+                            width: `240px`,
+                            height: `32px`,
+                            padding: `0 12px`,
+                            borderRadius: `3px`,
+                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                            fontSize: `14px`,
+                            outline: `none`,
+                            textOverflow: `ellipses`,
+                            position: "absolute",
+                            left: "50%",
+                            marginLeft: "-120px"
+                        }}
+                    />
+                </Autocomplete> */}
+                {props.merchants.map((place, idx) => (
+                    <Marker
+                        key={idx}
+                        position={{ lat: place.lat, lng: place.lon }}
+                        onLoad={marker => markerLoadHandler(marker, place)}
+                        onClick={event => markerClickHandler(event, place)}
+                    />
+                ))}
+                {infoOpen && selectedPlace && (
+                    <MapMarkerPopup selectedPlace={selectedPlace} anchor={markerMap[selectedPlace.name]} setInfoOpen={setInfoOpen} />
+                )}
 
-                </>
             </GoogleMap>
         </LoadScript>
     )
@@ -123,3 +147,8 @@ export default React.memo(Map)
 //     strokeWeight: 0,
 //     scale: 1.25
 // }}
+
+// // Save the current center position in state
+            // onCenterChanged={() => setCenter(mapRef.getCenter().toJSON())}
+            // Save the user's map click position
+            // onClick={e => setClickedLatLng(e.latLng.toJSON())}
