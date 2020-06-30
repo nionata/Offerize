@@ -16,6 +16,8 @@ const MerchantQs = (props) => {
     const [signinShake, setSigninShake] = useState(false);
     const [invalidCreds, setInvalidCreds] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [merchantData, setMerchantData] = useState(null);
+    const [form] = Form.useForm();
 
     let nameRef = React.createRef();
     let addressRef = React.createRef();
@@ -26,11 +28,50 @@ const MerchantQs = (props) => {
     let industryRef = React.createRef();
     let merchantIdRef = React.createRef();
 
+    // const [nameVal, setNameVal] = useState('');
+    // const [addressVal, setAddressVal] = useState('');
+    // const [cityVal, setCityVal] = useState('');
+    // const [stateVal, setStateVal] = useState('');
+    // const [zipcodeVal, setZipcodeVal] = useState('');
+    // const [mccCodeVal, setMccCodeVal] = useState('');
+    // const [industryVal, setIndustryVal] = useState('');
+    // const [merchantVal, setMerchantVal] = useState('');
+
     const history = useHistory();
 
     useEffect(() => {
         nameRef.current.focus();
-    }, [])
+        // check if they are signed in
+        if (localStorage.getItem('jwt') === null)
+            history.push('/signin');
+
+        const axiosConfig = {
+            headers: {
+                'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('jwt'))
+            }
+        };
+        axios.get('http://api.offerize.xyz/users/me', axiosConfig)
+            .then(res => {
+                console.log(res);
+                //get the merchant id and get that merchant info
+                if (res.data.merchant != null) {
+                    axios.get('http://api.offerize.xyz/merchants/' + res.data.merchant, axiosConfig)
+                        .then(otherRes => {
+                            console.log(otherRes);
+                            setMerchantData(otherRes.data);
+                            // so all the values will be prefilled
+                            form.resetFields();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }, []);
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
@@ -81,10 +122,18 @@ const MerchantQs = (props) => {
 
             <div className={['signinBox', signinShake ? 'signinShake' : ''].join(' ')}>
                 <Form
+                    form={form}
                     name="normal_login"
                     className="login-form"
                     initialValues={{
-                        remember: true,
+                        name: merchantData ? merchantData.name : '',
+                        address: merchantData ? merchantData.address : '',
+                        city: merchantData ? merchantData.city : '',
+                        state: merchantData ? merchantData.state : '',
+                        zipcode: merchantData ? merchantData.zipcode : '',
+                        mccCode: merchantData ? merchantData.mccCode : '',
+                        industry: merchantData ? merchantData.industry : '',
+                        merchantId: merchantData ? merchantData.merchant_id : ''
                     }}
                     onFinish={onFinish}
                 >

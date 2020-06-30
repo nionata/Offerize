@@ -8,6 +8,7 @@ import MerchantHome from './containers/Merchant/MerchantHome';
 import Signin from './containers/Signin';
 import Signup from './containers/Signup';
 import MerchantQs from './containers/Merchant/MerchantQs';
+import UserSettings from './containers/Merchant/UserSettings';
 import NotFound from './containers/NotFound';
 
 import 'antd/dist/antd.css';
@@ -80,9 +81,9 @@ function App() {
             <Route path='/signup' component={Signup} />
             <Route path='/merchant' component={MerchantHome} />
             <Route path='/merchantQs' component={MerchantQs} />
+            <Route path='/merchantSettings' component={UserSettings} />
             <Route default component={NotFound} />
           </Switch>
-
         </div>
       </Router>
     </AuthContext.Provider >
