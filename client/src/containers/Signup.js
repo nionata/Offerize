@@ -28,6 +28,7 @@ const Signup = (props) => {
     const onFinish = values => {
         console.log('Received values of form: ', values);
         localStorage.clear();
+        setLoading(true);
 
         axios.post('http://api.offerize.xyz/auth/local/register', {
             username: values.username,
@@ -35,6 +36,7 @@ const Signup = (props) => {
             password: values.password
         })
             .then(res => {
+                setLoading(false);
                 console.log(res.data);
                 dispatch({
                     type: "LOGIN",
@@ -48,6 +50,7 @@ const Signup = (props) => {
                 //     isSubmitting: false,
                 //     errorMessage: error.message || error.statusText
                 // });
+                setLoading(false);
                 setSigninShake(true);
                 setInvalidCreds(true);
                 setTimeout(() => {
@@ -133,7 +136,7 @@ const Signup = (props) => {
                         <Input.Password type="password" className='signinField' ref={confirmRef} />
                     </Form.Item>
 
-                    <Button type='primary' className='signinButton' htmlType="submit" loading={props.loading} style={{ margin: '24px 0' }}>
+                    <Button type='primary' className='signinButton' htmlType="submit" loading={loading} style={{ margin: '24px 0' }}>
                         Sign up
                     </Button>
 
