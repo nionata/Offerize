@@ -6,35 +6,23 @@ import { Input, Checkbox, Form, Button, message, Alert } from 'antd';
 
 import visaLogo from '../VisaIcons/visaLogoBlue.svg';
 
-const Signin = (props) => {
+const Signup = (props) => {
 
     const { dispatch } = React.useContext(AuthContext);
-    const initialState = {
-        email: "",
-        password: "",
-        isSubmitting: false,
-        errorMessage: null
-    };
-
-    const [data, setData] = React.useState(initialState);
-    const handleInputChange = event => {
-        setData({
-            ...data,
-            [event.target.name]: event.target.value
-        });
-    };
 
     const [signinShake, setSigninShake] = useState(false);
     const [invalidCreds, setInvalidCreds] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    let emailRef = React.createRef();
     let userRef = React.createRef();
     let passRef = React.createRef();
+    let confirmRef = React.createRef();
 
     const history = useHistory();
 
     useEffect(() => {
-        userRef.current.focus();
+        emailRef.current.focus();
     }, [])
 
     const onFinish = values => {
@@ -42,13 +30,14 @@ const Signin = (props) => {
         localStorage.clear();
         setLoading(true);
 
-        axios.post('http://api.offerize.xyz/auth/local', {
-            identifier: values.username,
+        axios.post('http://api.offerize.xyz/auth/local/register', {
+            username: values.username,
+            email: values.email,
             password: values.password
         })
             .then(res => {
-                console.log(res.data);
                 setLoading(false);
+                console.log(res.data);
                 dispatch({
                     type: "LOGIN",
                     payload: res.data
@@ -56,12 +45,12 @@ const Signin = (props) => {
                 history.push('/merchant');
             })
             .catch(error => {
+                // setData({
+                //     ...data,
+                //     isSubmitting: false,
+                //     errorMessage: error.message || error.statusText
+                // });
                 setLoading(false);
-                setData({
-                    ...data,
-                    isSubmitting: false,
-                    errorMessage: error.message || error.statusText
-                });
                 setSigninShake(true);
                 setInvalidCreds(true);
                 setTimeout(() => {
@@ -73,10 +62,10 @@ const Signin = (props) => {
     return (
 
         <div className='signinPage'>
-            <div style={{ height: '80px' }} />
+            <div style={{ height: '60px' }} />
 
             <Alert className='signinAlert' style={{ opacity: invalidCreds ? 1 : 0 }}
-                message={'Username or password is incorrect'}
+                message={'Registration failed.  Try again with different credentials.'}
                 type="error" showIcon />
 
             <div className={['signinBox', signinShake ? 'signinShake' : ''].join(' ')}>
@@ -94,42 +83,68 @@ const Signin = (props) => {
                         </Link>
                     </div>
 
+                    <a className='signinTextAbove' onClick={() => emailRef.current.focus()}>Email</a>
+                    <div style={{ height: '8px' }} />
+                    <Form.Item
+                        name="email"
+                        rules={[
+                            { required: true, message: 'Input an email' },
+                            { type: 'email', message: 'Enter a valid email' }
+                        ]}
+                    >
+                        <Input className='signinField' ref={emailRef} />
+                    </Form.Item>
+                    <div style={{ height: '20px' }} />
+
                     <a className='signinTextAbove' onClick={() => userRef.current.focus()}>Username</a>
                     <div style={{ height: '8px' }} />
                     <Form.Item
                         name="username"
-                        rules={[{ required: true, message: 'Input an username' }]}
+                        rules={[{ required: true, message: 'Input a username' }]}
                     >
-                        <Input className='signinField' size='large' ref={userRef} />
+                        <Input className='signinField' ref={userRef} />
                     </Form.Item>
-                    <div style={{ height: '32px' }} />
+
+                    <div style={{ height: '20px' }} />
 
                     <a className='signinTextAbove' onClick={() => passRef.current.focus()}>Password</a>
-                    <a className='signinForgot' onClick={() => message.info('This feature is not currently supported.  Stay tuned!', 5)}>
-                        Forgot your password?
-                    </a>
                     <Form.Item
                         name="password"
                         rules={[{ required: true, message: 'Input a password' }]}
                     >
-                        <Input.Password type="password" className='signinField' size='large' ref={passRef} />
+                        <Input.Password type="password" className='signinField' ref={passRef} />
                     </Form.Item>
-                    <div style={{ height: '32px' }} />
 
-                    <Checkbox className='signinCheckbox' defaultChecked={true} onChange={() => console.log('check')}>
-                        Stay signed in
-                    </Checkbox>
+                    <div style={{ height: '20px' }} />
 
-                    <Button type='primary' className='signinButton' htmlType="submit" loading={loading} >
-                        Sign in
+                    <a className='signinTextAbove' onClick={() => confirmRef.current.focus()}>Confirm Password</a>
+                    <Form.Item
+                        name="confirm"
+                        dependencies={['password']}
+                        rules={[
+                            { required: true, message: 'Confirm your password' },
+                            ({ getFieldValue }) => ({
+                                validator(rule, value) {
+                                    if (!value || getFieldValue('password') === value) {
+                                        return Promise.resolve();
+                                    }
+                                    return Promise.reject('The two passwords do not match');
+                                },
+                            }),
+                        ]}
+                    >
+                        <Input.Password type="password" className='signinField' ref={confirmRef} />
+                    </Form.Item>
+
+                    <Button type='primary' className='signinButton' htmlType="submit" loading={loading} style={{ margin: '24px 0' }}>
+                        Sign up
                     </Button>
-                    <div className='space32' />
 
                     <div style={{ textAlign: 'center', fontWeight: '600' }}>
-                        <span>Don't have an account?&nbsp;&nbsp;</span>
-                        <Link to='/signup'>
+                        <span>Have an account?&nbsp;&nbsp;</span>
+                        <Link to='/signin'>
                             <a className='signinBottomText'>
-                                Sign up
+                                Sign in
                             </a>
                         </Link>
                     </div>
@@ -139,4 +154,4 @@ const Signin = (props) => {
     )
 }
 
-export default Signin;
+export default Signup;

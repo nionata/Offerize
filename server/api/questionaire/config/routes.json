@@ -2,56 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/offers",
-      "handler": "offers.find",
+      "path": "/questionaires",
+      "handler": "questionaire.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/offers/trends",
-      "handler": "offers.find",
+      "path": "/questionaires/count",
+      "handler": "questionaire.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/offers/count",
-      "handler": "offers.count",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/offers/:id",
-      "handler": "offers.findOne",
+      "path": "/questionaires/:id",
+      "handler": "questionaire.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/offers",
-      "handler": "offers.create",
+      "path": "/questionaires",
+      "handler": "questionaire.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/offers/:id",
-      "handler": "offers.update",
+      "path": "/questionaires/:id",
+      "handler": "questionaire.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/offers/:id",
-      "handler": "offers.delete",
+      "path": "/questionaires/:id",
+      "handler": "questionaire.delete",
       "config": {
         "policies": []
       }

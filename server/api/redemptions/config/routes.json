@@ -2,56 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/offers",
-      "handler": "offers.find",
+      "path": "/redemptions",
+      "handler": "redemptions.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/offers/trends",
-      "handler": "offers.find",
+      "path": "/redemptions/count",
+      "handler": "redemptions.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/offers/count",
-      "handler": "offers.count",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/offers/:id",
-      "handler": "offers.findOne",
+      "path": "/redemptions/:id",
+      "handler": "redemptions.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/offers",
-      "handler": "offers.create",
+      "path": "/redemptions",
+      "handler": "redemptions.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/offers/:id",
-      "handler": "offers.update",
+      "path": "/redemptions/:id",
+      "handler": "redemptions.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/offers/:id",
-      "handler": "offers.delete",
+      "path": "/redemptions/:id",
+      "handler": "redemptions.delete",
       "config": {
         "policies": []
       }

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questionaires",
+  "info": {
+    "name": "Questionaire"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "minCustomers": {
+      "type": "integer"
+    },
+    "maxCustomers": {
+      "type": "integer"
+    },
+    "currentProfitMargin": {
+      "type": "decimal"
+    },
+    "idealProfit": {
+      "type": "decimal"
+    },
+    "newDiscount": {
+      "type": "decimal"
+    },
+    "avgTransactionAmount": {
+      "type": "decimal"
+    }
+  }
+}
