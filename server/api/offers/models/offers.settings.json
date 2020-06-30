@@ -18,18 +18,19 @@
     "active": {
       "type": "boolean"
     },
-    "initialOffers": {
-      "type": "integer"
-    },
-    "currentOffers": {
-      "type": "integer"
-    },
     "expirationDate": {
       "type": "datetime"
     },
     "merchant": {
-      "via": "offers",
-      "model": "merchant"
+      "model": "merchant",
+      "via": "offers"
+    },
+    "questionaire": {
+      "model": "questionaire"
+    },
+    "redemption": {
+      "model": "redemptions",
+      "via": "offer"
     }
   }
 }
