@@ -18,6 +18,7 @@ const MerchantQs = (props) => {
     const [loading, setLoading] = useState(false);
     const [merchantData, setMerchantData] = useState(null);
     const [form] = Form.useForm();
+    const [fetchedMerchantId, setFetchedMerchantId] = useState(null);
 
     let nameRef = React.createRef();
     let addressRef = React.createRef();
@@ -27,15 +28,6 @@ const MerchantQs = (props) => {
     let mccCodeRef = React.createRef();
     let industryRef = React.createRef();
     let merchantIdRef = React.createRef();
-
-    // const [nameVal, setNameVal] = useState('');
-    // const [addressVal, setAddressVal] = useState('');
-    // const [cityVal, setCityVal] = useState('');
-    // const [stateVal, setStateVal] = useState('');
-    // const [zipcodeVal, setZipcodeVal] = useState('');
-    // const [mccCodeVal, setMccCodeVal] = useState('');
-    // const [industryVal, setIndustryVal] = useState('');
-    // const [merchantVal, setMerchantVal] = useState('');
 
     const history = useHistory();
 
@@ -53,6 +45,7 @@ const MerchantQs = (props) => {
         axios.get('http://api.offerize.xyz/users/me', axiosConfig)
             .then(res => {
                 console.log(res);
+                setFetchedMerchantId(res.data.merchant);
                 //get the merchant id and get that merchant info
                 if (res.data.merchant != null) {
                     axios.get('http://api.offerize.xyz/merchants/' + res.data.merchant, axiosConfig)
@@ -76,7 +69,6 @@ const MerchantQs = (props) => {
     const onFinish = values => {
         console.log('Received values of form: ', values);
         setLoading(true);
-        console.log(JSON.parse(localStorage.getItem('jwt')));
 
         const postData = {
             name: values.name,
@@ -95,20 +87,38 @@ const MerchantQs = (props) => {
             }
         };
 
-        axios.post('http://api.offerize.xyz/merchants', postData, axiosConfig)
-            .then(res => {
-                console.log(res.data);
-                setLoading(true);
-                history.push('/merchant');
-            })
-            .catch(error => {
-                setLoading(false);
-                setSigninShake(true);
-                setInvalidCreds(true);
-                setTimeout(() => {
-                    setSigninShake(false);
-                }, 600)
-            });
+        if (fetchedMerchantId == null) {
+            axios.post('http://api.offerize.xyz/merchants', postData, axiosConfig)
+                .then(res => {
+                    console.log(res.data);
+                    setLoading(true);
+                    history.push('/merchant');
+                })
+                .catch(error => {
+                    setLoading(false);
+                    setSigninShake(true);
+                    setInvalidCreds(true);
+                    setTimeout(() => {
+                        setSigninShake(false);
+                    }, 600)
+                });
+        } else {
+            axios.put('http://api.offerize.xyz/merchants/' + fetchedMerchantId, postData, axiosConfig)
+                .then(res => {
+                    console.log(res.data);
+                    console.log('put');
+                    setLoading(false);
+                    history.push('/merchant');
+                })
+                .catch(error => {
+                    setLoading(false);
+                    setSigninShake(true);
+                    setInvalidCreds(true);
+                    setTimeout(() => {
+                        setSigninShake(false);
+                    }, 600)
+                });
+        }
     }
 
     return (
@@ -130,7 +140,7 @@ const MerchantQs = (props) => {
                         address: merchantData ? merchantData.address : '',
                         city: merchantData ? merchantData.city : '',
                         state: merchantData ? merchantData.state : '',
-                        zipcode: merchantData ? merchantData.zipcode : '',
+                        zipcode: merchantData ? String(merchantData.zipcode) : '',
                         mccCode: merchantData ? merchantData.mccCode : '',
                         industry: merchantData ? merchantData.industry : '',
                         merchantId: merchantData ? merchantData.merchant_id : ''
@@ -207,6 +217,7 @@ const MerchantQs = (props) => {
                             { required: true, message: 'Input a zip code' },
                             ({ getFieldValue }) => ({
                                 validator(rule, value) {
+                                    console.log(value);
                                     if (/^\d+$/.test(value) && value.length === 5) {
                                         return Promise.resolve();
                                     }
