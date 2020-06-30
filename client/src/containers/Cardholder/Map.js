@@ -4,6 +4,8 @@ import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/
 import mapStyles from './mapStyles.json';
 import MapMarkerPopup from './MapMarkerPopup';
 
+const places = ["places"];
+
 const Map = (props) => {
     // The things we need to track in state
     const [mapRef, setMapRef] = useState(null);
@@ -67,23 +69,10 @@ const Map = (props) => {
         //setCenter(place.pos)
     };
 
-    const onLoad = (autocomplete) => {
-        console.log('autocomplete: ', autocomplete)
-        setAutocomplete(autocomplete);
-    }
-
-    const onPlaceChanged = () => {
-        if (autocomplete !== null) {
-            console.log(autocomplete.getPlace());
-        } else {
-            console.log('Autocomplete is not loaded yet!');
-        }
-    }
-
     return (
         <LoadScript
             googleMapsApiKey='AIzaSyD-f71Ghi91GVwaNecmAtv_eIsaFOf3p5M'
-            libraries={["places"]}
+            libraries={places}
         >
             <GoogleMap
                 onLoad={loadHandler}

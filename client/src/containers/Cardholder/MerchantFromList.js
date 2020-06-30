@@ -29,8 +29,8 @@ const MerchantFromList = (props) => {
                         <Rate disabled allowHalf defaultValue={Math.round(props.item.rating * 2) / 2} style={{ fontSize: '14px' }} />
                         <div style={{ height: '4px' }} />
                         {props.item.rating ?
-                            '$'.repeat(props.item.rating) + ' • ' + props.item.address
-                            : '$$ • ' + props.item.address}
+                            '$'.repeat(props.item.rating) + ' • ' + Math.round(10 * props.item.distance) / 10 + ' miles away'
+                            : Math.round(10 * props.item.distance) / 10 + ' miles away'}
                         <div style={{ height: '4px' }} />
                         {/* sunday starts on a 0 but monday should be a 0 */}
                         {parseDate(props.item.timings)}

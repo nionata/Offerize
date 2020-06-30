@@ -19,7 +19,7 @@ const MapMarkerPopup = (props) => {
             >
                 <div>
                     <h3>{props.selectedPlace.name}</h3>
-                    <div>0.5 miles away</div>
+                    <div>{Math.round(10 * props.selectedPlace.distance) / 10 + ' miles away'}</div>
                     <div>{parseDate(props.selectedPlace.timings)}</div>
                     <u className='mapMarkerMoreInfo' onClick={() => setShowModal(true)}>More info</u>
                 </div>

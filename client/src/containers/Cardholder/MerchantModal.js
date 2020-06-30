@@ -37,7 +37,9 @@ const MerchantModal = (props) => {
                         <div className='merchantModalBodyLeft'>
                             <div className='merchantModalIconText'>
                                 <EnvironmentOutlined />&nbsp;&nbsp;&nbsp;
-                                {props.item.address}, {props.item.city}, {props.item.state}, {props.item.zipcode.slice(0, 5)}
+                                {props.item.address}, {props.item.city}, {props.item.state}, {String(props.item.zipcode).slice(0, 5)}
+                                {/* {(typeof props.item.zipcode === 'string' || props.item.zipcode instanceof String) ? */}
+                                {/* String(props.item.zipcode).slice(0, 5) : props.item.zipcode} */}
                             </div>
                             <div className='merchantModalIconText'>
                                 <GlobalOutlined />&nbsp;&nbsp;&nbsp;

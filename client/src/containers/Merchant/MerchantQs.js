@@ -58,10 +58,6 @@ const MerchantQs = (props) => {
             .then(res => {
                 console.log(res.data);
                 setLoading(true);
-                // dispatch({
-                //     type: "LOGIN",
-                //     payload: res.data
-                // });
                 history.push('/merchant');
             })
             .catch(error => {
