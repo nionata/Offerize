@@ -3,10 +3,12 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../App';
 
+import { message } from 'antd';
+
 import Header from '../../components/Header.js';
 import Footer from '../../components/Footer.js';
 
-function MerchantHome(props) {
+const UserSettings = (props) => {
 
     const { state, dispatch } = React.useContext(AuthContext);
     const [userData, setUserData] = useState(null);
@@ -46,7 +48,7 @@ function MerchantHome(props) {
             })
 
 
-    }, [])
+    }, []);
 
     return (
         <>
@@ -54,8 +56,27 @@ function MerchantHome(props) {
             <div className='dashboard'>
                 <div className='dashboardBody'>
                     <h3>
-                        Welcome back{userData == null ? '' : ', ' + userData.username}
+                        Settings
                     </h3>
+                    <div style={{ fontSize: '18px', fontWeight: 600 }}>
+                        Username:&nbsp; {userData == null ? '' : userData.username}&nbsp;&nbsp;
+                        <a className='dashboardGreyLinks' onClick={() => message.info('This feature is not currently supported.  Stay tuned!', 5)}>
+                            - Change
+                        </a>
+                        <div style={{ height: '6px' }} />
+                        Email:&nbsp; {userData == null ? '' : userData.email}&nbsp;&nbsp;
+                        <a className='dashboardGreyLinks' onClick={() => message.info('This feature is not currently supported.  Stay tuned!', 5)}>
+                            - Change
+                        </a>
+                        <div style={{ height: '30px' }} />
+                        Merchant information&nbsp;&nbsp;
+                        <Link to='/merchantQs'>
+                            <a className='dashboardGreyLinks'>
+                                - Change
+                            </a>
+                        </Link>
+                    </div>
+
                 </div>
             </div>
             <div style={{ height: '1000px' }} />
@@ -64,4 +85,4 @@ function MerchantHome(props) {
     )
 }
 
-export default MerchantHome;
+export default UserSettings;

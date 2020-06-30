@@ -483,6 +483,42 @@ code {
   }
 }
 
+/*
+=======================================================
+                        USER DASHBOARD
+=======================================================
+*/
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.dashboardBody {
+  width: 700px;
+  margin: 0 20px;
+}
+
+.dashboardBody h3 {
+  color: #474c52;
+  display: inline-block;
+  border-bottom: 2px solid #474c52;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.dashboardGreyLinks {
+  color: #8a8c8e;
+  transition: color 0s;
+}
+
+.dashboardGreyLinks:hover {
+  color: #474c52;
+}
+
+
 
 /*
 =======================================================

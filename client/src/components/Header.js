@@ -34,7 +34,7 @@ function Header(props) {
         if (event.key === '1') {
             history.push('/merchant');
         } else if (event.key === '2') {
-            history.push('/merchant');
+            history.push('/merchantSettings');
         } else {
             signout();
             history.push('/');
@@ -59,12 +59,13 @@ function Header(props) {
                                 <Menu onClick={onMenuClick}>
                                     <Menu.ItemGroup title="Account">
                                         <Menu.Item key="1">Dashboard</Menu.Item>
-                                        <Menu.Item key="2">Preferences</Menu.Item>
+                                        <Menu.Item key="2">Settings</Menu.Item>
                                         <Menu.Item key="3">Sign out →</Menu.Item>
                                     </Menu.ItemGroup>
                                 </Menu>
                             }>
-                            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}
+                                style={{ padding: '12px 20px 0 20px', marginBottom: '12px' }}>
                                 <UserOutlined style={{ fontSize: '18px' }} />
                             </a>
                         </Dropdown>
