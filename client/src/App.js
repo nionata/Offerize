@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import ScrollToTop from './hooks/ScrollToTop';
+
 import CardholderHome from './containers/Cardholder/CardholderHome';
 import MerchantHome from './containers/Merchant/MerchantHome';
 import Signin from './containers/Signin';
 import Signup from './containers/Signup';
+import MerchantQs from './containers/Merchant/MerchantQs';
 import NotFound from './containers/NotFound';
 
 import 'antd/dist/antd.css';
@@ -22,19 +25,18 @@ const reducer = (state, action) => {
     case "LOGIN":
       localStorage.setItem("username", JSON.stringify(action.payload.user.username));
       localStorage.setItem("jwt", JSON.stringify(action.payload.jwt));
-      // localStorage.setItem("email", JSON.stringify(action.payload.user.email));
       return {
         ...state,
         isAuthenticated: true,
         username: action.payload.username,
-        jwt: action.payload.jwt
+        jwt: action.payload.jwt,
       };
     case "LOGOUT":
       localStorage.clear();
       return {
         ...state,
         isAuthenticated: false,
-        username: null
+        username: null,
       };
     default:
       return state;
@@ -56,7 +58,7 @@ function App() {
         type: 'LOGIN',
         payload: {
           user,
-          jwt
+          jwt,
         }
       })
     }
@@ -70,12 +72,14 @@ function App() {
       }}
     >
       <Router>
+        <ScrollToTop />
         <div>
           <Switch>
             <Route exact path='/' component={CardholderHome} />
             <Route path='/signin' component={Signin} />
             <Route path='/signup' component={Signup} />
             <Route path='/merchant' component={MerchantHome} />
+            <Route path='/merchantQs' component={MerchantQs} />
             <Route default component={NotFound} />
           </Switch>
 

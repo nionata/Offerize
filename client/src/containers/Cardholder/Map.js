@@ -4,6 +4,8 @@ import { GoogleMap, LoadScript, Marker, Autocomplete } from '@react-google-maps/
 import mapStyles from './mapStyles.json';
 import MapMarkerPopup from './MapMarkerPopup';
 
+const places = ["places"];
+
 const Map = (props) => {
     // The things we need to track in state
     const [mapRef, setMapRef] = useState(null);
@@ -67,23 +69,10 @@ const Map = (props) => {
         //setCenter(place.pos)
     };
 
-    const onLoad = (autocomplete) => {
-        console.log('autocomplete: ', autocomplete)
-        setAutocomplete(autocomplete);
-    }
-
-    const onPlaceChanged = () => {
-        if (autocomplete !== null) {
-            console.log(autocomplete.getPlace());
-        } else {
-            console.log('Autocomplete is not loaded yet!');
-        }
-    }
-
     return (
         <LoadScript
             googleMapsApiKey='AIzaSyD-f71Ghi91GVwaNecmAtv_eIsaFOf3p5M'
-            libraries={["places"]}
+            libraries={places}
         >
             <GoogleMap
                 onLoad={loadHandler}
@@ -94,30 +83,6 @@ const Map = (props) => {
                     styles: mapStyles
                 }}
             >
-                {/* <Autocomplete
-                    onLoad={onLoad}
-                    onPlaceChanged={onPlaceChanged}
-                >
-                    <input
-                        type="text"
-                        placeholder="Customized your placeholder"
-                        style={{
-                            boxSizing: `border-box`,
-                            border: `1px solid transparent`,
-                            width: `240px`,
-                            height: `32px`,
-                            padding: `0 12px`,
-                            borderRadius: `3px`,
-                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                            fontSize: `14px`,
-                            outline: `none`,
-                            textOverflow: `ellipses`,
-                            position: "absolute",
-                            left: "50%",
-                            marginLeft: "-120px"
-                        }}
-                    />
-                </Autocomplete> */}
                 {props.merchants.map((place, idx) => (
                     <Marker
                         key={idx}

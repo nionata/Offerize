@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../App';
 import { Spin, Popover, Dropdown, Menu } from 'antd';
@@ -15,6 +15,9 @@ function Header(props) {
     const [loadSignout, setLoadSignout] = useState(false);
 
     const history = useHistory();
+
+    useEffect(() => {
+    }, [])
 
     const signout = () => {
         setLoadSignout(true);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Select, Button, Popover, Radio } from 'antd';
+import { Input, Select, Button, Popover, Radio, message } from 'antd';
 import { SlidersFilled } from '@ant-design/icons';
 
 import useWindowDimensions from './../../hooks/useWindowDimensions';
@@ -34,6 +34,7 @@ const InputBox = (props) => {
             setInvalidZip(false);
             props.fetchMerchants();
         } else {
+            message.error('Select an address or zip code from the dropdown', 4);
             setInvalidZip(true);
             setButtonShake(true);
             setTimeout(() => {

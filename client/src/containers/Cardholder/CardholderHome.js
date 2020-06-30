@@ -23,12 +23,12 @@ function CardholderHome(props) {
         // setMerchants(tempData);
         setLoadingMerchants(true);
         let codes = industryCodes[store];
-        axios.get(`http://api.offerize.xyz/merchants?zipcode=20740&show=visa&industry=${codes}`)
+        axios.get(`http://api.offerize.xyz/merchants?lat=${location.lat}&industry=${codes}&lon=${location.lng}&show=all`)
             .then(res => {
                 console.log(res);
                 setShowMerchants(true);
                 setLoadingMerchants(false);
-                let listOfMerchants = []
+                let listOfMerchants = [];
                 res.data.forEach(elem => {
                     let name = elem.name.toLowerCase()
                         .split(' ')
@@ -47,11 +47,13 @@ function CardholderHome(props) {
                         ...elem,
                         name: name,
                         city: city,
-                        address: address
+                        address: address,
+                        zipcode: String(elem.zipcode),
+                        lat: parseFloat(elem.lat),
+                        lon: parseFloat(elem.lon)
                     })
                 })
                 setMerchants(listOfMerchants);
-                console.log(listOfMerchants);
             })
             .catch(error => {
                 console.log(error);
