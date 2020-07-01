@@ -13,6 +13,7 @@ module.exports.merchantData = async (offers, query) =>
         let dataProjections;
         let offersData = [];
         let highestProfitForDay = 0;
+        let idealDiscountForDay = 0;
         for (i = 0; i < offers.length; i++){
             let indOffer = {}
             indOffer['id'] = offers[i]['id'];
@@ -40,6 +41,7 @@ module.exports.merchantData = async (offers, query) =>
 
                 if (dailyStats[currentDay] / idealProfit > highestProfitForDay){
                     highestProfitForDay = dailyStats[currentDay]/ idealProfit;
+                    idealDiscountForDay = newDiscount
                 }
             }
 
@@ -47,7 +49,7 @@ module.exports.merchantData = async (offers, query) =>
             indOffer['percentProfitReached'] = percentProfit
             offersData.push(indOffer);           
         }
-        allOffersData['highestProfitForDay'] = highestProfitForDay
+        allOffersData['detailsForSpecificDay'] = {'idealDiscountForDay' : idealDiscountForDay, 'percentOfProfitMade' : highestProfitForDay}
         allOffersData['offersData'] = offersData
         let lineBestFit = await this.bestFitCalculator(allOffersData['offersData'])
         allOffersData['lineBestFit'] = lineBestFit
