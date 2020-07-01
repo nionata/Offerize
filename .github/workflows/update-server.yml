@@ -34,10 +34,13 @@ jobs:
           always_pull: true
           tags: latest
           dockerfile: Dockerfile.web
+      - name: Set branch name
+        id: vars
+        run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
       - name: Bring up latest service
         uses: appleboy/ssh-action@master
         env: 
-          BRANCH: ${GITHUB_REF##*/}
+          BRANCH: ${{ steps.vars.outputs.branch }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
