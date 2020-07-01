@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  api:
+    container_name: offerize-api-prod
+    image: nionata/offerize:latest
+    ports:
+      - 1337:1337
+    environment: 
+      - DATABASE_HOST
+      - DATABASE_PASSWORD
+      - GOOGLE_KEY
+  web:
+    container_name: offerize-web-prod
+    image: nionata/offerize-web:latest
+    ports:
+      - 80:80
+    # volumes: 
+    #   - ./nginx.conf:/etc/nginx/nginx.conf
+
