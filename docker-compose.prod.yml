@@ -17,7 +17,7 @@ services:
       - 80:80
       - 443:443
     volumes: 
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      # - ./nginx.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/live/offerize.xyz/fullchain.pem:/etc/letsencrypt/live/offerize.xyz/fullchain.pem
       - /etc/letsencrypt/live/offerize.xyz/privkey.pem:/etc/letsencrypt/live/offerize.xyz/privkey.pem
 
