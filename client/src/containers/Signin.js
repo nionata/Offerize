@@ -37,7 +37,7 @@ const Signin = (props) => {
         userRef.current.focus();
     }, [])
 
-    const onFinish = values => {
+    const onFinish = (values) => {
         console.log('Received values of form: ', values);
         localStorage.clear();
         setLoading(true);
