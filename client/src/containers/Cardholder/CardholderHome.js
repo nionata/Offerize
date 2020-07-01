@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { message } from 'antd';
 
 import Header from '../../components/Header.js';
 import Footer from '../../components/Footer.js';
@@ -57,6 +58,8 @@ function CardholderHome(props) {
                 setMerchants(listOfMerchants);
             })
             .catch(error => {
+                setLoadingMerchants(false);
+                message.error('Network error. Please try again later.')
                 console.log(error);
             });
     }
