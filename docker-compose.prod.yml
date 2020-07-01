@@ -5,7 +5,7 @@ services:
     container_name: offerize-api-prod
     image: nionata/offerize:latest
     ports:
-      - 1337:1337
+      # - 1337:1337
     environment: 
       - DATABASE_HOST
       - DATABASE_PASSWORD
