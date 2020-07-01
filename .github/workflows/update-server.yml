@@ -15,7 +15,7 @@ jobs:
       steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Build latest
+      - name: Build latest api
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -24,18 +24,27 @@ jobs:
           cache_froms: nionata/offerize:latest
           always_pull: true
           tags: latest
-      - name: Deploy latest image to EC2
+      - name: Build latest web
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nionata/offerize-web
+          cache_froms: nionata/offerize-web:latest
+          always_pull: true
+          tags: latest
+          dockerfile: Dockerfile.web
+      - name: Bring up latest service
         uses: appleboy/ssh-action@master
         env: 
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
+          BRANCH: ${{ GITHUB_REF##*/ }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PERM_KEY }}
-          envs: DATABASE_HOST,DATABASE_PASSWORD,GOOGLE_KEY
+          envs: BRANCH
           script: |
-            docker rm -f offerize-server-prod
-            docker pull nionata/offerize:latest
-            docker run -d --name offerize-server-prod -p 80:1337 -e DATABASE_HOST="$DATABASE_HOST" -e DATABASE_PASSWORD="$DATABASE_PASSWORD" -e GOOGLE_KEY="$GOOGLE_KEY" nionata/offerize:latest  
+            curl https://raw.githubusercontent.com/nionata/Offerize/"$BRANCH"/docker-compose.prod.yml > docker-compose.yml
+            docker-compose rm -f -s
+            docker-compose pull
+            docker-compose up -d

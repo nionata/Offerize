@@ -6,34 +6,23 @@ on:
     branches: [ master ]
 
 jobs:
-  build-and-release-client:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-    - name: Install client dependencies
-      run: cd client && npm install
-    - name: Build client
-      run: cd client && npm run build
-      env:
-        CI: false
-    - name: Sync build folder with S3
-      run: |
-        aws s3 sync "$SOURCE_DIR" s3://"$BUCKET"/ --delete
-        aws cloudfront create-invalidation --distribution-id="$DISTRIBUTION" --paths "/*"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: us-east-1
-        BUCKET: ${{ secrets.AWS_BUCKET }}
-        SOURCE_DIR: 'client/build'
-        DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+  # release-latest-client:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Invalidate client cache
+  #     run: |
+  #       aws cloudfront create-invalidation --distribution-id="$DISTRIBUTION" --paths "/*"
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+  #       AWS_DEFAULT_REGION: us-east-1
+  #       DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
   tag-and-push-server-image:
       runs-on: ubuntu-latest
       steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Build latest and tag as release version
+      - name: Tag latest api as release version
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -42,3 +31,13 @@ jobs:
           cache_froms: nionata/offerize:latest
           always_pull: true
           tag_with_ref: true
+      - name: Tag latest web as release version
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nionata/offerize-web
+          cache_froms: nionata/offerize-web:latest
+          always_pull: true
+          tag_with_ref: true
+          dockerfile: Dockerfile.web
