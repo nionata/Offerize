@@ -27,6 +27,7 @@ function discountCalculator(minCust, maxCust, profitMargin, profitIncreasePercen
     var extraCustomers = numOfCustomersNeeded - (1.0 * (minCust + maxCust) / 2);
     return [newProfitMargin, numOfCustomersNeeded, customersToBreakEven];    
 }
+module.exports.discountCalculator = discountCalculator;
 console.log(discountCalculator(50,50,30,50,10,10));
 
 

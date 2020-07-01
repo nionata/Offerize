@@ -17,7 +17,6 @@ const InputBox = (props) => {
 
     const [invalidZip, setInvalidZip] = useState(false);
     const [buttonShake, setButtonShake] = useState(false);
-    const [sortBy, setSortBy] = useState(null);
     const { height, width } = useWindowDimensions();
     const [edited, setEdited] = useState(false);
 
@@ -67,12 +66,13 @@ const InputBox = (props) => {
                     <Autocomplete invalidZip={invalidZip} setLocation={props.setLocation} setEdited={setEdited} />
                 </div>
                 <div className='inputBoxFieldsRow'>
-                    <Popover placement="right" trigger="click"
+                    <Popover className={props.showMerchants ? '' : 'inputBoxHidePopover'} placement="right" trigger="click"
+                        style={{ visibility: props.showMerchants ? 'visible' : 'hidden' }}
                         content={
                             <>
                                 Sort by
                                 <br />
-                                <Radio.Group onChange={e => setSortBy(e.target.value)} value={sortBy}>
+                                <Radio.Group onChange={props.onChangeSort} value={props.sortBy}>
                                     <Radio style={radioStyle} value={1}>
                                         Distance
                                     </Radio>
@@ -85,7 +85,8 @@ const InputBox = (props) => {
                                 </Radio.Group>
                             </>
                         }>
-                        <Button size={width > 800 ? 'middle' : 'middle'}>
+                        <Button className='inputBoxFilterButton' size={width > 800 ? 'middle' : 'middle'}
+                            style={{ opacity: props.showMerchants ? 1 : 0 }}>
                             <SlidersFilled style={{ color: '#1890ff' }} />
                         </Button>
                     </Popover>

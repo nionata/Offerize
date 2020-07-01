@@ -1,6 +1,7 @@
 'use strict';
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
 const axios = require('axios')
+const {merchantData} = require('../services/offers')
 
 /**
  *  We need to know how many people use cash, visa, other money transaction network
@@ -17,9 +18,16 @@ const axios = require('axios')
 
  */
 
+
 module.exports = {
-
-   
-
-
+    async trends(ctx) {
+        let query = ctx.request.query
+        const { merchant } = ctx.state.user
+        let merchantOffers = await strapi.services.offers.find({ merchant });
+        let allOffers = await strapi.services.offers.find();
+        merchantOffers = await merchantData(merchantOffers, query);
+        allOffers =  await merchantData(allOffers, query);
+        let combinedOffers = [merchantOffers, allOffers]
+        return combinedOffers;
+    },
 };

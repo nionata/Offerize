@@ -14,10 +14,6 @@
     },
     "redemptionTimeStamps": {
       "type": "json"
-    },
-    "offer": {
-      "via": "redemption",
-      "model": "offers"
     }
   }
 }
