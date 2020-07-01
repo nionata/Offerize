@@ -13,24 +13,12 @@ RUN npm install
 COPY ./client .
 RUN npm run build
 
-# build admin
-# WORKDIR /admin
-
-# COPY ./server/package.json .
-# COPY ./server/yarn.lock .
-# RUN yarn
-
-# COPY ./server .
-# ENV NODE_ENV production
-# RUN yarn build
-
 #
 # production environment
 #
 FROM nginx:stable-alpine
 
 COPY --from=build /client/build /usr/share/nginx/html/client
-# COPY --from=build /admin/build /usr/share/nginx/html/admin
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
