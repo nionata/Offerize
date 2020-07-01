@@ -18,6 +18,7 @@ function CardholderHome(props) {
     const [loadingMerchants, setLoadingMerchants] = useState(false);
     const [merchants, setMerchants] = useState([]);
     const [address, setAddress] = useState('');
+    const [sortBy, setSortBy] = useState(null);
 
     function fetchMerchants() {
         // setMerchants(tempData);
@@ -60,6 +61,38 @@ function CardholderHome(props) {
             });
     }
 
+    function onChangeSort(e) {
+        setSortBy(e.target.value);
+        // sort by distance
+        if (e.target.value === 1) {
+            setMerchants([...merchants].sort((a, b) => a.distance - b.distance));
+        }
+        // sort by rating
+        else if (e.target.value === 2) {
+            function compare(a, b) {
+                // sort in descending, null rating are sent to the bottom
+                a = a || 0;
+                b = b || 0;
+                return b.rating - a.rating;
+            }
+            setMerchants([...merchants].sort(compare));
+        }
+        // sort by name (alphabetical)
+        else {
+            function compare(a, b) {
+                let nameA = a.name.toLowerCase();
+                let nameB = b.name.toLowerCase();
+                // sort ascending (a -> z)
+                if (nameA < nameB)
+                    return -1;
+                if (nameA > nameB)
+                    return 1;
+                return 0;
+            }
+            setMerchants([...merchants].sort(compare));
+        }
+    }
+
     return (
         <>
             <Header />
@@ -69,8 +102,8 @@ function CardholderHome(props) {
             <div style={{ position: 'relative', backgroundColor: '#f7fafc' }}>
                 <Map merchants={merchants} />
                 <div className='inputBox'>
-                    <InputBox store={store} setStore={setStore} setLocation={setLocation} location={location}
-                        fetchMerchants={fetchMerchants} loadingMerchants={loadingMerchants} />
+                    <InputBox store={store} setStore={setStore} setLocation={setLocation} location={location} showMerchants={showMerchants}
+                        fetchMerchants={fetchMerchants} loadingMerchants={loadingMerchants} sortBy={sortBy} onChangeSort={onChangeSort} />
                     {showMerchants && <MerchantList merchants={merchants} />}
                 </div>
             </div>

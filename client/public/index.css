@@ -177,6 +177,14 @@ code {
   /* transition: transform 0s !important; */
 }
 
+.inputBoxFilterButton {
+  transition: 0.15s opacity;
+}
+
+.inputBoxHidePopover:hover {
+  cursor: default;
+}
+
 /* when given invalid input */
 .inputBox .invalidZip.ant-input{
   /* rgb(255, 77, 79) */
@@ -503,7 +511,7 @@ code {
 .dashboardBody h3 {
   color: #474c52;
   display: inline-block;
-  border-bottom: 2px solid #474c52;
+  border-bottom: 2px solid #777c82;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
@@ -516,6 +524,36 @@ code {
 
 .dashboardGreyLinks:hover {
   color: #474c52;
+}
+
+.offerCard {
+  
+}
+
+.offerCardTag {
+  color: #f7b600 !important;
+  font-size: 16px;
+  padding-right: 10px;
+  transition: 0.30s color;
+}
+
+.offerCard:hover .offerCardTag{
+  color: #c78600 !important;
+}
+
+.offerCardTagInactive {
+  color: #808080 !important;
+  font-size: 16px;
+  padding-right: 10px;
+  transition: 0.30s color;
+}
+
+.offerCard:hover .offerCardTagInactive{
+  color: #303030 !important;
+}
+
+.ant-picker {
+  /* width: 100% !important; */
 }
 
 
