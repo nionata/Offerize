@@ -2,20 +2,21 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/offers",
-      "handler": "offers.find",
+      "path": "/offers/trends",
+      "handler": "offers.trends",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/offers/trends",
+      "path": "/offers",
       "handler": "offers.find",
       "config": {
         "policies": []
       }
     },
+    
     {
       "method": "GET",
       "path": "/offers/count",
