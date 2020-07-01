@@ -37,16 +37,14 @@ jobs:
       - name: Bring up latest service
         uses: appleboy/ssh-action@master
         env: 
-          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
+          BRANCH: ${{ GITHUB_REF##*/ }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PERM_KEY }}
-          envs: DATABASE_HOST,DATABASE_PASSWORD,GOOGLE_KEY
+          envs: BRANCH
           script: |
-            curl https://raw.githubusercontent.com/nionata/Offerize/${{ GITHUB_REF##*/ }}/docker-compose.prod.yml > docker-compose.yml
+            curl https://raw.githubusercontent.com/nionata/Offerize/"$BRANCH"/docker-compose.prod.yml > docker-compose.yml
             docker-compose rm -f -s
             docker-compose pull
             docker-compose up -d
