@@ -28,6 +28,5 @@ function discountCalculator(minCust, maxCust, profitMargin, profitIncreasePercen
     return [newProfitMargin, numOfCustomersNeeded, customersToBreakEven];    
 }
 module.exports.discountCalculator = discountCalculator;
-console.log(discountCalculator(50,50,30,50,10,10));
 
 
