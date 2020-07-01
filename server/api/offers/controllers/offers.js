@@ -30,4 +30,20 @@ module.exports = {
         let combinedOffers = [merchantOffers, allOffers]
         return combinedOffers;
     },
+
+    async create(ctx) {
+        let entity;
+        let redemptionBody = {
+            'currentRedemptions' : 0,
+            'redemptionTimeStamps' : {}
+        }
+        let response = ctx.request.body
+        // creates a redemption object
+        let redemption = await strapi.services.redemptions.create(redemptionBody);
+        response['redemption'] = redemption['id']
+        entity = await strapi.services.offers.create(response);
+        
+        return sanitizeEntity(entity, { model: strapi.models.offers });
+      }, 
+    
 };

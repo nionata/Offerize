@@ -42,6 +42,9 @@
         "Friday",
         "Saturday"
       ]
+    },
+    "startingDate": {
+      "type": "datetime"
     }
   }
 }
