@@ -73,6 +73,7 @@ code {
   padding: 12px 20px;
   color: #fff;
   text-decoration: none;
+  transition: 0s color;
 }
 
 .header a:hover {
@@ -179,10 +180,6 @@ code {
 
 .inputBoxFilterButton {
   transition: 0.15s opacity;
-}
-
-.inputBoxHidePopover:hover {
-  cursor: default;
 }
 
 /* when given invalid input */
