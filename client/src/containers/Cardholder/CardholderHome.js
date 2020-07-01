@@ -102,7 +102,7 @@ function CardholderHome(props) {
             <div style={{ position: 'relative', backgroundColor: '#f7fafc' }}>
                 <Map merchants={merchants} />
                 <div className='inputBox'>
-                    <InputBox store={store} setStore={setStore} setLocation={setLocation} location={location}
+                    <InputBox store={store} setStore={setStore} setLocation={setLocation} location={location} showMerchants={showMerchants}
                         fetchMerchants={fetchMerchants} loadingMerchants={loadingMerchants} sortBy={sortBy} onChangeSort={onChangeSort} />
                     {showMerchants && <MerchantList merchants={merchants} />}
                 </div>

@@ -177,6 +177,14 @@ code {
   /* transition: transform 0s !important; */
 }
 
+.inputBoxFilterButton {
+  transition: 0.15s opacity;
+}
+
+.inputBoxHidePopover:hover {
+  cursor: default;
+}
+
 /* when given invalid input */
 .inputBox .invalidZip.ant-input{
   /* rgb(255, 77, 79) */
