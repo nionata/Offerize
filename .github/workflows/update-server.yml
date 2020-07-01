@@ -46,6 +46,7 @@ jobs:
           key: ${{ secrets.EC2_PERM_KEY }}
           envs: DATABASE_HOST,DATABASE_PASSWORD,GOOGLE_KEY
           script: |
-            docker-compose -f docker-compose.prod.yml rm -f -s
-            docker-compose -f docker-compose.prod.yml pull
-            docker-compose -f docker-compose.prod.yml up -d
+            curl https://raw.githubusercontent.com/nionata/Offerize/${{ GITHUB_REF##*/ }}/docker-compose.prod.yml > docker-compose.yml
+            docker-compose rm -f -s
+            docker-compose pull
+            docker-compose up -d
