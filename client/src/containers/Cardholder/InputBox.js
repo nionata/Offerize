@@ -17,7 +17,6 @@ const InputBox = (props) => {
 
     const [invalidZip, setInvalidZip] = useState(false);
     const [buttonShake, setButtonShake] = useState(false);
-    const [sortBy, setSortBy] = useState(null);
     const { height, width } = useWindowDimensions();
     const [edited, setEdited] = useState(false);
 
@@ -72,7 +71,7 @@ const InputBox = (props) => {
                             <>
                                 Sort by
                                 <br />
-                                <Radio.Group onChange={e => setSortBy(e.target.value)} value={sortBy}>
+                                <Radio.Group onChange={props.onChangeSort} value={props.sortBy}>
                                     <Radio style={radioStyle} value={1}>
                                         Distance
                                     </Radio>
