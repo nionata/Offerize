@@ -6,17 +6,17 @@ on:
     branches: [ master ]
 
 jobs:
-  release-latest-client:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Invalidate client cache
-      run: |
-        aws cloudfront create-invalidation --distribution-id="$DISTRIBUTION" --paths "/*"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_DEFAULT_REGION: us-east-1
-        DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+  # release-latest-client:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Invalidate client cache
+  #     run: |
+  #       aws cloudfront create-invalidation --distribution-id="$DISTRIBUTION" --paths "/*"
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+  #       AWS_DEFAULT_REGION: us-east-1
+  #       DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
   tag-and-push-server-image:
       runs-on: ubuntu-latest
       steps:
