@@ -42,13 +42,13 @@ const MerchantQs = (props) => {
                 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('jwt'))
             }
         };
-        axios.get('http://api.offerize.xyz/users/me', axiosConfig)
+        axios.get('/users/me', axiosConfig)
             .then(res => {
                 console.log(res);
                 setFetchedMerchantId(res.data.merchant);
                 //get the merchant id and get that merchant info
                 if (res.data.merchant != null) {
-                    axios.get('http://api.offerize.xyz/merchants/' + res.data.merchant, axiosConfig)
+                    axios.get('/merchants/' + res.data.merchant, axiosConfig)
                         .then(otherRes => {
                             console.log(otherRes);
                             setMerchantData(otherRes.data);
@@ -88,7 +88,7 @@ const MerchantQs = (props) => {
         };
 
         if (fetchedMerchantId == null) {
-            axios.post('http://api.offerize.xyz/merchants', postData, axiosConfig)
+            axios.post('/merchants', postData, axiosConfig)
                 .then(res => {
                     console.log(res.data);
                     setLoading(true);

@@ -42,7 +42,7 @@ const Signin = (props) => {
         localStorage.clear();
         setLoading(true);
 
-        axios.post('http://api.offerize.xyz/auth/local', {
+        axios.post('/auth/local', {
             identifier: values.username,
             password: values.password
         })

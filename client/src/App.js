@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 import ScrollToTop from './hooks/ScrollToTop';
 
@@ -9,6 +10,7 @@ import Signin from './containers/Signin';
 import Signup from './containers/Signup';
 import MerchantQs from './containers/Merchant/MerchantQs';
 import UserSettings from './containers/Merchant/UserSettings';
+import CreateOffer from './containers/Merchant/CreateOffer';
 import NotFound from './containers/NotFound';
 
 import 'antd/dist/antd.css';
@@ -43,6 +45,8 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+axios.defaults.baseURL = 'https://api.offerize.xyz';
 
 function App() {
 
@@ -82,6 +86,7 @@ function App() {
             <Route path='/merchant' component={MerchantHome} />
             <Route path='/merchantQs' component={MerchantQs} />
             <Route path='/merchantSettings' component={UserSettings} />
+            <Route path='/merchantCreateOffer' component={CreateOffer} />
             <Route default component={NotFound} />
           </Switch>
         </div>

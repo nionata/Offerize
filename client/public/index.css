@@ -342,12 +342,17 @@ code {
   text-indent: -13px;
 }
 
-.merchantModalIconText:nth-child(-n+3) {
+.merchantModalIconText:not(:last-child) {
   padding-bottom: 14px;
+}
+
+.merchantModalReviewsLink {
+  border-bottom: 1px solid rgba(0,0,0,0.40);
 }
 
 .merchantModalReviewsLink:hover {
   color: #202020;
+  border-bottom: 1px solid rgba(0,0,0,0.70);
   cursor: pointer;
 }
 
@@ -372,6 +377,17 @@ code {
   /* height: 300px !important;
   overflow-y: scroll; */
 }
+
+.merchantModalBody .ant-btn-primary {
+  background-color: #f7b600 !important;
+  border-color: #f7b600 !important;
+  text-shadow: none !important;
+}
+
+/* .merchantModalBody .ant-btn-primary:hover {
+  background-color: #f7b600 !important;
+  border-color: #f7b600;
+} */
 
 @media screen and (max-width: 650px) {
   .merchantModalBody {

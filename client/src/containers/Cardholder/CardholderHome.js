@@ -25,7 +25,7 @@ function CardholderHome(props) {
         // setMerchants(tempData);
         setLoadingMerchants(true);
         let codes = industryCodes[store];
-        axios.get(`http://api.offerize.xyz/merchants?lat=${location.lat}&industry=${codes}&lon=${location.lng}&show=all`)
+        axios.get(`/merchants?lat=${location.lat}&industry=${codes}&lon=${location.lng}&show=all`)
             .then(res => {
                 console.log(res);
                 setShowMerchants(true);
