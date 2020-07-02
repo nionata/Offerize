@@ -5,14 +5,17 @@ const regression = require('regression')
  * Read the documentation (https://strapi.io/documentation/v3.x/concepts/services.html#core-services)
  * to customize this service
  */
-
-module.exports.merchantData = async (offers, query, dataset) => 
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+module.exports.merchantData = async (offers, dataset) => 
   {
         var allOffersData = {}; 
+        console.log(dataset)
         allOffersData['dataset'] = dataset
         let i;
         let dataProjections;
         let offersData = [];
+        let bestDiscount = 0
+        let highestProfit = 0;
         let highestProfitForDay = 0;
         let idealDiscountForDay = 0;
         for (i = 0; i < offers.length; i++){
@@ -39,9 +42,10 @@ module.exports.merchantData = async (offers, query, dataset) =>
                 let dailyStats = await this.dailyStats(redemptionTimeStamps, dataProjections[0])
                 // these are individual sales per each day for each discount 
                 indOffer['dailyStats'] = dailyStats
-                let currentDay = query['currentDay']
+                let date = new Date();
+                var today = date.getDay()
+                let currentDay = days[today]
                 // formating string received from query
-                currentDay = currentDay.replace(/"/g, '');
 
                 // everytime the day specified finds a higher profit percentage for a specific discount, this is updated
                 if (dailyStats[currentDay] / dataProjections[1] > highestProfitForDay){
@@ -51,10 +55,16 @@ module.exports.merchantData = async (offers, query, dataset) =>
                 }
             }
             let percentProfit = currentRedemptions * dataProjections[0] / dataProjections[1];
+            console.log(percentProfit)
+            if(percentProfit > highestProfit){
+                highestProfit = percentProfit
+                bestDiscount = newDiscount
+            }
             // percentProfit is the percent of the profit the whole offer reached
             indOffer['percentProfitReached'] = percentProfit
             offersData.push(indOffer);           
         }
+        allOffersData['bestOverallProfit'] = {'idealOverallDiscount' : bestDiscount, 'percentOfProfitMade' : highestProfit}
         // these details for specific day pertain to effectiveness of offer on selected DoW
         allOffersData['detailsForSpecificDay'] = {'idealDiscountForDay' : idealDiscountForDay, 'percentOfProfitMade' : highestProfitForDay}
         // offers data holds all the offer specific info
@@ -94,7 +104,7 @@ module.exports.merchantData = async (offers, query, dataset) =>
 
     // returns the day of the week provided a date
     module.exports.dayDeterminer = async (date) => {
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        
         var d = new Date(date);
         var dayName = days[d.getDay()];
         return dayName;
