@@ -6,9 +6,10 @@ const regression = require('regression')
  * to customize this service
  */
 
-module.exports.merchantData = async (offers, query) => 
+module.exports.merchantData = async (offers, query, dataset) => 
   {
         var allOffersData = {}; 
+        allOffersData['dataset'] = dataset
         let i;
         let dataProjections;
         let offersData = [];

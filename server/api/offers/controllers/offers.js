@@ -25,8 +25,10 @@ module.exports = {
         const { merchant } = ctx.state.user
         let merchantOffers = await strapi.services.offers.find({ merchant });
         let allOffers = await strapi.services.offers.find();
-        merchantOffers = await merchantData(merchantOffers, query);
-        allOffers =  await merchantData(allOffers, query);
+        let merchantDataSet = "merchantData"
+        let allData = "allData"
+        merchantOffers = await merchantData(merchantOffers, query, merchantDataSet);
+        allOffers =  await merchantData(allOffers, query, allData);
         let combinedOffers = [merchantOffers, allOffers]
         return combinedOffers;
     },
