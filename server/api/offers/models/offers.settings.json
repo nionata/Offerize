@@ -29,8 +29,10 @@
       "model": "questionaire"
     },
     "redemption": {
-      "model": "redemptions",
-      "via": "offer"
+      "model": "redemptions"
+    },
+    "startingDate": {
+      "type": "datetime"
     }
   }
 }

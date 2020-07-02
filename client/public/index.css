@@ -73,6 +73,7 @@ code {
   padding: 12px 20px;
   color: #fff;
   text-decoration: none;
+  transition: 0s color;
 }
 
 .header a:hover {
@@ -175,6 +176,10 @@ code {
 .inputBoxComponent {
   width: 220px !important;
   /* transition: transform 0s !important; */
+}
+
+.inputBoxFilterButton {
+  transition: 0.15s opacity;
 }
 
 /* when given invalid input */
@@ -337,12 +342,17 @@ code {
   text-indent: -13px;
 }
 
-.merchantModalIconText:nth-child(-n+3) {
+.merchantModalIconText:not(:last-child) {
   padding-bottom: 14px;
+}
+
+.merchantModalReviewsLink {
+  border-bottom: 1px solid rgba(0,0,0,0.40);
 }
 
 .merchantModalReviewsLink:hover {
   color: #202020;
+  border-bottom: 1px solid rgba(0,0,0,0.70);
   cursor: pointer;
 }
 
@@ -367,6 +377,17 @@ code {
   /* height: 300px !important;
   overflow-y: scroll; */
 }
+
+.merchantModalBody .ant-btn-primary {
+  background-color: #f7b600 !important;
+  border-color: #f7b600 !important;
+  text-shadow: none !important;
+}
+
+/* .merchantModalBody .ant-btn-primary:hover {
+  background-color: #f7b600 !important;
+  border-color: #f7b600;
+} */
 
 @media screen and (max-width: 650px) {
   .merchantModalBody {
@@ -503,7 +524,7 @@ code {
 .dashboardBody h3 {
   color: #474c52;
   display: inline-block;
-  border-bottom: 2px solid #474c52;
+  border-bottom: 2px solid #777c82;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 12px;
@@ -516,6 +537,36 @@ code {
 
 .dashboardGreyLinks:hover {
   color: #474c52;
+}
+
+.offerCard {
+  
+}
+
+.offerCardTag {
+  color: #f7b600 !important;
+  font-size: 16px;
+  padding-right: 10px;
+  transition: 0.30s color;
+}
+
+.offerCard:hover .offerCardTag{
+  color: #c78600 !important;
+}
+
+.offerCardTagInactive {
+  color: #808080 !important;
+  font-size: 16px;
+  padding-right: 10px;
+  transition: 0.30s color;
+}
+
+.offerCard:hover .offerCardTagInactive{
+  color: #303030 !important;
+}
+
+.ant-picker {
+  /* width: 100% !important; */
 }
 
 

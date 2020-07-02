@@ -16,8 +16,7 @@ powered by [React](https://reactjs.org/)
 powered by [Strapi](https://strapi.io/)
 
 #### API
-Current documentation is available [here](https://documenter.getpostman.com/view/3570478/Szzn6wMY?version=latest)
-> A full SwaggerUI documentation is coming soon
+[Documentation](https://documenter.getpostman.com/view/3570478/Szzn6wMY?version=latest)
 
 <br/>
 
@@ -47,11 +46,9 @@ docker-compose up
 
 ### Client - [offerize.xyz](https://offerize.xyz)
 
-On release, the client will be built to static files and the build folder will be synced with the `offerize.xyz` S3 bucket. Additionally, all the old build files that were cached on [CloudFront](https://aws.amazon.com/cloudfront/) edge nodes will be invalidated.
-
 ### Server - [api.offerize.xyz](http://api.offerize.xyz)
 
-The [server docker image](https://hub.docker.com/repository/docker/nionata/offerize) is built and tagged as `latest` on all new commits to `develop` and `master`. Additionally, the old server will be removed on the EC2 instance and replaced with the `latest` build. On release, the image is tagged with the version and pushed back to [Dockerhub](https://hub.docker.com/).
+The [api](https://hub.docker.com/repository/docker/nionata/offerize) and [web](https://hub.docker.com/repository/docker/nionata/offerize-web) images are built and tagged as `latest` on all new commits to `develop` and `master`. Additionally, the old containers on the EC2 instance will be replaced with the `latest` builds. On release, the images are tagged with the version and pushed back to [Dockerhub](https://hub.docker.com/).
 
 <br/>
 

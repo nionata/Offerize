@@ -37,12 +37,12 @@ const Signin = (props) => {
         userRef.current.focus();
     }, [])
 
-    const onFinish = values => {
+    const onFinish = (values) => {
         console.log('Received values of form: ', values);
         localStorage.clear();
         setLoading(true);
 
-        axios.post('http://api.offerize.xyz/auth/local', {
+        axios.post('/auth/local', {
             identifier: values.username,
             password: values.password
         })

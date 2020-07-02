@@ -1,6 +1,7 @@
 'use strict';
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
 const axios = require('axios')
+const {merchantData} = require('../services/offers')
 
 /**
  *  We need to know how many people use cash, visa, other money transaction network
@@ -17,9 +18,36 @@ const axios = require('axios')
 
  */
 
+
 module.exports = {
+    async trends(ctx) {
+        const { merchant } = ctx.state.user
+        let merchantOffers = await strapi.services.offers.find({ merchant });
+        let allOffers = await strapi.services.offers.find();
+        let merchantDataSet = "merchantData"
+        let allData = "allData"
+        merchantOffers = await merchantData(merchantOffers, merchantDataSet);
+        allOffers =  await merchantData(allOffers, allData);
+        let combinedOffers = [merchantOffers, allOffers]
+        return combinedOffers;
+    },
 
-   
-
-
+    async create(ctx) {
+        // get merchant id and assign that 
+        let entity;
+        let redemptionBody = {
+            'currentRedemptions' : 0,
+            'redemptionTimeStamps' : {}
+        }
+        let { merchant } = ctx.state.user
+        let response = ctx.request.body
+        // creates a redemption object
+        let redemption = await strapi.services.redemptions.create(redemptionBody);
+        response['redemption'] = redemption['id']
+        response['merchant'] = merchant
+        entity = await strapi.services.offers.create(response);
+        
+        return sanitizeEntity(entity, { model: strapi.models.offers });
+      }, 
+    
 };

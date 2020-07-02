@@ -2,7 +2,13 @@ const axios = require('axios')
 const GOOGLE_API_HOST = 'https://maps.googleapis.com/maps/api'
 const GOOGLE_KEY = process.env.GOOGLE_KEY
 
-const { getCoord, getDetail } = require('./base')
+const getCoord = (type, results) => {
+    return results[0] && results[0].geometry ? results[0].geometry.location[type] : null
+}
+    
+const getDetail = (type, result) => {
+    return result && result[type] ? result[type] : null
+}
 
 module.exports.getLatLong = async (address, zipcode) => {
 

@@ -14,13 +14,23 @@ module.exports = {
         let redemption = await strapi.services.redemptions.findOne({id});
         let numCurrentRedemptions = redemption['currentRedemptions'];
         let today = new Date();
-        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        // console.log(today.getMonth())
+        let date = today.getFullYear() + '-' + (today.getMonth()+1 )+'-'+today.getDate();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         let dateTime = date + ' ' + time;
         let allTimeStamps = redemption['redemptionTimeStamps'];
-        let size = redemption['redemptionTimeStamps'].length - 1;
-        let lastKey = parseInt(Object.keys(allTimeStamps)[Object.keys(allTimeStamps).length-1]);
-        allTimeStamps[lastKey + 1] =  dateTime;
+        // console.log(allTimeStamps)
+        // if timestamps already exist
+        if(Object.keys(allTimeStamps).length != 0 ){
+            let size = redemption['redemptionTimeStamps'].length - 1;
+            let lastKey = parseInt(Object.keys(allTimeStamps)[Object.keys(allTimeStamps).length-1]);
+            allTimeStamps[lastKey + 1] =  dateTime;
+        }
+        else{
+            // if first time redeemed 
+            allTimeStamps  = {}
+            allTimeStamps[0] = dateTime;
+        }
         
         let data = 
         {
