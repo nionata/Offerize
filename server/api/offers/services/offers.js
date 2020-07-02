@@ -9,7 +9,6 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 module.exports.merchantData = async (offers, dataset) => 
   {
         var allOffersData = {}; 
-        console.log(dataset)
         allOffersData['dataset'] = dataset
         let i;
         let dataProjections;
@@ -61,7 +60,7 @@ module.exports.merchantData = async (offers, dataset) =>
                 bestDiscount = newDiscount
             }
             // percentProfit is the percent of the profit the whole offer reached
-            indOffer['percentProfitReached'] = percentProfit
+            indOffer['percentProfitReached'] = percentProfit * 100;
             offersData.push(indOffer);           
         }
         allOffersData['bestOverallProfit'] = {'idealOverallDiscount' : bestDiscount, 'percentOfProfitMade' : highestProfit}
