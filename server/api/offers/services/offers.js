@@ -109,7 +109,7 @@ module.exports.merchantData = async (offers, query, dataset) =>
             let percentProfitReached = offer['percentProfitReached']
             fullDataSet.push([discountRate, percentProfitReached])
         }
-        let result = regression.polynomial(fullDataSet, { order: 3 });
+        let result = regression.polynomial(fullDataSet, { order: 1 });
         return result
     }
 
