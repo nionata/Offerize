@@ -62,7 +62,7 @@ module.exports = {
 				// and filter out any results further than 5 miles away
 				merchants = results.filter(merchant => {
 					const { lat: lat2, lon: lon2 } = merchant
-					const merchantDistance = strapi.service.merchant.distance(lat, lon, lat2, lon2)
+					const merchantDistance = strapi.services.merchant.distance(lat, lon, lat2, lon2)
 					return merchantDistance < 5
 				})
 			}
@@ -71,7 +71,11 @@ module.exports = {
 			// add all merchants from the suppliers api
 			if (show === 'all' || show === 'visa') {
 
-                let suppliers = await strapi.services.supplier.getSuppliers(lat, lon, mccCode)
+				// get all the trend offers
+				let trendOffers = await strapi.services.offers.find({ merchant: NULL })
+				console.log('trend', trendOffers)
+
+                const suppliers = await strapi.services.supplier.getSuppliers(lat, lon, mccCode)
 				if (suppliers) suppliers.forEach(supplier => {
                     
 					const { clientId, address1, zipCode } = supplier
@@ -80,11 +84,13 @@ module.exports = {
 					supplier.merchant_id = clientId
 					supplier.address = address1
 					supplier.zipcode = zipCode
+					
+					// add a trend offer to this merchant
+					let offer = trendOffers.pop()
+					supplier.offers = offer ? [offer] : []
 
-					// get existing merchants with the same name
-					// if (merchants.findIndex(mercha)) 
-
-					merchants.push(supplier)
+					// let local offers override supplier
+					if (merchants.findIndex(merchant => merchant.name === supplier.name) === -1) merchants.push(supplier)
 				})
 			}
 
@@ -102,7 +108,7 @@ module.exports = {
 					return {
 						...merchant,
 						...details,
-						distance: strapi.service.merchant.distance(lat, lon, lat2, lon2)
+						distance: strapi.services.merchant.distance(lat, lon, lat2, lon2)
 					}
 				} catch (err) {
 					console.log('PlaceDetailsError', err)
