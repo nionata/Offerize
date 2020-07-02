@@ -50,7 +50,9 @@ const UserSettings = (props) => {
     const [discountRate, setDiscountRate] = useState(5);
     // true once the form is all filled out
     const [seeCustomers, setSeeCustomers] = useState(false);
-    const [graphData, setGraphData] = useState(null);
+    const [graphOneData, setGraphOneData] = useState(null);
+    const [graphTwoData, setGraphTwoData] = useState(null);
+
 
     let minCustomersRef = React.createRef();
     let maxCustomersRef = React.createRef();
@@ -110,6 +112,8 @@ const UserSettings = (props) => {
         axios.get('/offers/trends?currentDay=%22Monday', axiosConfig)
             .then(res => {
                 console.log(res);
+                setGraphOneData(res.data[0].offersData);
+                setGraphTwoData(res.data[1].offersData);
             })
             .error(err => {
                 console.log(err);
@@ -146,7 +150,6 @@ const UserSettings = (props) => {
                                             avgMoney: averageMoney
                                         }}
                                     >
-
                                         <a className='signinTextAbove' onClick={() => minCustomersRef.current.focus()}>Minimum customers on a slow day</a>
                                         <div style={{ height: '8px' }} />
                                         <Form.Item
@@ -275,8 +278,8 @@ const UserSettings = (props) => {
                                 : (current === 1 ?
                                     <div>
                                         <div style={{ height: '12px' }} />
-                                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <div style={{ width: '45%', textAlign: 'center' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                                            <div style={{ width: '315px', textAlign: 'center', marginRight: '20px' }}>
                                                 <div style={{ fontWeight: 600, paddingBottom: '10px' }}>
                                                     Data from your previous offers
                                                 </div>
@@ -286,45 +289,61 @@ const UserSettings = (props) => {
                                                     data={{
                                                         datasets: [{
                                                             label: 'Scatter Dataset',
-                                                            data: [{
-                                                                x: -10,
-                                                                y: 0
-                                                            }, {
-                                                                x: 0,
-                                                                y: 10
-                                                            }, {
-                                                                x: 10,
-                                                                y: 5
-                                                            }]
+                                                            pointBackgroundColor: '#202020',
+                                                            data: !graphOneData ? [] :
+                                                                graphOneData.map(elem => {
+                                                                    return ({
+                                                                        x: parseInt(elem.discountRate),
+                                                                        y: parseInt(elem.percentProfitReached),
+                                                                        Sunday: elem.dailyStats['Sunday'],
+                                                                        Monday: elem.dailyStats['Monday'],
+                                                                        Tuesday: elem.dailyStats['Tuesday'],
+                                                                        Wednesday: elem.dailyStats['Wednesday'],
+                                                                        Thursday: elem.dailyStats['Thursday'],
+                                                                        Friday: elem.dailyStats['Friday'],
+                                                                        Saturday: elem.dailyStats['Saturday'],
+                                                                    })
+                                                                })
                                                         }]
                                                     }}
                                                     options={{
                                                         scales: {
                                                             xAxes: [{
-                                                                // gridLines: {
-                                                                //     display: false,
-                                                                //     color: "black"
-                                                                // },
                                                                 scaleLabel: {
                                                                     display: true,
                                                                     labelString: "Discount (%)",
+                                                                },
+                                                                ticks: {
+                                                                    beginAtZero: true
                                                                 }
                                                             }],
                                                             yAxes: [{
-                                                                // gridLines: {
-                                                                //     color: "black",
-                                                                //     borderDash: [2, 5],
-                                                                // },
                                                                 scaleLabel: {
                                                                     display: true,
                                                                     labelString: "Profit recorded (%)",
+                                                                },
+                                                                ticks: {
+                                                                    beginAtZero: true
                                                                 }
                                                             }]
+                                                        },
+                                                        tooltips: {
+                                                            callbacks: {
+                                                                label: (tooltipItem, data) => {
+                                                                    return ['Sunday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Sunday,
+                                                                    'Monday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Monday,
+                                                                    'Tuesday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Tuesday,
+                                                                    'Wednesday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Wednesday,
+                                                                    'Thursday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Thursday,
+                                                                    'Friday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Friday,
+                                                                    'Saturday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Saturday];
+                                                                },
+                                                            },
                                                         },
                                                     }}
                                                 />
                                             </div>
-                                            <div style={{ width: '45%', textAlign: 'center' }}>
+                                            <div style={{ width: '315px', textAlign: 'center' }}>
                                                 <div style={{ fontWeight: 600, paddingBottom: '10px' }}>
                                                     Data from merchants around you
                                                 </div>
@@ -334,40 +353,56 @@ const UserSettings = (props) => {
                                                     data={{
                                                         datasets: [{
                                                             label: 'Scatter Dataset',
-                                                            data: [{
-                                                                x: -10,
-                                                                y: 0
-                                                            }, {
-                                                                x: 0,
-                                                                y: 10
-                                                            }, {
-                                                                x: 10,
-                                                                y: 5
-                                                            }]
+                                                            pointBackgroundColor: '#202020',
+                                                            data: !graphTwoData ? [] :
+                                                                graphTwoData.map(elem => {
+                                                                    return ({
+                                                                        x: parseInt(elem.discountRate),
+                                                                        y: parseInt(elem.percentProfitReached),
+                                                                        Sunday: elem.dailyStats['Sunday'],
+                                                                        Monday: elem.dailyStats['Monday'],
+                                                                        Tuesday: elem.dailyStats['Tuesday'],
+                                                                        Wednesday: elem.dailyStats['Wednesday'],
+                                                                        Thursday: elem.dailyStats['Thursday'],
+                                                                        Friday: elem.dailyStats['Friday'],
+                                                                        Saturday: elem.dailyStats['Saturday'],
+                                                                    })
+                                                                })
                                                         }]
                                                     }}
                                                     options={{
                                                         scales: {
                                                             xAxes: [{
-                                                                // gridLines: {
-                                                                //     display: false,
-                                                                //     color: "black"
-                                                                // },
                                                                 scaleLabel: {
                                                                     display: true,
                                                                     labelString: "Discount (%)",
+                                                                },
+                                                                ticks: {
+                                                                    beginAtZero: true
                                                                 }
                                                             }],
                                                             yAxes: [{
-                                                                // gridLines: {
-                                                                //     color: "black",
-                                                                //     borderDash: [2, 5],
-                                                                // },
                                                                 scaleLabel: {
                                                                     display: true,
                                                                     labelString: "Profit recorded (%)",
+                                                                },
+                                                                ticks: {
+                                                                    beginAtZero: true
                                                                 }
                                                             }]
+                                                        },
+                                                        tooltips: {
+                                                            callbacks: {
+                                                                label: (tooltipItem, data) => {
+                                                                    return ['Sunday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Sunday,
+                                                                    'Monday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Monday,
+                                                                    'Tuesday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Tuesday,
+                                                                    'Wednesday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Wednesday,
+                                                                    'Thursday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Thursday,
+                                                                    'Friday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Friday,
+                                                                    'Saturday: $' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].Saturday];
+                                                                },
+                                                            },
                                                         },
                                                     }}
                                                 />
