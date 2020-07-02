@@ -31,18 +31,6 @@
     "redemption": {
       "model": "redemptions"
     },
-    "currentDay": {
-      "type": "enumeration",
-      "enum": [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ]
-    },
     "startingDate": {
       "type": "datetime"
     }
