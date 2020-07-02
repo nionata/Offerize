@@ -21,17 +21,19 @@ const {merchantData} = require('../services/offers')
 
 module.exports = {
     async trends(ctx) {
-        let query = ctx.request.query
         const { merchant } = ctx.state.user
         let merchantOffers = await strapi.services.offers.find({ merchant });
         let allOffers = await strapi.services.offers.find();
-        merchantOffers = await merchantData(merchantOffers, query);
-        allOffers =  await merchantData(allOffers, query);
+        let merchantDataSet = "merchantData"
+        let allData = "allData"
+        merchantOffers = await merchantData(merchantOffers, merchantDataSet);
+        allOffers =  await merchantData(allOffers, allData);
         let combinedOffers = [merchantOffers, allOffers]
         return combinedOffers;
     },
 
     async create(ctx) {
+        // get merchant id and assign that 
         let entity;
         let redemptionBody = {
             'currentRedemptions' : 0,
