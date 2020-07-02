@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../App';
+import moment from 'moment';
 
-import { Steps, Button, message, Form, Input, InputNumber, Slider } from 'antd';
+import { Steps, Button, message, Form, Input, InputNumber, Slider, Switch, DatePicker } from 'antd';
 import { TagOutlined } from '@ant-design/icons';
 
 import { Scatter, defaults } from 'react-chartjs-2';
@@ -34,13 +35,15 @@ const steps = [
     },
 ];
 
+const { RangePicker } = DatePicker;
+
 const UserSettings = (props) => {
 
     const { state, dispatch } = React.useContext(AuthContext);
     const [userData, setUserData] = useState(null);
     const [merchantData, setMerchantData] = useState(null);
     const history = useHistory();
-    const [current, setCurrent] = useState(1);
+    const [current, setCurrent] = useState(0);
 
     const [minCust, setMinCust] = useState(null);
     const [maxCust, setMaxCust] = useState(null);
@@ -52,13 +55,24 @@ const UserSettings = (props) => {
     const [seeCustomers, setSeeCustomers] = useState(false);
     const [graphOneData, setGraphOneData] = useState(null);
     const [graphTwoData, setGraphTwoData] = useState(null);
-
+    const [graphOneBest, setGraphOneBest] = useState(null);
+    const [graphTwoBest, setGraphTwoBest] = useState(null);
+    const [active, setActive] = useState(true);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [descriptionComp, setDescriptionComp] = useState('');
+    const [loading, setLoading] = useState(false);
 
     let minCustomersRef = React.createRef();
     let maxCustomersRef = React.createRef();
     let profitMarginRef = React.createRef();
     let profitIncreaseRef = React.createRef();
     let avgMoneyRef = React.createRef();
+
+    let descriptionRef = React.createRef();
+    let discountRateRef = React.createRef();
+    let expirationDateRef = React.createRef();
+
 
     useEffect(() => {
         // check if they are signed in
@@ -100,6 +114,19 @@ const UserSettings = (props) => {
             setSeeCustomers(false);
     }, [minCust, maxCust, profitMarg, profitIncr, averageMoney]);
 
+    function onChange(value, dateString) {
+        console.log('Selected Time: ', value);
+        console.log('Formatted Selected Time: ', dateString);
+        let newStartDate = dateString[0].replace(' ', 'T') + ':00.000Z';
+        let newEndDate = dateString[1].replace(' ', 'T') + ':00.000Z'
+        setStartDate(newStartDate);
+        setEndDate(newEndDate);
+    }
+
+    function onOk(value) {
+        console.log('onOk: ', value);
+    }
+
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
         setCurrent(prev => prev + 1);
@@ -109,13 +136,56 @@ const UserSettings = (props) => {
                 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('jwt'))
             }
         };
-        axios.get('/offers/trends?currentDay=%22Monday', axiosConfig)
+        axios.get('/offers/trends', axiosConfig)
             .then(res => {
                 console.log(res);
                 setGraphOneData(res.data[0].offersData);
                 setGraphTwoData(res.data[1].offersData);
+                setGraphOneBest(res.data[0].bestOverallProfit);
+                setGraphTwoBest(res.data[1].bestOverallProfit);
             })
-            .error(err => {
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const postOffer = (values) => {
+        console.log(values);
+        setLoading(true);
+        const postData = {
+            minCustomers: minCust,
+            maxCustomers: maxCust,
+            currentProfitMargin: profitMarg,
+            idealProfit: profitIncr,
+            newDiscount: discountRate,
+            avgTransactionAmount: averageMoney
+        }
+        const axiosConfig = {
+            headers: {
+                'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('jwt'))
+            }
+        };
+        axios.post('/questionaires', postData, axiosConfig)
+            .then(res => {
+                console.log(res);
+                const newPostData = {
+                    description: descriptionComp,
+                    discountRate: discountRate,
+                    startingDate: startDate,
+                    expirationDate: endDate,
+                    questionaire: res.data.id
+                }
+                axios.post('/offers', newPostData, axiosConfig)
+                    .then(newRes => {
+                        console.log(newRes);
+                        setLoading(false);
+                        history.push('/merchant');
+                    })
+                    .catch(newErr => {
+                        console.log(newErr)
+                    })
+            })
+            .catch(err => {
                 console.log(err);
             })
     }
@@ -342,9 +412,15 @@ const UserSettings = (props) => {
                                                         },
                                                     }}
                                                 />
+                                                <div style={{ height: '12px' }} />
+                                                <p style={{ textAlign: 'left', paddingLeft: '10px' }}>
+                                                    Based on your previous history, you should choose a
+                                                    {graphOneBest ? ' ' + graphOneBest.idealOverallDiscount : ' x'}% discount to have a profit of
+                                                    {graphOneBest ? ' ' + Math.round((graphOneBest.percentOfProfitMade * 100) * 10) / 10 : ' x'}%.
+                                                </p>
                                             </div>
                                             <div style={{ width: '315px', textAlign: 'center' }}>
-                                                <div style={{ fontWeight: 600, paddingBottom: '10px' }}>
+                                                <div style={{ fontWeight: 600, paddingBottom: '20px' }}>
                                                     Data from merchants around you
                                                 </div>
                                                 <Scatter
@@ -406,22 +482,119 @@ const UserSettings = (props) => {
                                                         },
                                                     }}
                                                 />
+                                                <div style={{ height: '12px' }} />
+                                                <p style={{ textAlign: 'left', paddingLeft: '20px' }}>
+                                                    Based on your previous history, you should choose a
+                                                    {graphTwoBest ? ' ' + graphTwoBest.idealOverallDiscount : ' x'}% discount to have a profit of
+                                                    {graphTwoBest ? ' ' + Math.round((graphTwoBest.percentOfProfitMade * 100) * 10) / 10 : ' x'}%.
+                                                </p>
                                             </div>
 
                                         </div>
 
+                                        <div style={{ height: '20px' }} />
+                                        <a className='signinTextAbove' onClick={() => avgMoneyRef.current.focus()}>Discount rate</a>
+                                        <InputNumber
+                                            value={discountRate} min={0} max={100}
+                                            onChange={(val) => setDiscountRate(val)}
+                                            formatter={value => `${value}%`}
+                                            parser={value => value.replace('%', '')}
+                                            style={{ marginLeft: '105px' }} />
+                                        <div style={{ height: '8px' }} />
+                                        <Slider defaultValue={30} value={discountRate}
+                                            min={0} max={profitMarg ? profitMarg - 1 : 100}
+                                            onChange={(val) => setDiscountRate(val)}
+                                            tipFormatter={val => `${val}%`}
+                                            style={{ width: '280px' }} />
                                         <div style={{ height: '20px' }} />
 
                                         <Button type="primary" onClick={() => setCurrent(prev => prev - 1)}
                                             style={{ marginRight: '12px', fontWeight: 600 }} >
                                             Previous
                                         </Button>
-                                        <Button type="primary" onClick={() => console.log(minCust)}
+                                        <Button type="primary" onClick={() => setCurrent(prev => prev + 1)}
                                             style={{ fontWeight: 600 }} >
                                             Next
                                         </Button>
                                     </div>
-                                    : '')}
+                                    :
+                                    <div>
+                                        <Form
+                                            onFinish={postOffer}
+                                            initialValues={{
+                                                discountRate: discountRate,
+                                                description: descriptionComp
+                                            }}
+                                        >
+
+                                            <a className='signinTextAbove' onClick={() => descriptionRef.current.focus()}>Description</a>
+                                            <div style={{ height: '8px' }} />
+                                            <Form.Item
+                                                name="description"
+                                                rules={[{ required: true, message: 'Input a description' }]}
+                                            >
+                                                <Input className='signinField' ref={descriptionRef}
+                                                    value={descriptionComp} onChange={(e) => setDescriptionComp(e.target.value)} />
+                                            </Form.Item>
+                                            <div style={{ height: '32px' }} />
+
+                                            <a className='signinTextAbove' onClick={() => discountRateRef.current.focus()}>Discount rate</a>
+                                            <div style={{ height: '8px' }} />
+                                            <Form.Item
+                                                name="discountRate"
+                                                rules={[
+                                                    { required: true, message: 'Input a discount rate' },
+                                                    ({ getFieldValue }) => ({
+                                                        validator(rule, value) {
+                                                            if (value != null && parseInt(value) >= 0 && parseInt(value) <= 100) {
+                                                                return Promise.resolve();
+                                                            }
+                                                            return Promise.reject('Input a percentage between 0 and 100');
+                                                        },
+                                                    }),
+                                                ]}
+                                            >
+                                                <InputNumber className='signinField' ref={discountRateRef}
+                                                    formatter={value => `${value}%`}
+                                                    parser={value => value.replace('%', '')} />
+                                            </Form.Item>
+                                            <div style={{ height: '32px' }} />
+
+                                            <a className='signinTextAbove'>Active</a>
+                                            <div style={{ height: '8px' }} />
+                                            <Switch checked={active} onChange={(val) => setActive(val)} />
+                                            <div style={{ height: '32px' }} />
+
+                                            <a className='signinTextAbove' onClick={() => expirationDateRef.current.focus()}>Expiration date</a>
+                                            <div style={{ height: '8px' }} />
+                                            <Form.Item
+                                                name="expirationDate"
+                                                rules={[{ required: true, message: 'Select a date and time' }]}
+                                            >
+                                                <RangePicker
+                                                    ranges={{
+                                                        'Today': [moment(), moment()],
+                                                        'This Week': [moment().startOf('week'), moment().endOf('week')],
+                                                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                                    }}
+                                                    showTime={{ format: "hh:mm a", minuteStep: 15, use12Hours: true }}
+                                                    format="YYYY-MM-DD HH:mm"
+                                                    onChange={onChange}
+                                                    onOk={onOk}
+                                                />
+                                            </Form.Item>
+                                            <div style={{ height: '32px' }} />
+                                            <Button type="primary" onClick={() => setCurrent(prev => prev - 1)}
+                                                style={{ marginRight: '12px', fontWeight: 600 }} >
+                                                Previous
+                                            </Button>
+                                            <Button type="primary" htmlType='submit' style={{ fontWeight: 600 }} loading={loading} >
+                                                Submit offer
+                                        </Button>
+                                        </Form>
+
+                                    </div>
+                                )}
                         </div>
                         {/* <div className="steps-action">
                             {current < steps.length - 1 && (

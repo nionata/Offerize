@@ -33,6 +33,9 @@ function MerchantHome(props) {
     const [merchantData, setMerchantData] = useState(null);
     const [showCreateOfferModal, setShowCreateOfferModal] = useState(false);
     const history = useHistory();
+    const [activeOffers, setActiveOffers] = useState(null);
+    const [inactiveOffers, setInactiveOffers] = useState(null);
+    const [numRedemptions, setNumRedemptions] = useState(null);
 
     useEffect(() => {
         // check if they are signed in
@@ -56,6 +59,18 @@ function MerchantHome(props) {
                         .then(otherRes => {
                             console.log(otherRes);
                             setMerchantData(otherRes.data);
+                            if (otherRes.data.offers) {
+                                let activeArr = [];
+                                let inactiveArr = [];
+                                otherRes.data.offers.forEach(elem => {
+                                    if (elem.active) //&& new Date() > new Date(elem.startingDate))
+                                        activeArr.push(elem);
+                                    else
+                                        inactiveArr.push(elem);
+                                })
+                                setActiveOffers(activeArr);
+                                setInactiveOffers(inactiveArr);
+                            }
                         })
                         .catch(error => {
                             console.log(error);
@@ -114,7 +129,7 @@ function MerchantHome(props) {
                                 xl: 2,
                                 xxl: 2,
                             }}
-                            dataSource={data}
+                            dataSource={activeOffers ? activeOffers : []}
                             renderItem={item => (
                                 <OfferCard item={item} active={true} />
                             )}
@@ -134,7 +149,7 @@ function MerchantHome(props) {
                                 xl: 2,
                                 xxl: 2,
                             }}
-                            dataSource={data}
+                            dataSource={inactiveOffers ? inactiveOffers : []}
                             renderItem={item => (
                                 <OfferCard item={item} active={false} />
                             )}
