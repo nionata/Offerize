@@ -346,8 +346,13 @@ code {
   padding-bottom: 14px;
 }
 
+.merchantModalReviewsLink {
+  border-bottom: 1px solid rgba(0,0,0,0.40);
+}
+
 .merchantModalReviewsLink:hover {
   color: #202020;
+  border-bottom: 1px solid rgba(0,0,0,0.70);
   cursor: pointer;
 }
 

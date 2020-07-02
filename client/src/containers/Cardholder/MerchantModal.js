@@ -32,14 +32,20 @@ const MerchantModal = (props) => {
             width='600px'
         >
             <Tabs activeKey={tabKey} animated={{ inkBar: true, tabPane: true }} style={{ height: tabKey === '1' ? infoTabHeight : 'auto' }}>
-                <TabPane tab="Tab 1" key="1" >
+                <TabPane tab="Tab 1" key="1">
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Rate disabled allowHalf defaultValue={Math.round(props.item.rating * 2) / 2} style={{ fontSize: '16px' }} />
+                        <div style={{ height: '8px' }} />
+                        {props.item.rating ?
+                            '$'.repeat(props.item.rating) + ' • ' + Math.round(10 * props.item.distance) / 10 + ' miles away'
+                            : Math.round(10 * props.item.distance) / 10 + ' miles away'}
+                    </div>
+                    <div style={{ height: '16px' }} />
                     <div className='merchantModalBody' id={'merchantModalBody' + props.idx}>
                         <div className='merchantModalBodyLeft'>
                             <div className='merchantModalIconText'>
                                 <EnvironmentOutlined />&nbsp;&nbsp;&nbsp;
                                 {props.item.address}, {props.item.city}, {props.item.state}, {String(props.item.zipcode).slice(0, 5)}
-                                {/* {(typeof props.item.zipcode === 'string' || props.item.zipcode instanceof String) ? */}
-                                {/* String(props.item.zipcode).slice(0, 5) : props.item.zipcode} */}
                             </div>
                             <div className='merchantModalIconText'>
                                 <GlobalOutlined />&nbsp;&nbsp;&nbsp;
@@ -47,11 +53,12 @@ const MerchantModal = (props) => {
                                     <a className='merchantModalWebsite' href={props.item.website}>
                                         Visit Website
                                     </a>
-                                    : 'Website Unavailable'
+                                    : 'Website unavailable'
                                 }
                             </div>
                             <div className='merchantModalIconText'>
-                                <PhoneOutlined />&nbsp;&nbsp;&nbsp;(717) 343-3423
+                                <PhoneOutlined />&nbsp;&nbsp;&nbsp;
+                                {props.item.formatted_phone_number ? props.item.formatted_phone_number : 'Phone number unavailable'}
                             </div>
                             <div className='merchantModalIconText' onClick={() => {
                                 setInfoTabHeight(document.getElementById('merchantModalBody' + props.idx).offsetHeight);

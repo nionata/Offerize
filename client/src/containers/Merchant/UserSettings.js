@@ -25,7 +25,7 @@ const UserSettings = (props) => {
                 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('jwt'))
             }
         };
-        axios.get('http://api.offerize.xyz/users/me', axiosConfig)
+        axios.get('/users/me', axiosConfig)
             .then(res => {
                 console.log(res);
                 setUserData(res.data);
@@ -33,7 +33,7 @@ const UserSettings = (props) => {
                 if (res.data.merchant == null)
                     history.push('merchantQs');
                 else {
-                    axios.get('http://api.offerize.xyz/merchants/' + res.data.merchant, axiosConfig)
+                    axios.get('/merchants' + res.data.merchant, axiosConfig)
                         .then(otherRes => {
                             console.log(otherRes);
                             setMerchantData(otherRes.data);

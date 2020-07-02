@@ -4,12 +4,12 @@ import axios from 'axios';
 import { AuthContext } from '../../App';
 
 import { List, Card, Button } from 'antd';
-import { ShopOutlined, ThunderboltFilled, FireFilled, CrownFilled, TagFilled } from '@ant-design/icons';
+import { ShopOutlined, ThunderboltFilled, TagFilled, PlusOutlined } from '@ant-design/icons';
 
 import Header from '../../components/Header.js';
 import Footer from '../../components/Footer.js';
 import OfferCard from './OfferCard';
-import CreateOfferModal from './CreateOfferModal';
+import CreateOffer from './CreateOffer';
 
 const data = [
     {
@@ -44,7 +44,7 @@ function MerchantHome(props) {
                 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('jwt'))
             }
         };
-        axios.get('http://api.offerize.xyz/users/me', axiosConfig)
+        axios.get('/users/me', axiosConfig)
             .then(res => {
                 console.log(res);
                 setUserData(res.data);
@@ -52,7 +52,7 @@ function MerchantHome(props) {
                 if (res.data.merchant == null)
                     history.push('merchantQs');
                 else {
-                    axios.get('http://api.offerize.xyz/merchants/' + res.data.merchant, axiosConfig)
+                    axios.get('/merchants/' + res.data.merchant, axiosConfig)
                         .then(otherRes => {
                             console.log(otherRes);
                             setMerchantData(otherRes.data);
@@ -69,7 +69,6 @@ function MerchantHome(props) {
 
     return (
         <>
-            <CreateOfferModal showModal={showCreateOfferModal} setShowModal={setShowCreateOfferModal} />
             <Header />
             <div className='dashboard'>
                 <div className='dashboardBody'>
@@ -97,9 +96,12 @@ function MerchantHome(props) {
                             Active offers:
                         </span>
                         <span style={{ float: 'right' }}>
-                            <Button type='primary' style={{ fontWeight: 600 }} onClick={() => setShowCreateOfferModal(true)}>
-                                Create a new offer
-                            </Button>
+                            <Link to='/merchantCreateOffer'>
+                                <Button type='primary' style={{ fontWeight: 600 }} onClick={() => setShowCreateOfferModal(true)}>
+                                    <PlusOutlined />
+                                    Create offer
+                                </Button>
+                            </Link>
                         </span>
                         <div style={{ height: '16px' }} />
                         <List
