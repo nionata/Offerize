@@ -20,7 +20,9 @@
 */
 
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils')
-const { getLatLong, getSuppliers, getPlaceId, getPlaceDetails, cleanMerchant } = require('./utils')
+const { cleanMerchant, distance } = require('../utils/base')
+const { getSuppliers } = require('../utils/supplier')
+const { getLatLong, getPlaceId, getPlaceDetails } = require('../utils/google')
 
 const formatError = error => [
     { messages: [{ id: error.id, message: error.message, field: error.field }] },
@@ -40,15 +42,15 @@ module.exports = {
 			}))
 		} else {
 
-			const { industry, zipcode, show } = ctx.query
+			const { industry, lat, lon, show } = ctx.query
 			const mccCode = industry
 
-			if (!industry || !zipcode) {
+			if (!industry || !lat || !lon) {
 				return ctx.badRequest(
 					null,
 					formatError({
 					  id: 'Merchant.query.parameters.invalid',
-					  message: 'Industry and zipcode parameters required!',
+					  message: 'Industry, lat, and lon parameters required!',
 					})
 				)
 			}
@@ -60,17 +62,27 @@ module.exports = {
 
 				// run a db query for each mccCode sent
 				const queries = await Promise.all(codes.map(async (code) => {
-					return strapi.services.merchant.find({ mccCode: code, zipcode })
+					return strapi.services.merchant.find({ mccCode: code })
 				}))
 
-				// reduce all the queries into the list of merchants
-				queries.forEach(potentialMerchants => merchants = merchants.concat(potentialMerchants))
+				// temp array
+				let results = []
+
+				// reduce all the queries into the list of results
+				queries.forEach(potentialMerchants => results = results.concat(potentialMerchants))
+
+				// calculate the distance between the merchant and the cardholder
+				// and filter out any results further than 5 miles away
+				merchants = results.filter(merchant => {
+					const { lat: lat2, lon: lon2 } = merchant
+					const merchantDistance = distance(lat, lon, lat2, lon2)
+					return merchantDistance < 5
+				})
 			}
 
 			// only when show all and visa,
 			// add all merchants from the suppliers api
 			if (show === 'all' || show === 'visa') {
-                const { lat, lon } = await getLatLong(zipcode)
 
                 let suppliers = await getSuppliers(lat, lon, mccCode)
 				if (suppliers) suppliers.forEach(supplier => {
@@ -89,21 +101,16 @@ module.exports = {
 
 				const merchant = cleanMerchant(rawMerchant)
 
-				const { address, name } = merchant
+				const { address, name, lat: lat2, lon: lon2 } = merchant
 
 				try { 
 					const placeId = await getPlaceId(address, name)
-					const { timings, reviews, website, formatted_phone_number, icon, rating, price_level } = await getPlaceDetails(placeId)
+					const details = await getPlaceDetails(placeId)
 					
 					return {
 						...merchant,
-						timings,
-                        reviews,
-                        website,
-                        formatted_phone_number,
-						icon,
-						rating, 
-						price_level
+						...details,
+						distance: distance(lat, lon, lat2, lon2)
 					}
 				} catch (err) {
 					console.log('PlaceDetailsError', err)
@@ -120,19 +127,25 @@ module.exports = {
 
 		if (ctx.is('multipart')) {
 
-		  	const { data, files } = parseMultipartData(ctx);
-			merchant = await strapi.services.merchant.create(data, { files })
+			return badRequest('No multipart')
 		} else {
 
-			const { zipcode } = ctx.request.body
-			if (zipcode) {
-				const { lat, lon } = await getLatLong(zipcode)
+			// using the address and zipcode,
+			// get the lat and lon of the merchant
+			const { address, zipcode } = ctx.request.body
+			if (address && zipcode) {
+				const { lat, lon } = await getLatLong(address, zipcode)
 
 				ctx.request.body.lat = `${lat}`
 				ctx.request.body.lon = `${lon}`
 			}
 
-            merchant = await strapi.services.merchant.create(ctx.request.body)
+			// create the merchant entry
+			merchant = await strapi.services.merchant.create(ctx.request.body)
+			
+			// add the merchant to the current user
+			const { id } = ctx.state.user 
+			await strapi.query('user', 'users-permissions').update({ id }, { merchant: merchant.id })
 		}
 
 		return sanitizeEntity(merchant, { model: strapi.models.merchant })

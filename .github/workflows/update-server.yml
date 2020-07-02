@@ -1,0 +1,53 @@
+name: Build and Update Server
+
+on:
+  push:
+    branches: [ develop, master ]
+    paths:
+      - 'server/**'
+      - '.github/workflows/*'
+      - '!client/**'
+      - '!README.md'
+
+jobs:
+  build-and-update:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Build latest api
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nionata/offerize
+          cache_froms: nionata/offerize:latest
+          always_pull: true
+          tags: latest
+      - name: Build latest web
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nionata/offerize-web
+          cache_froms: nionata/offerize-web:latest
+          always_pull: true
+          tags: latest
+          dockerfile: Dockerfile.web
+      - name: Set branch name
+        id: vars
+        run: echo ::set-output name=branch::${GITHUB_REF#refs/*/}
+      - name: Bring up latest service
+        uses: appleboy/ssh-action@master
+        env: 
+          BRANCH: ${{ steps.vars.outputs.branch }}
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PERM_KEY }}
+          envs: BRANCH
+          script: |
+            curl https://raw.githubusercontent.com/nionata/Offerize/"$BRANCH"/docker-compose.prod.yml > docker-compose.yml
+            docker-compose rm -f -s
+            docker-compose pull
+            docker-compose up -d

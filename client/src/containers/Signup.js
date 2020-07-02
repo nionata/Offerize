@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Input, Checkbox, Form, Button, message } from 'antd';
+import axios from 'axios';
+import { AuthContext } from '../App';
+import { Input, Checkbox, Form, Button, message, Alert } from 'antd';
 
 import visaLogo from '../VisaIcons/visaLogoBlue.svg';
 
 const Signup = (props) => {
 
+    const { dispatch } = React.useContext(AuthContext);
+
+    const [signinShake, setSigninShake] = useState(false);
     const [invalidCreds, setInvalidCreds] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     let emailRef = React.createRef();
     let userRef = React.createRef();
@@ -21,7 +27,36 @@ const Signup = (props) => {
 
     const onFinish = values => {
         console.log('Received values of form: ', values);
-        // do some authorization call...
+        localStorage.clear();
+        setLoading(true);
+
+        axios.post('http://api.offerize.xyz/auth/local/register', {
+            username: values.username,
+            email: values.email,
+            password: values.password
+        })
+            .then(res => {
+                setLoading(false);
+                console.log(res.data);
+                dispatch({
+                    type: "LOGIN",
+                    payload: res.data
+                });
+                history.push('/merchant');
+            })
+            .catch(error => {
+                // setData({
+                //     ...data,
+                //     isSubmitting: false,
+                //     errorMessage: error.message || error.statusText
+                // });
+                setLoading(false);
+                setSigninShake(true);
+                setInvalidCreds(true);
+                setTimeout(() => {
+                    setSigninShake(false);
+                }, 600)
+            });
     }
 
     return (
@@ -29,7 +64,11 @@ const Signup = (props) => {
         <div className='signinPage'>
             <div style={{ height: '60px' }} />
 
-            <div className='signinBox'>
+            <Alert className='signinAlert' style={{ opacity: invalidCreds ? 1 : 0 }}
+                message={'Registration failed.  Try again with different credentials.'}
+                type="error" showIcon />
+
+            <div className={['signinBox', signinShake ? 'signinShake' : ''].join(' ')}>
                 <Form
                     name="normal_login"
                     className="login-form"
@@ -37,10 +76,8 @@ const Signup = (props) => {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                // onFinishFailed={this.onFinishFailed}
                 >
-                    {/* padding centers it a little better */}
-                    <div style={{ textAlign: 'center', padding: '0 6px 0 0' }}>
+                    <div style={{ textAlign: 'center' }}>
                         <Link to='/'>
                             <img src={visaLogo} alt="visa logo" style={{ width: 100, height: 'auto', margin: '-30px 0 0 0' }} draggable='false' />
                         </Link>
@@ -99,7 +136,7 @@ const Signup = (props) => {
                         <Input.Password type="password" className='signinField' ref={confirmRef} />
                     </Form.Item>
 
-                    <Button type='primary' className='signinButton' htmlType="submit" loading={props.loading} style={{ margin: '24px 0' }}>
+                    <Button type='primary' className='signinButton' htmlType="submit" loading={loading} style={{ margin: '24px 0' }}>
                         Sign up
                     </Button>
 

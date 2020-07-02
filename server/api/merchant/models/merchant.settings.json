@@ -16,8 +16,8 @@
       "type": "string"
     },
     "offers": {
-      "collection": "offers",
-      "via": "merchant"
+      "via": "merchant",
+      "collection": "offers"
     },
     "zipcode": {
       "type": "integer"

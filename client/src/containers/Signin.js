@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../App';
-import { Input, Checkbox, Form, Button, message } from 'antd';
+import { Input, Checkbox, Form, Button, message, Alert } from 'antd';
 
 import visaLogo from '../VisaIcons/visaLogoBlue.svg';
 
@@ -15,6 +15,7 @@ const Signin = (props) => {
         isSubmitting: false,
         errorMessage: null
     };
+
     const [data, setData] = React.useState(initialState);
     const handleInputChange = event => {
         setData({
@@ -23,7 +24,9 @@ const Signin = (props) => {
         });
     };
 
+    const [signinShake, setSigninShake] = useState(false);
     const [invalidCreds, setInvalidCreds] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     let userRef = React.createRef();
     let passRef = React.createRef();
@@ -34,9 +37,10 @@ const Signin = (props) => {
         userRef.current.focus();
     }, [])
 
-    const onFinish = values => {
+    const onFinish = (values) => {
         console.log('Received values of form: ', values);
         localStorage.clear();
+        setLoading(true);
 
         axios.post('http://api.offerize.xyz/auth/local', {
             identifier: values.username,
@@ -44,32 +48,38 @@ const Signin = (props) => {
         })
             .then(res => {
                 console.log(res.data);
-                if (res.ok) {
-                    return res.json();
-                }
-                throw res;
-            })
-            .then(resJson => {
+                setLoading(false);
                 dispatch({
                     type: "LOGIN",
-                    payload: resJson
-                })
+                    payload: res.data
+                });
+                history.push('/merchant');
             })
             .catch(error => {
+                setLoading(false);
                 setData({
                     ...data,
                     isSubmitting: false,
                     errorMessage: error.message || error.statusText
                 });
+                setSigninShake(true);
+                setInvalidCreds(true);
+                setTimeout(() => {
+                    setSigninShake(false);
+                }, 600)
             });
     }
 
     return (
 
         <div className='signinPage'>
-            <div style={{ height: '120px' }} />
+            <div style={{ height: '80px' }} />
 
-            <div className='signinBox'>
+            <Alert className='signinAlert' style={{ opacity: invalidCreds ? 1 : 0 }}
+                message={'Username or password is incorrect'}
+                type="error" showIcon />
+
+            <div className={['signinBox', signinShake ? 'signinShake' : ''].join(' ')}>
                 <Form
                     name="normal_login"
                     className="login-form"
@@ -77,10 +87,8 @@ const Signin = (props) => {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                // onFinishFailed={this.onFinishFailed}
                 >
-                    {/* padding centers it a little better */}
-                    <div style={{ textAlign: 'center', padding: '0 6px 0 0' }}>
+                    <div style={{ textAlign: 'center' }}>
                         <Link to='/'>
                             <img src={visaLogo} alt="visa logo" style={{ width: 100, height: 'auto', margin: '-30px 0 0 0' }} draggable='false' />
                         </Link>
@@ -112,7 +120,7 @@ const Signin = (props) => {
                         Stay signed in
                     </Checkbox>
 
-                    <Button type='primary' className='signinButton' htmlType="submit" loading={props.loading} >
+                    <Button type='primary' className='signinButton' htmlType="submit" loading={loading} >
                         Sign in
                     </Button>
                     <div className='space32' />

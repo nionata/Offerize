@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { message } from 'antd';
 
 import Header from '../../components/Header.js';
 import Footer from '../../components/Footer.js';
@@ -9,24 +10,27 @@ import MerchantList from './MerchantList';
 import industryCodes from './industryCodes.json';
 import tempData from './tempData.json';
 
+
 function CardholderHome(props) {
 
     const [store, setStore] = useState('RESTAURANTS/BARS');
-    const [zip, setZip] = useState('');
-    const [showMerchants, setShowMerchants] = useState(false); //false
+    const [location, setLocation] = useState(null);
+    const [showMerchants, setShowMerchants] = useState(false);
     const [loadingMerchants, setLoadingMerchants] = useState(false);
     const [merchants, setMerchants] = useState([]);
+    const [address, setAddress] = useState('');
+    const [sortBy, setSortBy] = useState(null);
 
     function fetchMerchants() {
         // setMerchants(tempData);
         setLoadingMerchants(true);
         let codes = industryCodes[store];
-        axios.get(`http://api.offerize.xyz/merchants?zipcode=${zip}&show=visa&industry=${codes}`)
+        axios.get(`http://api.offerize.xyz/merchants?lat=${location.lat}&industry=${codes}&lon=${location.lng}&show=all`)
             .then(res => {
                 console.log(res);
                 setShowMerchants(true);
                 setLoadingMerchants(false);
-                let listOfMerchants = []
+                let listOfMerchants = [];
                 res.data.forEach(elem => {
                     let name = elem.name.toLowerCase()
                         .split(' ')
@@ -45,15 +49,51 @@ function CardholderHome(props) {
                         ...elem,
                         name: name,
                         city: city,
-                        address: address
+                        address: address,
+                        zipcode: String(elem.zipcode),
+                        lat: parseFloat(elem.lat),
+                        lon: parseFloat(elem.lon)
                     })
                 })
                 setMerchants(listOfMerchants);
-                console.log(listOfMerchants);
             })
             .catch(error => {
+                setLoadingMerchants(false);
+                message.error('Network error. Please try again later.')
                 console.log(error);
             });
+    }
+
+    function onChangeSort(e) {
+        setSortBy(e.target.value);
+        // sort by distance
+        if (e.target.value === 1) {
+            setMerchants([...merchants].sort((a, b) => a.distance - b.distance));
+        }
+        // sort by rating
+        else if (e.target.value === 2) {
+            function compare(a, b) {
+                // sort in descending, null rating are sent to the bottom
+                a = a || 0;
+                b = b || 0;
+                return b.rating - a.rating;
+            }
+            setMerchants([...merchants].sort(compare));
+        }
+        // sort by name (alphabetical)
+        else {
+            function compare(a, b) {
+                let nameA = a.name.toLowerCase();
+                let nameB = b.name.toLowerCase();
+                // sort ascending (a -> z)
+                if (nameA < nameB)
+                    return -1;
+                if (nameA > nameB)
+                    return 1;
+                return 0;
+            }
+            setMerchants([...merchants].sort(compare));
+        }
     }
 
     return (
@@ -65,8 +105,8 @@ function CardholderHome(props) {
             <div style={{ position: 'relative', backgroundColor: '#f7fafc' }}>
                 <Map merchants={merchants} />
                 <div className='inputBox'>
-                    <InputBox store={store} setStore={setStore} zip={zip} setZip={setZip}
-                        fetchMerchants={fetchMerchants} loadingMerchants={loadingMerchants} />
+                    <InputBox store={store} setStore={setStore} setLocation={setLocation} location={location} showMerchants={showMerchants}
+                        fetchMerchants={fetchMerchants} loadingMerchants={loadingMerchants} sortBy={sortBy} onChangeSort={onChangeSort} />
                     {showMerchants && <MerchantList merchants={merchants} />}
                 </div>
             </div>

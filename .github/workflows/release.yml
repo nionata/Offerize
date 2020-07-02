@@ -6,35 +6,38 @@ on:
     branches: [ master ]
 
 jobs:
-  build-and-release-client:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-    - name: Install client dependencies
-      run: cd client && npm install
-    - name: Build client
-      run: cd client && npm run build
-      env:
-        CI: false
-    - name: Upload build to S3
-      uses: nionata/upload-s3-action@v1.0.2
-      with:
-        aws_key_id: ${{ secrets.AWS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-        aws_bucket: ${{ secrets.AWS_BUCKET }}
-        source_dir: 'client/build'
-        destination_dir: ''
+  # release-latest-client:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Invalidate client cache
+  #     run: |
+  #       aws cloudfront create-invalidation --distribution-id="$DISTRIBUTION" --paths "/*"
+  #     env:
+  #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+  #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+  #       AWS_DEFAULT_REGION: us-east-1
+  #       DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
   tag-and-push-server-image:
       runs-on: ubuntu-latest
       steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Tag and push latest as release version
+      - name: Tag latest api as release version
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: nionata/offerize
           cache_froms: nionata/offerize:latest
+          always_pull: true
           tag_with_ref: true
+      - name: Tag latest web as release version
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: nionata/offerize-web
+          cache_froms: nionata/offerize-web:latest
+          always_pull: true
+          tag_with_ref: true
+          dockerfile: Dockerfile.web
