@@ -71,9 +71,9 @@ module.exports = {
 			// add all merchants from the suppliers api
 			if (show === 'all' || show === 'visa') {
 
-				// get all the trend offers
-				let trendOffers = await strapi.services.offers.find({ merchant: NULL })
-				console.log('trend', trendOffers)
+				// get all the offers and filter for only trend offers
+				const offers = await strapi.services.offers.find()
+				let trendOffers = offers.filter(offer => offer.merchant === null)
 
                 const suppliers = await strapi.services.supplier.getSuppliers(lat, lon, mccCode)
 				if (suppliers) suppliers.forEach(supplier => {

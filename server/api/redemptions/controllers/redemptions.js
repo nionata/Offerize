@@ -14,12 +14,12 @@ module.exports = {
         let redemption = await strapi.services.redemptions.findOne({id});
         let numCurrentRedemptions = redemption['currentRedemptions'];
         let today = new Date();
-        console.log(today.getMonth())
+        // console.log(today.getMonth())
         let date = today.getFullYear() + '-' + (today.getMonth()+1 )+'-'+today.getDate();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         let dateTime = date + ' ' + time;
         let allTimeStamps = redemption['redemptionTimeStamps'];
-        console.log(allTimeStamps)
+        // console.log(allTimeStamps)
         // if timestamps already exist
         if(Object.keys(allTimeStamps).length != 0 ){
             let size = redemption['redemptionTimeStamps'].length - 1;
