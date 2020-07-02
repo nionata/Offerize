@@ -39,10 +39,12 @@ module.exports = {
             'currentRedemptions' : 0,
             'redemptionTimeStamps' : {}
         }
+        let { merchant } = ctx.state.user
         let response = ctx.request.body
         // creates a redemption object
         let redemption = await strapi.services.redemptions.create(redemptionBody);
         response['redemption'] = redemption['id']
+        response['merchant'] = merchant
         entity = await strapi.services.offers.create(response);
         
         return sanitizeEntity(entity, { model: strapi.models.offers });

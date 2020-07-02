@@ -2,7 +2,7 @@ version: '3'
 
 services:
   server:
-    container_name: offerize-server-dev
+    container_name: offerize-api-dev
     image: strapi/strapi
     environment: 
       - DATABASE_HOST=db
