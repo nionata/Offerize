@@ -4,6 +4,7 @@ import {
     GlobalOutlined, EnvironmentOutlined,
     PhoneOutlined, ReadOutlined, TagFilled
 } from '@ant-design/icons';
+import axios from 'axios';
 
 const { TabPane } = Tabs;
 
@@ -23,6 +24,7 @@ const MerchantModal = (props) => {
         setTimeout(() => {
             message.success({ content: 'Offer successfully redeemed!', key, duration: 4 });
         }, 1000);
+        // axios.post('/redemptions/' + )
     };
 
     return (
